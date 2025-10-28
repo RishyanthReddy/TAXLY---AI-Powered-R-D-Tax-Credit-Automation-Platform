@@ -18,8 +18,9 @@
       ],
       "page_count": 8,
       "file_size_bytes": 209511,
-      "indexed": false,
-      "index_date": null
+      "indexed": true,
+      "index_date": "2025-10-28T17:12:50.492599",
+      "chunk_count": 24
     },
     {
       "id": "form-6765-instructions",
@@ -39,8 +40,9 @@
       ],
       "page_count": 11,
       "file_size_bytes": 238431,
-      "indexed": false,
-      "index_date": null
+      "indexed": true,
+      "index_date": "2025-10-28T17:12:53.792621",
+      "chunk_count": 36
     },
     {
       "id": "irs-audit-guidelines-software",
@@ -61,9 +63,10 @@
       "format": "text",
       "char_count": 48854,
       "file_size_bytes": 49144,
-      "indexed": false,
-      "index_date": null,
-      "notes": "Converted from scanned PDF to text file. Original PDF was image-based and not extractable via pypdf."
+      "indexed": true,
+      "index_date": "2025-10-28T17:18:11.160667",
+      "notes": "Converted from scanned PDF to text file. Original PDF was image-based and not extractable via pypdf.",
+      "chunk_count": 19
     },
     {
       "id": "publication-542",
@@ -82,11 +85,12 @@
       ],
       "page_count": 27,
       "file_size_bytes": 1281298,
-      "indexed": false,
-      "index_date": null
+      "indexed": true,
+      "index_date": "2025-10-28T17:13:00.834674",
+      "chunk_count": 74
     }
   ],
-  "metadata_version": "1.1",
-  "last_updated": "2025-10-28T16:00:00Z",
-  "notes": "All IRS source documents are available and verified. 3 documents are text-based PDFs, 1 document is a text file (converted from scanned PDF). All documents ready for indexing. Task 36 (PDF extraction) completed successfully."
+  "metadata_version": "1.2",
+  "last_updated": "2025-10-28T17:20:00.000000",
+  "notes": "All IRS source documents are available, verified, and indexed. 3 documents are text-based PDFs, 1 document is a text file (converted from scanned PDF). All 4 documents successfully indexed with 153 total chunks. Task 41 (Document indexing pipeline) completed successfully."
 }

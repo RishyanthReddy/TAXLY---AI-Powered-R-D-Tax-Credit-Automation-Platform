@@ -183,4 +183,233 @@ def index_documents(
         except Exception as e:
             stats['documents_failed'] += 1
             error_msg = f"Failed to index {filename}: {str(e)}"
-            stats['err
+            stats['errors'].append(error_msg)
+            logger.error(error_msg)
+            
+            # Mark as not indexed
+            doc_metadata['indexed'] = False
+            doc_metadata['index_date'] = None
+    
+    # Save updated metadata
+    try:
+        metadata['last_updated'] = datetime.now().isoformat()
+        with open(metadata_path, 'w', encoding='utf-8') as f:
+            json.dump(metadata, f, indent=2, ensure_ascii=False)
+        logger.info("Updated metadata.json with indexing status")
+    except Exception as e:
+        logger.error(f"Failed to update metadata.json: {e}")
+    
+    # Calculate duration
+    end_time = datetime.now()
+    duration = (end_time - start_time).total_seconds()
+    stats['duration_seconds'] = duration
+    
+    # Log final statistics
+    logger.info("=" * 80)
+    logger.info("Indexing Pipeline Complete")
+    logger.info("=" * 80)
+    logger.info(f"Total documents: {stats['total_documents']}")
+    logger.info(f"Documents indexed: {stats['documents_indexed']}")
+    logger.info(f"Documents skipped: {stats['documents_skipped']}")
+    logger.info(f"Documents failed: {stats['documents_failed']}")
+    logger.info(f"Total chunks created: {stats['total_chunks']}")
+    logger.info(f"Total embeddings generated: {stats['total_embeddings']}")
+    logger.info(f"Duration: {duration:.2f} seconds")
+    
+    if stats['errors']:
+        logger.warning(f"Errors encountered: {len(stats['errors'])}")
+        for error in stats['errors']:
+            logger.warning(f"  - {error}")
+    
+    # Get final collection info
+    collection_info = vector_db.get_collection_info()
+    logger.info(f"Vector DB collection: {collection_info['name']}")
+    logger.info(f"Total documents in collection: {collection_info['count']}")
+    logger.info("=" * 80)
+    
+    return stats
+
+
+def index_single_document(
+    doc_metadata: Dict[str, Any],
+    tax_docs_path: Path,
+    vector_db: VectorDB,
+    embedder: Embedder,
+    chunk_size: int = 512,
+    overlap: int = 50
+) -> Dict[str, Any]:
+    """
+    Index a single document through the complete pipeline.
+    
+    Args:
+        doc_metadata (Dict[str, Any]): Document metadata from metadata.json
+        tax_docs_path (Path): Path to tax_docs directory
+        vector_db (VectorDB): Initialized VectorDB instance
+        embedder (Embedder): Initialized Embedder instance
+        chunk_size (int): Target chunk size in tokens
+        overlap (int): Overlap between chunks in tokens
+    
+    Returns:
+        Dict[str, Any]: Indexing results for this document:
+            - chunk_count: Number of chunks created
+            - embedding_count: Number of embeddings generated
+            - document_id: Document ID
+    
+    Raises:
+        PDFExtractionError: If PDF extraction fails
+        TextChunkingError: If text chunking fails
+        RAGRetrievalError: If vector DB operations fail
+    """
+    doc_id = doc_metadata['id']
+    filename = doc_metadata['filename']
+    file_path = tax_docs_path / filename
+    
+    # Step 1: Extract text from PDF or read text file
+    logger.info(f"Step 1/4: Extracting text from {filename}")
+    
+    # Check if it's a text file
+    if filename.endswith('.txt'):
+        # Read text file directly
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                text_content = f.read()
+            
+            # Create a document structure similar to PDF extraction
+            extracted_doc = {
+                'text': text_content,
+                'pages': [{
+                    'page_number': 1,
+                    'text': text_content,
+                    'char_count': len(text_content)
+                }],
+                'total_pages': 1,
+                'total_chars': len(text_content),
+                'file_path': str(file_path)
+            }
+            logger.info(f"Read text file: {len(text_content)} characters")
+        except Exception as e:
+            raise PDFExtractionError(f"Failed to read text file {filename}: {e}")
+    else:
+        # Extract from PDF
+        extracted_doc = extract_text_from_pdf(
+            pdf_path=str(file_path),
+            preserve_formatting=True,
+            include_metadata=True
+        )
+        logger.info(
+            f"Extracted {extracted_doc['total_chars']} characters "
+            f"from {extracted_doc['total_pages']} pages"
+        )
+    
+    # Step 2: Chunk the text
+    logger.info(f"Step 2/4: Chunking text (chunk_size={chunk_size}, overlap={overlap})")
+    chunks = chunk_document(
+        document=extracted_doc,
+        chunk_size=chunk_size,
+        overlap=overlap
+    )
+    logger.info(f"Created {len(chunks)} chunks")
+    
+    # Step 3: Generate embeddings
+    logger.info(f"Step 3/4: Generating embeddings for {len(chunks)} chunks")
+    chunk_texts = [chunk['text'] for chunk in chunks]
+    embeddings = embedder.encode_batch(
+        texts=chunk_texts,
+        use_cache=True,
+        batch_size=32,
+        show_progress_bar=False
+    )
+    logger.info(f"Generated {len(embeddings)} embeddings")
+    
+    # Step 4: Store in vector database
+    logger.info(f"Step 4/4: Storing {len(chunks)} chunks in vector database")
+    
+    # Prepare data for vector DB
+    chunk_ids = []
+    chunk_metadatas = []
+    
+    for i, chunk in enumerate(chunks):
+        # Create unique ID for this chunk
+        chunk_id = f"{doc_id}_chunk_{i}"
+        chunk_ids.append(chunk_id)
+        
+        # Prepare metadata
+        chunk_metadata = {
+            'document_id': doc_id,
+            'source': doc_metadata.get('title', filename),
+            'filename': filename,
+            'chunk_index': chunk.get('chunk_index', i),
+            'page_number': chunk.get('page_number', 1),
+            'token_count': chunk.get('token_count', 0),
+            'char_count': chunk.get('char_count', 0)
+        }
+        
+        # Add optional metadata fields
+        if 'key_topics' in doc_metadata:
+            chunk_metadata['key_topics'] = ', '.join(doc_metadata['key_topics'])
+        
+        chunk_metadatas.append(chunk_metadata)
+    
+    # Add to vector database
+    vector_db.add_documents(
+        texts=chunk_texts,
+        metadatas=chunk_metadatas,
+        ids=chunk_ids
+    )
+    
+    logger.info(f"Successfully stored {len(chunks)} chunks in vector database")
+    
+    return {
+        'chunk_count': len(chunks),
+        'embedding_count': len(embeddings),
+        'document_id': doc_id
+    }
+
+
+def get_indexing_status(knowledge_base_path: str = "./knowledge_base") -> Dict[str, Any]:
+    """
+    Get the current indexing status from metadata.json.
+    
+    Args:
+        knowledge_base_path (str): Path to knowledge base directory
+    
+    Returns:
+        Dict[str, Any]: Indexing status containing:
+            - total_documents: Total number of documents
+            - indexed_documents: Number of indexed documents
+            - unindexed_documents: Number of unindexed documents
+            - documents: List of document statuses
+    
+    Example:
+        >>> from tools.indexing_pipeline import get_indexing_status
+        >>> status = get_indexing_status()
+        >>> print(f"Indexed: {status['indexed_documents']}/{status['total_documents']}")
+    """
+    metadata_path = Path(knowledge_base_path) / "metadata.json"
+    
+    try:
+        with open(metadata_path, 'r', encoding='utf-8') as f:
+            metadata = json.load(f)
+        
+        indexed_count = sum(1 for doc in metadata['documents'] if doc.get('indexed', False))
+        
+        return {
+            'total_documents': len(metadata['documents']),
+            'indexed_documents': indexed_count,
+            'unindexed_documents': len(metadata['documents']) - indexed_count,
+            'documents': [
+                {
+                    'id': doc['id'],
+                    'filename': doc['filename'],
+                    'indexed': doc.get('indexed', False),
+                    'index_date': doc.get('index_date'),
+                    'chunk_count': doc.get('chunk_count', 0)
+                }
+                for doc in metadata['documents']
+            ]
+        }
+    except Exception as e:
+        logger.error(f"Failed to get indexing status: {e}")
+        return {
+            'error': str(e)
+        }
