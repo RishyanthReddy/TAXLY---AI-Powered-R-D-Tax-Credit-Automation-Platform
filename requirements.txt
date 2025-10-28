@@ -26,6 +26,12 @@ requests==2.32.3
 python-dotenv==1.0.1
 tenacity==9.0.0
 
+# File Operations
+chardet==5.2.0
+
+# Database ORM
+sqlalchemy==2.0.36
+
 # Testing
 pytest==8.3.4
 pytest-asyncio==0.24.0

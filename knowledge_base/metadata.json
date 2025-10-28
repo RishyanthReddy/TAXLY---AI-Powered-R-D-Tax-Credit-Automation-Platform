@@ -1,0 +1,92 @@
+{
+  "documents": [
+    {
+      "id": "cfr-title-26-sec-1-41-4",
+      "filename": "CFR-2012-title26-vol1-sec1-41-4.pdf",
+      "title": "Code of Federal Regulations Title 26 § 1.41-4",
+      "description": "IRS regulations defining qualified research activities and the four-part test for R&D tax credit eligibility",
+      "source": "govinfo.gov",
+      "source_url": "https://www.govinfo.gov/content/pkg/CFR-2012-title26-vol1/pdf/CFR-2012-title26-vol1-sec1-41-4.pdf",
+      "download_date": "2025-10-28",
+      "version": "2012",
+      "key_topics": [
+        "Four-part test",
+        "Qualified research",
+        "Process of experimentation",
+        "Technological uncertainty",
+        "Business component"
+      ],
+      "page_count": 8,
+      "file_size_bytes": 209511,
+      "indexed": false,
+      "index_date": null
+    },
+    {
+      "id": "form-6765-instructions",
+      "filename": "Instructions for Form 6765.pdf",
+      "title": "Instructions for Form 6765 - Credit for Increasing Research Activities",
+      "description": "Official IRS instructions for calculating and claiming the R&D tax credit, including wage caps and qualified research expenditure definitions",
+      "source": "irs.gov",
+      "source_url": "https://www.irs.gov/forms-pubs/about-form-6765",
+      "download_date": "2025-10-28",
+      "version": "current",
+      "key_topics": [
+        "Qualified research expenditures (QRE)",
+        "Wage caps",
+        "Credit calculation",
+        "Regular credit method",
+        "Alternative simplified credit"
+      ],
+      "page_count": 11,
+      "file_size_bytes": 238431,
+      "indexed": false,
+      "index_date": null
+    },
+    {
+      "id": "irs-audit-guidelines-software",
+      "filename": "IRS Audit Guidelines for Software.txt",
+      "title": "IRS Audit Guidelines for Software Development",
+      "description": "IRS guidance for auditing R&D tax credit claims in software development, including common issues and documentation requirements",
+      "source": "irs.gov",
+      "source_url": "https://www.irs.gov/businesses/audit-guidelines-on-the-application-of-the-process-of-experimentation-for-all-software",
+      "download_date": "2025-10-28",
+      "version": "current",
+      "key_topics": [
+        "Software development qualification",
+        "Documentation requirements",
+        "Common audit issues",
+        "Technical uncertainty in software",
+        "Process of experimentation for software"
+      ],
+      "format": "text",
+      "char_count": 48854,
+      "file_size_bytes": 49144,
+      "indexed": false,
+      "index_date": null,
+      "notes": "Converted from scanned PDF to text file. Original PDF was image-based and not extractable via pypdf."
+    },
+    {
+      "id": "publication-542",
+      "filename": "IRS Publication 542 (Corporations).pdf",
+      "title": "IRS Publication 542 - Corporations",
+      "description": "General tax information for corporations, including sections relevant to R&D tax credits and corporate tax treatment",
+      "source": "irs.gov",
+      "source_url": "https://www.irs.gov/forms-pubs/about-publication-542",
+      "download_date": "2025-10-28",
+      "version": "current",
+      "key_topics": [
+        "Corporate taxation",
+        "Tax credits for corporations",
+        "Business expenses",
+        "Research and development deductions"
+      ],
+      "page_count": 27,
+      "file_size_bytes": 1281298,
+      "indexed": false,
+      "index_date": null
+    }
+  ],
+  "metadata_version": "1.1",
+  "last_updated": "2025-10-28T16:00:00Z",
+  "notes": "All IRS source documents are available and verified. 3 documents are text-based PDFs, 1 document is a text file (converted from scanned PDF). All documents ready for indexing. Task 36 (PDF extraction) completed successfully."
+}
