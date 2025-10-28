@@ -1,0 +1,162 @@
+[
+  {
+    "cost_id": "PAY001",
+    "cost_type": "Payroll",
+    "amount": 12500.00,
+    "project_name": "Alpha Development",
+    "employee_id": "EMP001",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "annual_salary": 150000.00,
+      "hourly_rate": 72.12,
+      "pay_period": "2024-03",
+      "department": "Engineering"
+    }
+  },
+  {
+    "cost_id": "PAY002",
+    "cost_type": "Payroll",
+    "amount": 13750.00,
+    "project_name": "Beta Infrastructure",
+    "employee_id": "EMP002",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "annual_salary": 165000.00,
+      "hourly_rate": 79.33,
+      "pay_period": "2024-03",
+      "department": "Engineering"
+    }
+  },
+  {
+    "cost_id": "PAY003",
+    "cost_type": "Payroll",
+    "amount": 14583.33,
+    "project_name": "Gamma Analytics",
+    "employee_id": "EMP003",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "annual_salary": 175000.00,
+      "hourly_rate": 84.13,
+      "pay_period": "2024-03",
+      "department": "Data Science"
+    }
+  },
+  {
+    "cost_id": "PAY004",
+    "cost_type": "Payroll",
+    "amount": 15833.33,
+    "project_name": "Delta Security",
+    "employee_id": "EMP004",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "annual_salary": 190000.00,
+      "hourly_rate": 91.35,
+      "pay_period": "2024-03",
+      "department": "Security"
+    }
+  },
+  {
+    "cost_id": "PAY005",
+    "cost_type": "Payroll",
+    "amount": 16666.67,
+    "project_name": "Epsilon AI",
+    "employee_id": "EMP005",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "annual_salary": 200000.00,
+      "hourly_rate": 96.15,
+      "pay_period": "2024-03",
+      "department": "AI Research"
+    }
+  },
+  {
+    "cost_id": "PAY006",
+    "cost_type": "Payroll",
+    "amount": 8333.33,
+    "project_name": "Support Tickets",
+    "employee_id": "EMP006",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": false,
+    "metadata": {
+      "annual_salary": 100000.00,
+      "hourly_rate": 48.08,
+      "pay_period": "2024-03",
+      "department": "Customer Support"
+    }
+  },
+  {
+    "cost_id": "PAY007",
+    "cost_type": "Payroll",
+    "amount": 14166.67,
+    "project_name": "Zeta Optimization",
+    "employee_id": "EMP007",
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "annual_salary": 170000.00,
+      "hourly_rate": 81.73,
+      "pay_period": "2024-03",
+      "department": "Engineering"
+    }
+  },
+  {
+    "cost_id": "CONT001",
+    "cost_type": "Contractor",
+    "amount": 25000.00,
+    "project_name": "Alpha Development",
+    "employee_id": null,
+    "date": "2024-03-15T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "contractor_name": "TechConsult LLC",
+      "contract_type": "Fixed Price",
+      "service_description": "Algorithm optimization consulting"
+    }
+  },
+  {
+    "cost_id": "MAT001",
+    "cost_type": "Materials",
+    "amount": 5000.00,
+    "project_name": "Beta Infrastructure",
+    "employee_id": null,
+    "date": "2024-03-10T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "description": "Specialized testing equipment",
+      "vendor": "Lab Equipment Co"
+    }
+  },
+  {
+    "cost_id": "CLOUD001",
+    "cost_type": "Cloud",
+    "amount": 8500.00,
+    "project_name": "Epsilon AI",
+    "employee_id": null,
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "provider": "AWS",
+      "service_type": "GPU Compute Instances",
+      "usage_hours": 850
+    }
+  },
+  {
+    "cost_id": "CLOUD002",
+    "cost_type": "Cloud",
+    "amount": 3200.00,
+    "project_name": "Gamma Analytics",
+    "employee_id": null,
+    "date": "2024-03-31T00:00:00",
+    "is_rd_classified": true,
+    "metadata": {
+      "provider": "Azure",
+      "service_type": "Data Processing Pipeline",
+      "usage_hours": 720
+    }
+  }
+]

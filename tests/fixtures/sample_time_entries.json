@@ -1,0 +1,110 @@
+[
+  {
+    "employee_id": "EMP001",
+    "employee_name": "Alice Johnson",
+    "project_name": "Alpha Development",
+    "task_description": "Implemented new authentication algorithm with encryption",
+    "hours_spent": 8.5,
+    "date": "2024-03-15T09:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP001",
+    "employee_name": "Alice Johnson",
+    "project_name": "Alpha Development",
+    "task_description": "Researched machine learning models for predictive analytics",
+    "hours_spent": 6.0,
+    "date": "2024-03-16T09:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP002",
+    "employee_name": "Bob Smith",
+    "project_name": "Beta Infrastructure",
+    "task_description": "Developed novel data compression algorithm",
+    "hours_spent": 7.5,
+    "date": "2024-03-15T10:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP002",
+    "employee_name": "Bob Smith",
+    "project_name": "Beta Infrastructure",
+    "task_description": "Experimented with distributed caching strategies",
+    "hours_spent": 8.0,
+    "date": "2024-03-16T10:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP003",
+    "employee_name": "Carol Davis",
+    "project_name": "Gamma Analytics",
+    "task_description": "Built real-time data processing pipeline",
+    "hours_spent": 9.0,
+    "date": "2024-03-15T08:30:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP003",
+    "employee_name": "Carol Davis",
+    "project_name": "Admin Tasks",
+    "task_description": "Team meetings and email correspondence",
+    "hours_spent": 2.0,
+    "date": "2024-03-15T17:00:00",
+    "is_rd_classified": false
+  },
+  {
+    "employee_id": "EMP004",
+    "employee_name": "David Lee",
+    "project_name": "Delta Security",
+    "task_description": "Researched quantum-resistant cryptography methods",
+    "hours_spent": 8.0,
+    "date": "2024-03-17T09:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP004",
+    "employee_name": "David Lee",
+    "project_name": "Delta Security",
+    "task_description": "Prototyped new encryption protocol",
+    "hours_spent": 7.0,
+    "date": "2024-03-18T09:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP005",
+    "employee_name": "Emma Wilson",
+    "project_name": "Epsilon AI",
+    "task_description": "Developed custom neural network architecture",
+    "hours_spent": 10.0,
+    "date": "2024-03-17T08:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP005",
+    "employee_name": "Emma Wilson",
+    "project_name": "Epsilon AI",
+    "task_description": "Tested model performance with various datasets",
+    "hours_spent": 6.5,
+    "date": "2024-03-18T08:00:00",
+    "is_rd_classified": true
+  },
+  {
+    "employee_id": "EMP006",
+    "employee_name": "Frank Martinez",
+    "project_name": "Support Tickets",
+    "task_description": "Customer support and bug fixes",
+    "hours_spent": 8.0,
+    "date": "2024-03-17T09:00:00",
+    "is_rd_classified": false
+  },
+  {
+    "employee_id": "EMP007",
+    "employee_name": "Grace Chen",
+    "project_name": "Zeta Optimization",
+    "task_description": "Investigated novel optimization algorithms for resource allocation",
+    "hours_spent": 7.5,
+    "date": "2024-03-19T09:30:00",
+    "is_rd_classified": true
+  }
+]

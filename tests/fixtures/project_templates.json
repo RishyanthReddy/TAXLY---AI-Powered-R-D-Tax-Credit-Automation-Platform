@@ -1,0 +1,239 @@
+{
+  "templates": [
+    {
+      "template_id": "template_ml_model",
+      "category": "ML/AI",
+      "name": "ML Model Development",
+      "description": "Development of machine learning models with experimentation",
+      "typical_activities": [
+        "Algorithm selection and testing",
+        "Hyperparameter tuning",
+        "Model validation and optimization"
+      ],
+      "technical_challenges": [
+        "Achieving target accuracy",
+        "Reducing training time",
+        "Handling imbalanced data"
+      ],
+      "estimated_hours": 120,
+      "rd_qualification_score": 0.95,
+      "example_deliverables": [
+        "Trained model with >85% accuracy",
+        "Performance benchmarks",
+        "Technical documentation"
+      ]
+    },
+    {
+      "template_id": "template_cloud_scaling",
+      "category": "Cloud Infrastructure",
+      "name": "Cloud Auto-Scaling System",
+      "description": "Developing intelligent scaling solutions for cloud resources",
+      "typical_activities": [
+        "Load prediction modeling",
+        "Resource allocation algorithms",
+        "Cost optimization frameworks"
+      ],
+      "technical_challenges": [
+        "Minimizing latency during scaling",
+        "Handling unpredictable traffic spikes",
+        "Cost-balance optimization"
+      ],
+      "estimated_hours": 140,
+      "rd_qualification_score": 0.88,
+      "example_deliverables": [
+        "Autoscaling engine",
+        "Traffic prediction model",
+        "Cost-benefit analysis report"
+      ]
+    },
+    {
+      "template_id": "template_security_audit",
+      "category": "Security",
+      "name": "Automated Security Audit Framework",
+      "description": "Creating AI-powered security vulnerability detection systems",
+      "typical_activities": [
+        "Behavior anomaly modeling",
+        "Zero-day vulnerability detection",
+        "Automated remediation workflows"
+      ],
+      "technical_challenges": [
+        "Reducing false positives",
+        "Adapting to new attack vectors",
+        "Real-time processing requirements"
+      ],
+      "estimated_hours": 180,
+      "rd_qualification_score": 0.92,
+      "example_deliverables": [
+        "Vulnerability detection engine",
+        "Risk assessment dashboard",
+        "Remediation automation toolkit"
+      ]
+    },
+    {
+      "template_id": "template_api_optimization",
+      "category": "APIs",
+      "name": "API Performance Optimization",
+      "description": "Enhancing API efficiency through advanced caching and routing",
+      "typical_activities": [
+        "Intelligent caching mechanisms",
+        "Dynamic routing algorithms",
+        "Request compression techniques"
+      ],
+      "technical_challenges": [
+        "Reducing latency",
+        "Handling high concurrency",
+        "Maintaining backward compatibility"
+      ],
+      "estimated_hours": 100,
+      "rd_qualification_score": 0.82,
+      "example_deliverables": [
+        "Optimized API gateway",
+        "Performance benchmark report",
+        "Caching documentation"
+      ]
+    },
+    {
+      "template_id": "template_data_pipeline",
+      "category": "Data Processing",
+      "name": "Real-time Data Pipeline",
+      "description": "Building scalable stream processing architectures",
+      "typical_activities": [
+        "Stream partitioning strategies",
+        "Windowing algorithms",
+        "Fault-tolerant data processing"
+      ],
+      "technical_challenges": [
+        "Throughput maximization",
+        "Data consistency guarantees",
+        "Late data handling"
+      ],
+      "estimated_hours": 160,
+      "rd_qualification_score": 0.89,
+      "example_deliverables": [
+        "High-throughput pipeline",
+        "Data consistency metrics",
+        "Latency benchmark"
+      ]
+    },
+    {
+      "template_id": "template_devops_automation",
+      "category": "DevOps",
+      "name": "DevOps Automation Platform",
+      "description": "Creating intelligent deployment and monitoring systems",
+      "typical_activities": [
+        "Deployment pipeline optimization",
+        "Self-healing infrastructure",
+        "Predictive failure detection"
+      ],
+      "technical_challenges": [
+        "Multi-environment consistency",
+        "Rollback reliability",
+        "Infrastructure complexity"
+      ],
+      "estimated_hours": 130,
+      "rd_qualification_score": 0.85,
+      "example_deliverables": [
+        "Automated deployment system",
+        "Infrastructure monitoring dashboard",
+        "Self-healing protocols"
+      ]
+    },
+    {
+      "template_id": "template_frontend_accessibility",
+      "category": "Frontend",
+      "name": "Advanced Accessibility Engine",
+      "description": "Developing adaptive UI systems for accessibility compliance",
+      "typical_activities": [
+        "Dynamic UI adaptation",
+        "Screen reader optimization",
+        "User preference learning"
+      ],
+      "technical_challenges": [
+        "WCAG 3.0 compliance",
+        "Cross-browser compatibility",
+        "Performance optimization"
+      ],
+      "estimated_hours": 110,
+      "rd_qualification_score": 0.78,
+      "example_deliverables": [
+        "Accessibility compliance report",
+        "Adaptive UI framework",
+        "User testing results"
+      ]
+    },
+    {
+      "template_id": "template_backend_optimization",
+      "category": "Backend",
+      "name": "Microservices Orchestration",
+      "description": "Building sophisticated service mesh architectures",
+      "typical_activities": [
+        "Circuit breaker implementation",
+        "Service discovery algorithms",
+        "Distributed tracing integration"
+      ],
+      "technical_challenges": [
+        "Service resilience",
+        "Data consistency across services",
+        "Observability complexity"
+      ],
+      "estimated_hours": 150,
+      "rd_qualification_score": 0.86,
+      "example_deliverables": [
+        "Service mesh implementation",
+        "Resilience testing suite",
+        "Distributed tracing system"
+      ]
+    },
+    {
+      "template_id": "template_mobile_offline",
+      "category": "Mobile",
+      "name": "Offline-First Mobile Architecture",
+      "description": "Developing robust offline data synchronization systems",
+      "typical_activities": [
+        "Conflict resolution algorithms",
+        "Efficient local storage",
+        "Reconnection optimization"
+      ],
+      "technical_challenges": [
+        "Data synchronization fidelity",
+        "Battery optimization",
+        "Seamless UX transitions"
+      ],
+      "estimated_hours": 120,
+      "rd_qualification_score": 0.83,
+      "example_deliverables": [
+        "Offline synchronization engine",
+        "Data integrity test suite",
+        "Transition performance metrics"
+      ]
+    },
+    {
+      "template_id": "template_iot_edge",
+      "category": "IoT",
+      "name": "Edge Computing Framework",
+      "description": "Creating intelligent edge processing for IoT devices",
+      "typical_activities": [
+        "Local ML model deployment",
+        "Resource-constrained optimization",
+        "Federated learning protocols"
+      ],
+      "technical_challenges": [
+        "Limited device capabilities",
+        "Energy efficiency",
+        "Security at edge level"
+      ],
+      "estimated_hours": 170,
+      "rd_qualification_score": 0.91,
+      "example_deliverables": [
+        "Edge processing SDK",
+        "Power consumption metrics",
+        "Security validation report"
+      ]
+    }
+  ],
+  "metadata": {
+    "generated_by": "AI (GLM 4.5 AIR)",
+    "purpose": "Frontend project selection templates",
+    "usage": "Users can select these templates when creating new R&D projects"
+  }
+}

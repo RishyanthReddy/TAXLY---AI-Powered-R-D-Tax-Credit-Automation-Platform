@@ -1,0 +1,1813 @@
+{
+  "workspace": {
+    "id": "69002f0cfa72440e4ca0cf35",
+    "name": "InsightPro",
+    "hourlyRate": {
+      "amount": 0,
+      "currency": "USD"
+    },
+    "costRate": {
+      "amount": 0,
+      "currency": "USD"
+    },
+    "memberships": [
+      {
+        "userId": "69002f0cfa72440e4ca0cf36",
+        "hourlyRate": null,
+        "costRate": null,
+        "targetId": "69002f0cfa72440e4ca0cf35",
+        "membershipType": "WORKSPACE",
+        "membershipStatus": "ACTIVE"
+      }
+    ],
+    "workspaceSettings": {
+      "timeRoundingInReports": false,
+      "onlyAdminsSeeBillableRates": true,
+      "activeBillableHours": true,
+      "onlyAdminsCanChangeBillableStatus": false,
+      "onlyAdminsCreateProject": true,
+      "onlyAdminsSeeDashboard": false,
+      "defaultBillableProjects": true,
+      "lockTimeEntries": null,
+      "lockTimeZone": null,
+      "round": {
+        "round": "Round to nearest",
+        "minutes": "15"
+      },
+      "projectFavorites": true,
+      "canSeeTimeSheet": false,
+      "canSeeTracker": true,
+      "projectPickerSpecialFilter": false,
+      "forceProjects": false,
+      "forceTasks": false,
+      "forceTags": false,
+      "forceDescription": false,
+      "onlyAdminsSeeAllTimeEntries": false,
+      "onlyAdminsSeePublicProjectsEntries": false,
+      "trackTimeDownToSecond": true,
+      "projectGroupingLabel": "client",
+      "adminOnlyPages": [],
+      "automaticLock": null,
+      "onlyAdminsCreateTag": false,
+      "onlyAdminsCreateTask": false,
+      "timeTrackingMode": "DEFAULT",
+      "multiFactorEnabled": false,
+      "numberFormat": "PERIOD_COMMA",
+      "currencyFormat": "VALUE_SPACE_CURRENCY",
+      "durationFormat": "FULL",
+      "entityCreationPermissions": {
+        "whoCanCreateTasks": "EVERYONE",
+        "whoCanCreateProjectsAndClients": "ADMINS",
+        "whoCanCreateTags": "EVERYONE"
+      },
+      "isProjectPublicByDefault": true
+    },
+    "imageUrl": "",
+    "featureSubscriptionType": "FREE",
+    "features": [
+      "KIOSK",
+      "TIME_TRACKING"
+    ],
+    "currencies": [
+      {
+        "id": "69002f0cfa72440e4ca0cf38",
+        "code": "USD",
+        "isDefault": true
+      }
+    ],
+    "subdomain": {
+      "name": null,
+      "enabled": false
+    },
+    "cakeOrganizationId": "69002f0c0a8820239f88d731"
+  },
+  "users": [
+    {
+      "id": "69002f0cfa72440e4ca0cf36",
+      "email": "rishyanthreddy101@gmail.com",
+      "name": "rishyanthreddy101",
+      "memberships": [],
+      "profilePicture": "",
+      "activeWorkspace": "69002f0cfa72440e4ca0cf35",
+      "defaultWorkspace": "69002f0cfa72440e4ca0cf35",
+      "settings": {
+        "weekStart": "MONDAY",
+        "timeZone": "Asia/Calcutta",
+        "timeFormat": "HOUR24",
+        "dateFormat": "DD/MM/YYYY",
+        "sendNewsletter": false,
+        "weeklyUpdates": false,
+        "longRunning": false,
+        "scheduledReports": true,
+        "approval": true,
+        "pto": true,
+        "alerts": true,
+        "reminders": true,
+        "timeTrackingManual": false,
+        "summaryReportSettings": {
+          "group": "Project",
+          "subgroup": "Time Entry"
+        },
+        "isCompactViewOn": false,
+        "dashboardSelection": "ME",
+        "dashboardViewType": "PROJECT",
+        "dashboardPinToTop": false,
+        "projectListCollapse": 50,
+        "collapseAllProjectLists": false,
+        "groupSimilarEntriesDisabled": false,
+        "myStartOfDay": "09:00",
+        "projectPickerTaskFilter": false,
+        "lang": "EN",
+        "multiFactorEnabled": false,
+        "theme": "DEFAULT",
+        "scheduling": true,
+        "onboarding": true,
+        "showOnlyWorkingDays": false
+      },
+      "status": "ACTIVE",
+      "customFields": []
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj_ml_model_dev_001",
+      "name": "ML Model Development",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#03A9F4",
+      "estimate": {
+        "estimate": "PT40H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT120H30M",
+      "clientName": "",
+      "note": "R&D project for developing machine learning algorithms for customer churn prediction",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 144000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_cloud_infra_002",
+      "name": "Cloud Infrastructure Optimization",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#4CAF50",
+      "estimate": {
+        "estimate": "PT60H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT85H15M",
+      "clientName": "",
+      "note": "R&D project for optimizing cloud architecture and reducing latency",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 216000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_api_integration_003",
+      "name": "API Integration Framework",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#FF9800",
+      "estimate": {
+        "estimate": "PT30H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT42H45M",
+      "clientName": "",
+      "note": "Developing novel API integration patterns for real-time data synchronization",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 108000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_ml_anomaly_001",
+      "name": "Neural Sentinel",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#FF6B6B",
+      "estimate": {
+        "estimate": "PT120H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT0H",
+      "clientName": "",
+      "note": "Development of a novel hybrid neural network architecture for real-time anomaly detection in IoT time-series data. Technical challenges include handling variable-length data sequences, reducing false positives while maintaining high detection rates, and creating an interpretable model that can provide explanations for its decisions. The project involves exploration of attention mechanisms, transformer architectures, and custom loss functions specifically designed for anomaly detection.",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 432000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_cloud_auto_002",
+      "name": "Elastic Quantum",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#4ECDC4",
+      "estimate": {
+        "estimate": "PT160H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT0H",
+      "clientName": "",
+      "note": "Creating an autonomous cloud resource management system that uses quantum-inspired algorithms for predictive scaling and cost optimization. Technical challenges include developing a novel algorithm for forecasting resource demands with high accuracy, implementing a dynamic scaling mechanism with minimal latency, and optimizing for both performance and cost across multi-cloud environments. The project involves research into reinforcement learning, combinatorial optimization, and distributed systems.",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 576000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_blockchain_zero_003",
+      "name": "TrustChain Sentinel",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#5D5D81",
+      "estimate": {
+        "estimate": "PT180H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT0H",
+      "clientName": "",
+      "note": "Implementation of a blockchain-based zero-trust security framework that eliminates the need for traditional perimeter security. Technical challenges include creating a consensus mechanism suitable for security verification, developing lightweight cryptographic protocols for resource-constrained devices, and designing a decentralized identity management system that maintains privacy while enabling robust authentication. The project involves research in distributed consensus, advanced cryptography, and decentralized identity systems.",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 648000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_api_intel_004",
+      "name": "Synapse Gateway",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#FFD166",
+      "estimate": {
+        "estimate": "PT100H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT0H",
+      "clientName": "",
+      "note": "Development of an intelligent API gateway with adaptive security protocols and predictive routing capabilities. Technical challenges include creating a machine learning system that can detect API abuse patterns in real-time, developing a dynamic routing algorithm that optimizes based on latency, error rates, and security posture, and implementing a policy engine that can automatically adapt to emerging threats. The project involves research into network security, distributed systems, and machine learning for security.",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 360000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    },
+    {
+      "id": "proj_stream_nexus_005",
+      "name": "Stream Nexus",
+      "hourlyRate": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "clientId": null,
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "billable": true,
+      "memberships": [],
+      "color": "#06D6A0",
+      "estimate": {
+        "estimate": "PT140H",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT0H",
+      "clientName": "",
+      "note": "Building a real-time data processing framework that can ingest, transform, and analyze massive unstructured data streams with sub-second latency. Technical challenges include developing a novel stream processing architecture that minimizes memory overhead, creating an adaptive schema inference system for semi-structured data, and implementing a windowing mechanism that can handle both event time and processing time with high accuracy. The project involves research in distributed computing, stream processing algorithms, and adaptive data structures.",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": 504000,
+        "type": "AUTO",
+        "resetOption": null
+      },
+      "budgetEstimate": null,
+      "public": true
+    }
+  ],
+  "time_entries": [
+    {
+      "id": "time_entry_0001",
+      "description": "Testing different ML frameworks (TensorFlow vs PyTorch)",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-09-29T09:00:00.665541Z",
+        "end": "2025-09-29T14:00:00.665541Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0002",
+      "description": "Hyperparameter tuning and model optimization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.665541Z",
+        "end": "2025-09-30T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0003",
+      "description": "Algorithm experimentation with neural network architectures",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.665541Z",
+        "end": "2025-09-30T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0004",
+      "description": "API rate limiting algorithm design",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-01T09:00:00.665541Z",
+        "end": "2025-10-01T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0005",
+      "description": "Hyperparameter tuning and model optimization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-01T09:00:00.665541Z",
+        "end": "2025-10-01T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0006",
+      "description": "Real-time data synchronization protocol development",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-02T09:00:00.665541Z",
+        "end": "2025-10-02T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0007",
+      "description": "Hyperparameter tuning and model optimization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-03T09:00:00.665541Z",
+        "end": "2025-10-03T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0008",
+      "description": "API rate limiting algorithm design",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-06T09:00:00.665541Z",
+        "end": "2025-10-06T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0009",
+      "description": "Resolving model overfitting issues through regularization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-07T09:00:00.665541Z",
+        "end": "2025-10-07T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0010",
+      "description": "Hyperparameter tuning and model optimization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-07T09:00:00.665541Z",
+        "end": "2025-10-07T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0011",
+      "description": "Cloud architecture design for distributed computing",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-08T09:00:00.665541Z",
+        "end": "2025-10-08T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0012",
+      "description": "Load balancing algorithm development and testing",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-08T09:00:00.665541Z",
+        "end": "2025-10-08T16:00:00.665541Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0013",
+      "description": "Caching strategy implementation and benchmarking",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-09T09:00:00.665541Z",
+        "end": "2025-10-09T14:00:00.665541Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0014",
+      "description": "Algorithm experimentation with neural network architectures",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-09T09:00:00.665541Z",
+        "end": "2025-10-09T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0015",
+      "description": "Database query optimization experiments",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-10T09:00:00.665541Z",
+        "end": "2025-10-10T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0016",
+      "description": "Database query optimization experiments",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-13T09:00:00.665541Z",
+        "end": "2025-10-13T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0017",
+      "description": "Algorithm experimentation with neural network architectures",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-13T09:00:00.665541Z",
+        "end": "2025-10-13T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0018",
+      "description": "Caching strategy implementation and benchmarking",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-14T09:00:00.665541Z",
+        "end": "2025-10-14T14:00:00.665541Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0019",
+      "description": "Testing different ML frameworks (TensorFlow vs PyTorch)",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-15T09:00:00.665541Z",
+        "end": "2025-10-15T14:00:00.665541Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0020",
+      "description": "Cloud architecture design for distributed computing",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-16T09:00:00.665541Z",
+        "end": "2025-10-16T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0021",
+      "description": "Algorithm experimentation with neural network architectures",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-17T09:00:00.665541Z",
+        "end": "2025-10-17T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0022",
+      "description": "Database query optimization experiments",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-17T09:00:00.665541Z",
+        "end": "2025-10-17T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0023",
+      "description": "API authentication flow optimization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-20T09:00:00.665541Z",
+        "end": "2025-10-20T14:00:00.665541Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0024",
+      "description": "Hyperparameter tuning and model optimization",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-21T09:00:00.665541Z",
+        "end": "2025-10-21T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0025",
+      "description": "Cloud architecture design for distributed computing",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-21T09:00:00.665541Z",
+        "end": "2025-10-21T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0026",
+      "description": "API rate limiting algorithm design",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-22T09:00:00.665541Z",
+        "end": "2025-10-22T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0027",
+      "description": "Database query optimization experiments",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-22T09:00:00.665541Z",
+        "end": "2025-10-22T15:00:00.665541Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0028",
+      "description": "Caching strategy implementation and benchmarking",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-23T09:00:00.665541Z",
+        "end": "2025-10-23T14:00:00.665541Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0029",
+      "description": "Load balancing algorithm development and testing",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-23T09:00:00.665541Z",
+        "end": "2025-10-23T16:00:00.665541Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0030",
+      "description": "Cloud architecture design for distributed computing",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-10-24T09:00:00.665541Z",
+        "end": "2025-10-24T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0031",
+      "description": "Webhook retry mechanism with exponential backoff",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-24T09:00:00.665541Z",
+        "end": "2025-10-24T16:00:00.665541Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0032",
+      "description": "Feature engineering for customer behavior prediction",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-27T09:00:00.665541Z",
+        "end": "2025-10-27T16:00:00.665541Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_0033",
+      "description": "Real-time data synchronization protocol development",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-27T09:00:00.665541Z",
+        "end": "2025-10-27T17:00:00.665541Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0001",
+      "description": "Designed and implemented transformer-based architecture for proj_ml_model_dev_001, optimizing attention mechanisms for 40% faster inference with PyTorch and CUDA acceleration.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-10-16T09:00:00.589060Z",
+        "end": "2025-10-16T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0002",
+      "description": "Conducted load testing on Kubernetes cluster for proj_cloud_infra_002, resolving auto-scaling bottlenecks through custom metrics and HPA configuration tuning.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_intel_004",
+      "timeInterval": {
+        "start": "2025-10-16T09:00:00.589060Z",
+        "end": "2025-10-16T18:00:00.589060Z",
+        "duration": "PT9H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0003",
+      "description": "Debugged authentication failures in OAuth2 flow for proj_api_integration_003, implementing retry logic with exponential backoff to handle rate limits.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_auto_002",
+      "timeInterval": {
+        "start": "2025-09-29T09:00:00.589060Z",
+        "end": "2025-09-29T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0004",
+      "description": "Prototyped anomaly detection using LSTM autoencoders for Neural Sentinel (proj_ml_anomaly_001), achieving 92% precision on synthetic attack patterns.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.589060Z",
+        "end": "2025-09-30T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0005",
+      "description": "Optimized containerized workflows for Elastic Quantum (proj_cloud_auto_002) via IaC scripts, reducing deployment time from 12 to 4 minutes using Terraform modules.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.589060Z",
+        "end": "2025-09-30T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0006",
+      "description": "Researching federated learning approaches for proj_ml_model_dev_001, evaluating TensorFlow Federated vs. PySyft for distributed training privacy.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_auto_002",
+      "timeInterval": {
+        "start": "2025-10-20T09:00:00.589060Z",
+        "end": "2025-10-20T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0007",
+      "description": "Implemented CI/CD pipeline for proj_api_integration_003 using GitHub Actions, adding contract testing with Pact Broker to prevent breaking changes.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-07T09:00:00.589060Z",
+        "end": "2025-10-07T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0008",
+      "description": "Resolved GPU memory fragmentation in Neural Sentinel training, implementing gradient checkpointing and mixed precision with NVIDIA Nsight profiling.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-09-12T09:00:00.589060Z",
+        "end": "2025-09-12T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0009",
+      "description": "Benchmarked serverless functions for proj_cloud_auto_002 against container solutions, identifying cold start issues and proposing pre-warming strategies.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-10-21T09:00:00.589060Z",
+        "end": "2025-10-21T18:00:00.589060Z",
+        "duration": "PT9H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0010",
+      "description": "Developed hyperparameter optimization script for proj_ml_model_dev_001 using Optuna, automating Bayesian search across 500 configurations.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-10-09T09:00:00.589060Z",
+        "end": "2025-10-09T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0011",
+      "description": "Investigated multi-cloud networking solutions for proj_cloud_infra_002, comparing Azure ExpressRoute vs. AWS Direct Connect for latency optimization.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-10-03T09:00:00.589060Z",
+        "end": "2025-10-03T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0012",
+      "description": "Created mock services for proj_api_integration_003 using WireMock, simulating third-party API variations to test error handling resilience.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-10-06T09:00:00.589060Z",
+        "end": "2025-10-06T16:00:00.589060Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0013",
+      "description": "Designed novel feature extraction technique for Neural Sentinel using graph convolutional networks, outperforming baseline CNN by 15% F1-score.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-09-26T09:00:00.589060Z",
+        "end": "2025-09-26T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0014",
+      "description": "Debugged state synchronization issues in proj_cloud_auto_002 cluster, implementing distributed consensus via Raft algorithm in custom orchestrator.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-08-29T09:00:00.589060Z",
+        "end": "2025-08-29T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0015",
+      "description": "Conducted ablation studies on transformer variants for proj_ml_model_dev_001, determining best architecture for edge deployment constraints.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-09-16T09:00:00.589060Z",
+        "end": "2025-09-16T18:00:00.589060Z",
+        "duration": "PT9H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0016",
+      "description": "Optimized data pipeline for proj_ml_model_dev_001 using Apache Iceberg, reducing ETL latency by 65% through partition pruning techniques.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_auto_002",
+      "timeInterval": {
+        "start": "2025-10-09T09:00:00.589060Z",
+        "end": "2025-10-09T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0017",
+      "description": "Implemented chaos engineering tests for proj_cloud_infra_002 using Gremlin, validating system resilience against instance failures.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-09-16T09:00:00.589060Z",
+        "end": "2025-09-16T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0018",
+      "description": "Developed schema evolution strategy for proj_api_integration_003 using Avro, ensuring backward compatibility during microservice version transitions.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-10-23T09:00:00.589060Z",
+        "end": "2025-10-23T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0019",
+      "description": "Researching adversarial robustness techniques for Neural Sentinel, testing adversarial training with fast gradient sign method on attack vectors.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_auto_002",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.589060Z",
+        "end": "2025-09-30T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0020",
+      "description": "Configured Kubernetes cluster autoscaler for proj_cloud_auto_002 with custom policies, reducing cloud costs by 30% during variable workloads.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_auto_002",
+      "timeInterval": {
+        "start": "2025-09-09T09:00:00.589060Z",
+        "end": "2025-09-09T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0021",
+      "description": "Created automated testing suite for proj_ml_model_dev_001 using pytest and pytest-asyncio, covering 95% of inference pipeline edge cases.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-07T09:00:00.589060Z",
+        "end": "2025-10-07T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0022",
+      "description": "Debugged distributed training deadlock in proj_ml_model_dev_001, resolving NCCL communication issues through topology-aware GPU placement.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-09-29T09:00:00.589060Z",
+        "end": "2025-09-29T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0023",
+      "description": "Designed fault-tolerant message queue integration for proj_api_integration_003 using Kafka transactions, ensuring exactly-once processing semantics.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.589060Z",
+        "end": "2025-09-30T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0024",
+      "description": "Benchmarked anomaly detection algorithms for Neural Sentinel against 10 open-source datasets, selecting Isolation Forest for real-time performance.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_intel_004",
+      "timeInterval": {
+        "start": "2025-10-21T09:00:00.589060Z",
+        "end": "2025-10-21T18:00:00.589060Z",
+        "duration": "PT9H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0025",
+      "description": "Implemented serverless monitoring for proj_cloud_infra_002 using Prometheus and Grafana, creating custom exporters for unmonitored services.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-09-05T09:00:00.589060Z",
+        "end": "2025-09-05T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0026",
+      "description": "Developed CI pipeline for proj_cloud_auto_002 with Terraform validation, preventing deployment of infrastructural misconfigurations.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-09-12T09:00:00.589060Z",
+        "end": "2025-09-12T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0027",
+      "description": "Researching quantization techniques for proj_ml_model_dev_001, evaluating QNNPACK and ONNX Runtime for 8-bit model deployment.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_auto_002",
+      "timeInterval": {
+        "start": "2025-10-02T09:00:00.589060Z",
+        "end": "2025-10-02T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0028",
+      "description": "Created resilience test harness for proj_api_integration_003 using Locust, simulating 10k concurrent users with dynamic payload generation.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-10-24T09:00:00.589060Z",
+        "end": "2025-10-24T18:00:00.589060Z",
+        "duration": "PT9H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0029",
+      "description": "Implemented model versioning strategy for Neural Sentinel using MLflow, enabling A/B testing of new detection thresholds.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-09-10T09:00:00.589060Z",
+        "end": "2025-09-10T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0030",
+      "description": "Optimized cloud storage costs for proj_cloud_infra_002 by implementing lifecycle policies and cross-region replication rules.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_intel_004",
+      "timeInterval": {
+        "start": "2025-09-18T09:00:00.589060Z",
+        "end": "2025-09-18T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0031",
+      "description": "Debugged TLS handshake failures in proj_api_integration_003 gateway, resolving cipher suite mismatches through OpenSSL configuration updates.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_intel_004",
+      "timeInterval": {
+        "start": "2025-09-25T09:00:00.589060Z",
+        "end": "2025-09-25T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0032",
+      "description": "Designed distributed caching layer for proj_ml_model_dev_001 using Redis Cluster, reducing database load by 75% during peak inference.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-10-15T09:00:00.589060Z",
+        "end": "2025-10-15T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0033",
+      "description": "Conducted security penetration tests for proj_cloud_auto_002, identifying and patching container escape vulnerabilities.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-09-18T09:00:00.589060Z",
+        "end": "2025-09-18T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0034",
+      "description": "Developed automated data augmentation pipeline for Neural Sentinel using imgaug, creating adversarial examples to improve model robustness.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-09-23T09:00:00.589060Z",
+        "end": "2025-09-23T16:00:00.589060Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0035",
+      "description": "Implemented canary deployment strategy for proj_api_integration_003 using Istio, enabling gradual feature rollout with traffic mirroring.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-09-17T09:00:00.589060Z",
+        "end": "2025-09-17T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0036",
+      "description": "Researched quantum-inspired algorithms for proj_cloud_auto_002, evaluating their suitability for dynamic resource allocation.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-09-30T09:00:00.589060Z",
+        "end": "2025-09-30T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0037",
+      "description": "Created synthetic data generator for proj_ml_model_dev_001 using Faker, addressing data privacy concerns while maintaining statistical properties.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_api_integration_003",
+      "timeInterval": {
+        "start": "2025-09-18T09:00:00.589060Z",
+        "end": "2025-09-18T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0038",
+      "description": "Debugged container networking issues in proj_cloud_infra_002, resolving CNI plugin conflicts through network policy optimization.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-10-08T09:00:00.589060Z",
+        "end": "2025-10-08T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0039",
+      "description": "Designed reinforcement learning framework for Neural Sentinel, training agents to adapt detection thresholds based on threat landscape shifts.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-10-23T09:00:00.589060Z",
+        "end": "2025-10-23T17:00:00.589060Z",
+        "duration": "PT8H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0040",
+      "description": "Optimized API gateway performance for proj_api_integration_003 using NGINX rate limiting, reducing response time from 850ms to 320ms.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_model_dev_001",
+      "timeInterval": {
+        "start": "2025-09-10T09:00:00.589060Z",
+        "end": "2025-09-10T18:00:00.589060Z",
+        "duration": "PT9H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0041",
+      "description": "Implemented automated compliance checking for proj_cloud_auto_002 infra code, enforcing security policies via Open Policy Agent.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-09-08T09:00:00.589060Z",
+        "end": "2025-09-08T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0042",
+      "description": "Researching transfer learning approaches for proj_ml_model_dev_001, evaluating BERT variants for domain adaptation with small datasets.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_cloud_infra_002",
+      "timeInterval": {
+        "start": "2025-09-08T09:00:00.589060Z",
+        "end": "2025-09-08T15:00:00.589060Z",
+        "duration": "PT6H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0043",
+      "description": "Created end-to-end test scenarios for proj_api_integration_003 against legacy systems, identifying integration gaps through contract validation.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-09-22T09:00:00.589060Z",
+        "end": "2025-09-22T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0044",
+      "description": "Debugged model drift issues in Neural Sentinel, implementing drift detection with PSI metrics and automated retraining triggers.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_blockchain_zero_003",
+      "timeInterval": {
+        "start": "2025-10-22T09:00:00.589060Z",
+        "end": "2025-10-22T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0045",
+      "description": "Configured edge computing nodes for proj_cloud_auto_002 using AWS Greengrass, reducing latency for time-sensitive anomaly detection.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-10-08T09:00:00.589060Z",
+        "end": "2025-10-08T14:00:00.589060Z",
+        "duration": "PT5H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0046",
+      "description": "Developed standardized logging schema for proj_ml_model_dev_001, enabling structured logging with OpenTelemetry for distributed tracing.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_stream_nexus_005",
+      "timeInterval": {
+        "start": "2025-10-17T09:00:00.589060Z",
+        "end": "2025-10-17T13:00:00.589060Z",
+        "duration": "PT4H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    },
+    {
+      "id": "time_entry_ai_0047",
+      "description": "Optimized database indexing strategy for Neural Sentinel, improving query performance by 50% through composite index analysis.",
+      "tagIds": [
+        "tag_rd_qualified"
+      ],
+      "userId": "69002f0cfa72440e4ca0cf36",
+      "billable": true,
+      "taskId": null,
+      "projectId": "proj_ml_anomaly_001",
+      "timeInterval": {
+        "start": "2025-09-08T09:00:00.589060Z",
+        "end": "2025-09-08T16:00:00.589060Z",
+        "duration": "PT7H"
+      },
+      "workspaceId": "69002f0cfa72440e4ca0cf35",
+      "isLocked": false
+    }
+  ],
+  "_metadata": {
+    "generated_at": "2025-10-28T11:00:48.676162",
+    "source": "Real API calls with automated enrichment",
+    "enrichment_version": "1.0",
+    "note": "This fixture contains real API response structures with added sample data for testing"
+  }
+}
