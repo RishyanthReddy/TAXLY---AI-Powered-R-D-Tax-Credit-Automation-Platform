@@ -6,8 +6,19 @@ from .pdf_extractor import (
     PDFExtractionError
 )
 
+from .text_chunker import (
+    chunk_text,
+    chunk_document,
+    chunk_multiple_documents,
+    TextChunkingError
+)
+
 __all__ = [
     'extract_text_from_pdf',
     'extract_text_from_multiple_pdfs',
-    'PDFExtractionError'
+    'PDFExtractionError',
+    'chunk_text',
+    'chunk_document',
+    'chunk_multiple_documents',
+    'TextChunkingError'
 ]

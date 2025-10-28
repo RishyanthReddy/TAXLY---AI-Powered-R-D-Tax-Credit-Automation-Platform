@@ -207,6 +207,10 @@ def _split_into_sentences(text: str) -> List[str]:
     # Clean up the text
     text = text.strip()
     
+    # Return empty list if text is only whitespace
+    if not text:
+        return []
+    
     # Pattern to split on sentence boundaries
     # Matches: period/exclamation/question followed by space and capital letter
     # Also handles common abbreviations (Dr., Mr., Mrs., etc.)
