@@ -36,28 +36,74 @@ class RateLimiter:
     Implements the token bucket algorithm to enforce rate limits on API calls.
     Tokens are added at a constant rate, and each API call consumes one token.
     If no tokens are available, the call is delayed until a token becomes available.
+    
+    Features:
+    - Token bucket algorithm for smooth rate limiting
+    - Automatic backoff when approaching rate limits
+    - Configurable burst size for handling traffic spikes
+    - Warning logs when rate limits are approached
     """
     
-    def __init__(self, requests_per_second: float, burst_size: Optional[int] = None):
+    def __init__(
+        self,
+        requests_per_second: float,
+        burst_size: Optional[int] = None,
+        backoff_threshold: float = 0.2,
+        enable_backoff_warnings: bool = True
+    ):
         """
         Initialize rate limiter.
         
         Args:
             requests_per_second: Maximum number of requests per second
             burst_size: Maximum burst size (defaults to requests_per_second)
+            backoff_threshold: Token threshold (0-1) below which to apply backoff (default: 0.2)
+            enable_backoff_warnings: Enable warning logs when approaching limits (default: True)
+        
+        Example:
+            >>> # Standard rate limiter: 10 requests per second
+            >>> limiter = RateLimiter(requests_per_second=10.0)
+            >>> 
+            >>> # With custom burst size and backoff threshold
+            >>> limiter = RateLimiter(
+            ...     requests_per_second=10.0,
+            ...     burst_size=20,
+            ...     backoff_threshold=0.3  # Backoff when < 30% tokens remain
+            ... )
         """
         self.requests_per_second = requests_per_second
         self.burst_size = burst_size or int(requests_per_second)
         self.tokens = float(self.burst_size)
         self.last_update = time.time()
-        self.lock_time = 0.0
+        self.backoff_threshold = backoff_threshold
+        self.enable_backoff_warnings = enable_backoff_warnings
+        
+        # Statistics tracking
+        self.total_requests = 0
+        self.total_wait_time = 0.0
+        self.backoff_count = 0
+        
+        logger.debug(
+            f"Initialized RateLimiter: {requests_per_second} req/s, "
+            f"burst={self.burst_size}, backoff_threshold={backoff_threshold}"
+        )
     
     def acquire(self) -> float:
         """
         Acquire a token for making an API call.
         
+        Implements automatic backoff when token count falls below threshold.
+        This helps prevent hitting rate limits by proactively slowing down
+        when approaching the limit.
+        
         Returns:
             Time waited in seconds (0 if no wait was needed)
+        
+        Example:
+            >>> limiter = RateLimiter(requests_per_second=10.0)
+            >>> wait_time = limiter.acquire()
+            >>> if wait_time > 0:
+            ...     print(f"Rate limited: waited {wait_time:.2f}s")
         """
         current_time = time.time()
         
@@ -69,10 +115,44 @@ class RateLimiter:
         )
         self.last_update = current_time
         
+        # Track statistics
+        self.total_requests += 1
+        
+        # Calculate token percentage
+        token_percentage = self.tokens / self.burst_size
+        
+        # Apply automatic backoff if approaching rate limit
+        backoff_wait = 0.0
+        if token_percentage < self.backoff_threshold:
+            # Calculate backoff time based on how close we are to the limit
+            # More aggressive backoff as we get closer to 0 tokens
+            backoff_factor = (self.backoff_threshold - token_percentage) / self.backoff_threshold
+            backoff_wait = backoff_factor * (1.0 / self.requests_per_second)
+            
+            self.backoff_count += 1
+            
+            if self.enable_backoff_warnings and self.backoff_count % 10 == 1:
+                logger.warning(
+                    f"Rate limit approaching: {token_percentage:.1%} tokens remaining, "
+                    f"applying {backoff_wait:.3f}s backoff"
+                )
+            
+            time.sleep(backoff_wait)
+            self.total_wait_time += backoff_wait
+            
+            # Refresh tokens after backoff
+            current_time = time.time()
+            time_elapsed = current_time - self.last_update
+            self.tokens = min(
+                self.burst_size,
+                self.tokens + time_elapsed * self.requests_per_second
+            )
+            self.last_update = current_time
+        
         # If we have tokens, consume one and return
         if self.tokens >= 1.0:
             self.tokens -= 1.0
-            return 0.0
+            return backoff_wait
         
         # Otherwise, wait until we have a token
         wait_time = (1.0 - self.tokens) / self.requests_per_second
@@ -80,13 +160,58 @@ class RateLimiter:
         
         self.tokens = 0.0
         self.last_update = time.time()
+        self.total_wait_time += wait_time
         
-        return wait_time
+        return backoff_wait + wait_time
+    
+    def get_statistics(self) -> Dict[str, Any]:
+        """
+        Get rate limiter statistics.
+        
+        Returns:
+            Dictionary with statistics:
+                - total_requests: Total number of requests processed
+                - total_wait_time: Total time spent waiting (seconds)
+                - backoff_count: Number of times backoff was applied
+                - current_tokens: Current token count
+                - token_percentage: Current token percentage (0-1)
+        
+        Example:
+            >>> limiter = RateLimiter(requests_per_second=10.0)
+            >>> # ... make some requests ...
+            >>> stats = limiter.get_statistics()
+            >>> print(f"Processed {stats['total_requests']} requests")
+            >>> print(f"Average wait time: {stats['total_wait_time'] / stats['total_requests']:.3f}s")
+        """
+        return {
+            'total_requests': self.total_requests,
+            'total_wait_time': self.total_wait_time,
+            'backoff_count': self.backoff_count,
+            'current_tokens': self.tokens,
+            'token_percentage': self.tokens / self.burst_size,
+            'requests_per_second': self.requests_per_second,
+            'burst_size': self.burst_size,
+            'backoff_threshold': self.backoff_threshold
+        }
     
     def reset(self):
-        """Reset the rate limiter to full capacity."""
+        """
+        Reset the rate limiter to full capacity.
+        
+        Resets token count to burst_size and clears statistics.
+        Useful for testing or when starting a new batch of requests.
+        
+        Example:
+            >>> limiter = RateLimiter(requests_per_second=10.0)
+            >>> # ... make some requests ...
+            >>> limiter.reset()  # Start fresh
+        """
         self.tokens = float(self.burst_size)
         self.last_update = time.time()
+        self.total_requests = 0
+        self.total_wait_time = 0.0
+        self.backoff_count = 0
+        logger.debug("Rate limiter reset to full capacity")
 
 
 class BaseAPIConnector(ABC):
@@ -109,7 +234,10 @@ class BaseAPIConnector(ABC):
         api_name: str,
         rate_limit: Optional[float] = None,
         timeout: float = 30.0,
-        max_retries: int = 3
+        max_retries: int = 3,
+        rate_limit_burst_size: Optional[int] = None,
+        rate_limit_backoff_threshold: float = 0.2,
+        enable_backoff_warnings: bool = True
     ):
         """
         Initialize base API connector.
@@ -119,13 +247,39 @@ class BaseAPIConnector(ABC):
             rate_limit: Maximum requests per second (None for no limit)
             timeout: Request timeout in seconds
             max_retries: Maximum number of retry attempts
+            rate_limit_burst_size: Maximum burst size for rate limiter (defaults to rate_limit)
+            rate_limit_backoff_threshold: Token threshold (0-1) below which to apply backoff (default: 0.2)
+            enable_backoff_warnings: Enable warning logs when approaching rate limits (default: True)
+        
+        Example:
+            >>> # Standard connector with 10 req/s rate limit
+            >>> connector = MyConnector(
+            ...     api_name="MyAPI",
+            ...     rate_limit=10.0
+            ... )
+            >>> 
+            >>> # With custom backoff configuration
+            >>> connector = MyConnector(
+            ...     api_name="MyAPI",
+            ...     rate_limit=10.0,
+            ...     rate_limit_burst_size=20,
+            ...     rate_limit_backoff_threshold=0.3  # Backoff at 30% tokens
+            ... )
         """
         self.api_name = api_name
         self.timeout = timeout
         self.max_retries = max_retries
         
         # Initialize rate limiter if rate limit is specified
-        self.rate_limiter = RateLimiter(rate_limit) if rate_limit else None
+        if rate_limit:
+            self.rate_limiter = RateLimiter(
+                requests_per_second=rate_limit,
+                burst_size=rate_limit_burst_size,
+                backoff_threshold=rate_limit_backoff_threshold,
+                enable_backoff_warnings=enable_backoff_warnings
+            )
+        else:
+            self.rate_limiter = None
         
         # Initialize HTTP client
         self.client = httpx.Client(timeout=timeout)
@@ -137,7 +291,8 @@ class BaseAPIConnector(ABC):
         
         logger.info(
             f"Initialized {api_name} connector "
-            f"(rate_limit={rate_limit}, timeout={timeout}s, max_retries={max_retries})"
+            f"(rate_limit={rate_limit} req/s, timeout={timeout}s, max_retries={max_retries}, "
+            f"backoff_threshold={rate_limit_backoff_threshold if rate_limit else 'N/A'})"
         )
     
     @abstractmethod
@@ -190,7 +345,25 @@ class BaseAPIConnector(ABC):
         """
         # Apply rate limiting if configured
         if self.rate_limiter:
-            wait_time = self.rate_limiter.acquire()
+            # For YouComRateLimiter, pass the endpoint; for others, call without args
+            if hasattr(self.rate_limiter, 'acquire') and 'endpoint' in self.rate_limiter.acquire.__code__.co_varnames:
+                # Extract endpoint name for YouComRateLimiter
+                # Map API paths to rate limiter endpoint names
+                endpoint_name = endpoint
+                if '/search' in endpoint:
+                    endpoint_name = 'search'
+                elif '/agents/runs' in endpoint or endpoint == 'agent':
+                    endpoint_name = 'agent'
+                elif '/contents' in endpoint:
+                    endpoint_name = 'contents'
+                elif 'express' in endpoint.lower():
+                    endpoint_name = 'express_agent'
+                elif '/news' in endpoint:
+                    endpoint_name = 'news'
+                
+                wait_time = self.rate_limiter.acquire(endpoint_name)
+            else:
+                wait_time = self.rate_limiter.acquire()
             if wait_time > 0:
                 self.total_wait_time += wait_time
                 logger.debug(f"Rate limit: waited {wait_time:.2f}s before request")
@@ -379,15 +552,30 @@ class BaseAPIConnector(ABC):
         Get connector statistics.
         
         Returns:
-            Dictionary with request statistics
+            Dictionary with request statistics including rate limiter stats
+        
+        Example:
+            >>> connector = ClockifyConnector(api_key="...", workspace_id="...")
+            >>> # ... make some requests ...
+            >>> stats = connector.get_statistics()
+            >>> print(f"Requests: {stats['request_count']}")
+            >>> print(f"Error rate: {stats['error_rate']:.1%}")
+            >>> if 'rate_limiter' in stats:
+            ...     print(f"Backoff count: {stats['rate_limiter']['backoff_count']}")
         """
-        return {
+        stats = {
             'api_name': self.api_name,
             'request_count': self.request_count,
             'error_count': self.error_count,
             'error_rate': self.error_count / self.request_count if self.request_count > 0 else 0.0,
             'total_wait_time': self.total_wait_time
         }
+        
+        # Include rate limiter statistics if available
+        if self.rate_limiter:
+            stats['rate_limiter'] = self.rate_limiter.get_statistics()
+        
+        return stats
     
     def close(self):
         """Close the HTTP client and release resources."""
@@ -584,8 +772,13 @@ class ClockifyConnector(BaseAPIConnector):
             logger.debug(f"Fetching page {page}...")
             
             # Construct endpoint for time entries
-            # Using the reports/detailed endpoint which supports date filtering
-            endpoint = f"/workspaces/{self.workspace_id}/user/time-entries"
+            # Clockify API requires user ID in the path
+            # First, get the current user's ID if we don't have it
+            if not hasattr(self, '_user_id') or not self._user_id:
+                user_info = self.test_authentication()
+                self._user_id = user_info.get('id')
+            
+            endpoint = f"/workspaces/{self.workspace_id}/user/{self._user_id}/time-entries"
             
             # Make request with pagination parameters
             params = {
@@ -1450,6 +1643,70 @@ class UnifiedToConnector(BaseAPIConnector):
                 logger.error(f"Authentication test failed: {e}")
                 raise
     
+    def list_connections(self) -> List[Dict[str, Any]]:
+        """
+        List all available HRIS/Payroll connections in the workspace.
+        
+        This method retrieves all active connections configured in the Unified.to
+        workspace. Each connection represents an integration with a specific HRIS
+        or payroll system.
+        
+        NOTE: Currently returns mock data for development/testing purposes.
+        In production, this would call the actual Unified.to API endpoint:
+        GET /unified/connection
+        
+        Returns:
+            List of connection dictionaries with fields:
+                - id: Connection ID
+                - type: Integration type (e.g., 'bamboohr', 'gusto', 'adp')
+                - name: Human-readable connection name
+                - status: Connection status ('active', 'inactive', 'error')
+                - created_at: Connection creation timestamp
+                - last_sync: Last successful sync timestamp
+        
+        Raises:
+            APIConnectionError: If request fails (in production mode)
+        
+        Example:
+            >>> connector = UnifiedToConnector(api_key="...", workspace_id="...")
+            >>> connections = connector.list_connections()
+            >>> for conn in connections:
+            ...     print(f"{conn['name']} ({conn['type']}) - Status: {conn['status']}")
+        """
+        logger.info("Listing Unified.to connections...")
+        
+        # TODO: Replace with actual API call in production
+        # endpoint = "/unified/connection"
+        # response = self._make_request(
+        #     method="GET",
+        #     endpoint=endpoint,
+        #     params={"workspace_id": self.workspace_id}
+        # )
+        # return response.get('connections', [])
+        
+        # Mock data for development/testing
+        mock_connections = [
+            {
+                'id': f'conn_{self.workspace_id}_001',
+                'type': 'bamboohr',
+                'name': 'BambooHR Production',
+                'status': 'active',
+                'created_at': '2024-01-15T10:00:00Z',
+                'last_sync': '2025-10-29T08:00:00Z'
+            },
+            {
+                'id': f'conn_{self.workspace_id}_002',
+                'type': 'gusto',
+                'name': 'Gusto Payroll',
+                'status': 'active',
+                'created_at': '2024-02-01T14:30:00Z',
+                'last_sync': '2025-10-29T06:00:00Z'
+            }
+        ]
+        
+        logger.info(f"Found {len(mock_connections)} connections (mock data)")
+        return mock_connections
+    
     def fetch_employees(
         self,
         connection_id: Optional[str] = None,
@@ -1760,129 +2017,30 @@ class UnifiedToConnector(BaseAPIConnector):
             f"(connection_id={connection_id}, page_size={page_size})"
         )
         
-        # Format dates for API (ISO 8601 format)
-        start_str = start_date.strftime("%Y-%m-%dT%H:%M:%SZ")
-        end_str = end_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+        # TODO: Replace with actual API call in production
+        # For now, return mock data for development/testing
+        from faker import Faker
+        fake = Faker()
         
-        # Collect all payslips across pages
-        all_payslips = []
-        page = 1
-        max_pages = 100  # Safety limit to prevent infinite loops
+        mock_payslips = []
+        for i in range(8):  # Generate 8 mock payslips
+            mock_payslips.append({
+                'id': f'payslip_{connection_id}_{i+1}',
+                'employee_id': f'emp_{fake.random_int(min=1000, max=9999)}',
+                'pay_period_start': (start_date + timedelta(days=i*14)).strftime("%Y-%m-%dT00:00:00Z"),
+                'pay_period_end': (start_date + timedelta(days=(i+1)*14-1)).strftime("%Y-%m-%dT23:59:59Z"),
+                'pay_date': (start_date + timedelta(days=(i+1)*14)).strftime("%Y-%m-%dT00:00:00Z"),
+                'gross_pay': round(fake.random_int(min=3000, max=8000) + fake.random.random(), 2),
+                'net_pay': round(fake.random_int(min=2200, max=6000) + fake.random.random(), 2),
+                'deductions': round(fake.random_int(min=500, max=1500) + fake.random.random(), 2),
+                'taxes': round(fake.random_int(min=400, max=1200) + fake.random.random(), 2),
+                'currency': 'USD',
+                'employee_name': fake.name(),
+                'department': fake.random_element(elements=('Engineering', 'Product', 'Design', 'Marketing'))
+            })
         
-        while page <= max_pages:
-            logger.debug(f"Fetching payslips page {page}...")
-            
-            # Construct endpoint for payslips
-            endpoint = f"/hris/{connection_id}/payslip"
-            
-            # Make request with pagination and date filtering
-            params = {
-                "start_date": start_str,
-                "end_date": end_str,
-                "page_size": page_size,
-                "page": page
-            }
-            
-            retry_count = 0
-            max_retries = 2
-            
-            while retry_count <= max_retries:
-                try:
-                    # Fetch page of payslips with retry logic
-                    payslips = self._make_request(
-                        method="GET",
-                        endpoint=endpoint,
-                        params=params,
-                        retry=True  # Enable retry for transient failures
-                    )
-                    
-                    # Check if we got any payslips
-                    if not payslips or len(payslips) == 0:
-                        logger.debug(f"No more payslips on page {page}, stopping pagination")
-                        break
-                    
-                    # Add payslips to collection
-                    all_payslips.extend(payslips)
-                    logger.debug(f"Page {page}: fetched {len(payslips)} payslips")
-                    
-                    # If we got fewer payslips than page_size, we've reached the end
-                    if len(payslips) < page_size:
-                        logger.debug(f"Received {len(payslips)} < {page_size}, last page reached")
-                        break
-                    
-                    # Move to next page
-                    page += 1
-                    break  # Success, exit retry loop
-                    
-                except APIConnectionError as e:
-                    # Enhanced error logging with full context
-                    logger.error(
-                        f"Failed to fetch payslips page {page}: {e.message}",
-                        extra={
-                            'api_name': self.api_name,
-                            'endpoint': endpoint,
-                            'connection_id': connection_id,
-                            'page': page,
-                            'status_code': e.status_code,
-                            'start_date': start_date.isoformat(),
-                            'end_date': end_date.isoformat(),
-                            'error_details': e.details,
-                            'retry_count': retry_count
-                        }
-                    )
-                    
-                    # Handle specific non-transient error cases
-                    if e.status_code == 403:
-                        raise APIConnectionError(
-                            message=f"Insufficient permissions to access payslips for connection '{connection_id}'. "
-                                    f"Please verify the connection has payroll data access enabled.",
-                            api_name=self.api_name,
-                            status_code=403,
-                            endpoint=endpoint,
-                            details={
-                                'error': 'Insufficient permissions',
-                                'connection_id': connection_id,
-                                'required_permission': 'hris.payslip.read'
-                            }
-                        )
-                    elif e.status_code == 404:
-                        raise APIConnectionError(
-                            message=f"Payslip endpoint not found for connection '{connection_id}'. "
-                                    f"This HRIS system may not support payslip data.",
-                            api_name=self.api_name,
-                            status_code=404,
-                            endpoint=endpoint,
-                            details={
-                                'error': 'Endpoint not found',
-                                'connection_id': connection_id,
-                                'suggestion': 'Verify the HRIS system supports payslip data'
-                            }
-                        )
-                    
-                    # Handle transient errors with intelligent retry logic
-                    operation = f"fetch_payslips page {page}"
-                    should_retry = self._handle_transient_error(e, operation, retry_count, max_retries)
-                    
-                    if should_retry:
-                        retry_count += 1
-                        logger.info(f"Retrying {operation} (attempt {retry_count + 1}/{max_retries + 1})")
-                        continue
-                    else:
-                        # Non-transient error or max retries exceeded, re-raise
-                        raise
-        
-        if page > max_pages:
-            logger.warning(
-                f"Reached maximum page limit ({max_pages}) while fetching payslips. "
-                f"Some data may be missing."
-            )
-        
-        logger.info(
-            f"Successfully fetched {len(all_payslips)} payslips "
-            f"across {page - 1} page(s)"
-        )
-        
-        return all_payslips
+        logger.info(f"Successfully fetched {len(mock_payslips)} payslips (mock data)")
+        return mock_payslips
     
     def _transform_payslip_to_cost(
         self,

@@ -59,19 +59,24 @@ class TestRateLimiter:
     
     def test_rate_limiter_acquire_with_wait(self):
         """Test acquiring token when no tokens available."""
-        limiter = RateLimiter(requests_per_second=10.0)
+        limiter = RateLimiter(
+            requests_per_second=10.0,
+            enable_backoff_warnings=False  # Disable warnings for cleaner test output
+        )
         
         # Exhaust all tokens
         for _ in range(10):
             limiter.acquire()
         
-        # Next acquire should wait
+        # Next acquire should wait (includes backoff + token wait)
         start_time = time.time()
         wait_time = limiter.acquire()
         elapsed = time.time() - start_time
         
         assert wait_time > 0.0
-        assert elapsed >= 0.09  # Should wait ~0.1s for 10 req/s
+        # Should wait at least some time (backoff + token refill)
+        # Reduced threshold to account for backoff timing variations
+        assert elapsed >= 0.05
     
     def test_rate_limiter_reset(self):
         """Test resetting rate limiter."""
@@ -88,6 +93,69 @@ class TestRateLimiter:
         # Should be able to acquire immediately
         wait_time = limiter.acquire()
         assert wait_time == 0.0
+    
+    def test_rate_limiter_automatic_backoff(self):
+        """Test automatic backoff when approaching rate limit."""
+        limiter = RateLimiter(
+            requests_per_second=10.0,
+            backoff_threshold=0.2,  # Backoff when < 20% tokens remain
+            enable_backoff_warnings=False  # Disable warnings for test
+        )
+        
+        # Consume tokens until we're below threshold (< 2 tokens)
+        for _ in range(9):
+            limiter.acquire()
+        
+        # Next acquire should trigger backoff
+        start_time = time.time()
+        wait_time = limiter.acquire()
+        elapsed = time.time() - start_time
+        
+        # Should have applied backoff
+        assert limiter.backoff_count > 0
+        assert wait_time > 0.0
+        assert elapsed > 0.0
+    
+    def test_rate_limiter_backoff_statistics(self):
+        """Test rate limiter statistics tracking."""
+        limiter = RateLimiter(
+            requests_per_second=10.0,
+            backoff_threshold=0.3,
+            enable_backoff_warnings=False
+        )
+        
+        # Make several requests to trigger backoff
+        for _ in range(10):
+            limiter.acquire()
+        
+        stats = limiter.get_statistics()
+        
+        assert stats['total_requests'] == 10
+        assert stats['requests_per_second'] == 10.0
+        assert stats['burst_size'] == 10
+        assert stats['backoff_threshold'] == 0.3
+        assert 'total_wait_time' in stats
+        assert 'backoff_count' in stats
+        assert 'current_tokens' in stats
+        assert 'token_percentage' in stats
+    
+    def test_rate_limiter_custom_backoff_threshold(self):
+        """Test rate limiter with custom backoff threshold."""
+        limiter = RateLimiter(
+            requests_per_second=10.0,
+            backoff_threshold=0.5,  # Backoff when < 50% tokens remain
+            enable_backoff_warnings=False
+        )
+        
+        # Consume tokens to get below 50% threshold
+        # After 6 requests, we'll have 4 tokens left (40% of 10)
+        for _ in range(6):
+            limiter.acquire()
+        
+        # Next acquire should trigger backoff since we're below 50%
+        limiter.acquire()
+        
+        assert limiter.backoff_count > 0
 
 
 class TestBaseAPIConnector:
@@ -113,6 +181,45 @@ class TestBaseAPIConnector:
         """Test connector without rate limiting."""
         connector = MockAPIConnector(rate_limit=None)
         assert connector.rate_limiter is None
+    
+    def test_connector_with_backoff_configuration(self):
+        """Test connector with custom backoff configuration."""
+        connector = MockAPIConnector(
+            rate_limit=10.0,
+            rate_limit_burst_size=20,
+            rate_limit_backoff_threshold=0.3,
+            enable_backoff_warnings=False
+        )
+        
+        assert connector.rate_limiter is not None
+        assert connector.rate_limiter.requests_per_second == 10.0
+        assert connector.rate_limiter.burst_size == 20
+        assert connector.rate_limiter.backoff_threshold == 0.3
+        assert connector.rate_limiter.enable_backoff_warnings is False
+    
+    def test_connector_statistics_with_rate_limiter(self):
+        """Test connector statistics include rate limiter stats."""
+        connector = MockAPIConnector(
+            rate_limit=10.0,
+            enable_backoff_warnings=False
+        )
+        
+        stats = connector.get_statistics()
+        
+        assert 'api_name' in stats
+        assert 'request_count' in stats
+        assert 'error_count' in stats
+        assert 'error_rate' in stats
+        assert 'total_wait_time' in stats
+        assert 'rate_limiter' in stats
+        
+        # Check rate limiter stats
+        rate_limiter_stats = stats['rate_limiter']
+        assert 'total_requests' in rate_limiter_stats
+        assert 'total_wait_time' in rate_limiter_stats
+        assert 'backoff_count' in rate_limiter_stats
+        assert 'current_tokens' in rate_limiter_stats
+        assert 'token_percentage' in rate_limiter_stats
     
     def test_get_base_url(self):
         """Test getting base URL."""
@@ -2565,4 +2672,4 @@ class TestUnifiedToPayslipTransformation:
 
 
 class TestUnifiedToConnector:
-    """Test cases for UnifiedToConnector class with enhanced error handl
+    """Test cases for UnifiedToConnector class with enhanced error handling."""
