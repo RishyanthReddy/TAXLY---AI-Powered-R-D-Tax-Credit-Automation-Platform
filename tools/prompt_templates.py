@@ -5,11 +5,15 @@ This module provides prompt templates for various LLM interactions in the system
 - RAG_INFERENCE_PROMPT: For RAG-augmented reasoning with IRS document context
 - AGENT_DECISION_PROMPT: For PydanticAI agent decision-making logic
 - THESYS_UI_GENERATION_PROMPT: For dynamic UI generation with Thesys C1
+- YOUCOM_QUALIFICATION_PROMPT: For You.com Agent API R&D qualification analysis
+- YOUCOM_NARRATIVE_TEMPLATE_FETCH: For You.com Contents API template retrieval
+- YOUCOM_COMPLIANCE_REVIEW_PROMPT: For You.com Express Agent compliance review
+- YOUCOM_SEARCH_QUERY_TEMPLATE: For You.com Search API IRS guidance searches
 
 Each template includes placeholders that can be populated with actual data
 using the provided helper functions.
 
-Requirements: 2.3, 4.1, 4.3
+Requirements: 2.3, 4.1, 4.3, 6.1
 """
 
 from typing import Dict, List, Any, Optional
@@ -426,6 +430,265 @@ Be thorough and specific in your feedback. Flag any areas that could be challeng
 
 
 # ============================================================================
+# YOU.COM API PROMPTS
+# ============================================================================
+
+YOUCOM_QUALIFICATION_PROMPT = """You are an expert R&D tax credit consultant analyzing a project for IRS Section 41 qualification.
+
+## IRS Guidance Context
+
+{rag_context}
+
+## Project Details
+
+**Project Name:** {project_name}
+
+**Project Description:** {project_description}
+
+**Technical Activities:**
+{technical_activities}
+
+**Total Hours:** {total_hours}
+
+**Total Cost:** ${total_cost:,.2f}
+
+**Employee Roles Involved:** {employee_roles}
+
+## Analysis Task
+
+Using the IRS guidance provided above and your expertise, determine:
+
+1. What percentage of this project's activities qualify for the R&D tax credit (0-100%)
+2. Your confidence level in this assessment (0-1 scale)
+3. Detailed reasoning supporting your determination
+4. Specific IRS citations that support your conclusion
+
+## Four-Part Test Evaluation
+
+Evaluate the project against each criterion:
+
+**1. Technological in Nature**
+- Does the work fundamentally rely on principles of physical/biological sciences, engineering, or computer science?
+- Are the methods used based on hard sciences rather than social sciences or arts?
+
+**2. Elimination of Uncertainty**
+- What specific technical uncertainties existed at the project's outset?
+- Was the capability or method uncertain, or was the appropriate design uncertain?
+- Could the desired result be achieved and was the method to achieve it uncertain?
+
+**3. Process of Experimentation**
+- Was there a systematic process to evaluate alternatives?
+- Were different approaches tested and compared?
+- Was there iteration and refinement based on results?
+
+**4. Qualified Purpose**
+- Is the purpose to create a new or improved business component?
+- Does it result in new/improved functionality, performance, reliability, or quality?
+
+## Output Requirements
+
+Provide a comprehensive analysis that includes:
+- Qualification percentage with clear justification
+- Confidence score reflecting certainty of your assessment
+- Detailed reasoning explaining how the project meets (or doesn't meet) each part of the four-part test
+- Specific citations from the IRS guidance provided
+- Technical details about uncertainties and experimentation
+- Any red flags or concerns that could be challenged in an audit
+
+Be conservative and thorough. Only activities that clearly meet ALL four criteria should be fully qualified.
+"""
+
+
+YOUCOM_NARRATIVE_TEMPLATE_FETCH = """Retrieve a comprehensive R&D tax credit project narrative template that can be used to document qualified research activities for IRS audit purposes.
+
+## Template Requirements
+
+The template should include sections for:
+
+1. **Executive Summary**
+   - Project overview and business context
+   - Key technical objectives
+   - Timeline and milestones
+
+2. **Technical Uncertainties**
+   - Specific uncertainties that existed at project start
+   - Why existing knowledge or methods were inadequate
+   - What needed to be discovered or developed
+
+3. **Process of Experimentation**
+   - Systematic approach used to resolve uncertainties
+   - Alternative solutions evaluated
+   - Tests, trials, or experiments conducted
+   - How results informed subsequent iterations
+   - Refinements made based on findings
+
+4. **Technological Nature**
+   - Scientific or engineering principles applied
+   - Technical methodologies employed
+   - Reliance on hard sciences (computer science, engineering, physics, etc.)
+   - Technical expertise required
+
+5. **Qualified Purpose**
+   - Business component being developed or improved
+   - New or improved functionality achieved
+   - Performance enhancements or new capabilities
+   - How the result differs from prior art
+
+6. **Project Team and Resources**
+   - Key personnel and their technical qualifications
+   - Time allocation and effort distribution
+   - Tools, technologies, and methodologies used
+
+7. **Outcomes and Results**
+   - Technical achievements
+   - Knowledge gained
+   - How uncertainties were resolved
+   - Deliverables produced
+
+## Format Preferences
+
+- Professional, audit-ready language
+- Clear section headings and structure
+- Placeholders for project-specific details
+- Guidance notes for completing each section
+- Examples of strong technical descriptions
+- Compliance with IRS documentation standards
+
+Please provide a detailed template in Markdown format that can be populated with project-specific information.
+"""
+
+
+YOUCOM_COMPLIANCE_REVIEW_PROMPT = """You are a compliance expert reviewing R&D tax credit documentation for IRS audit readiness.
+
+## Narrative to Review
+
+{narrative_text}
+
+## Compliance Review Criteria
+
+Perform a thorough review to ensure the narrative meets IRS requirements for R&D tax credit documentation under Section 41.
+
+### 1. Technical Uncertainties (Required)
+- [ ] Specific technical uncertainties are clearly identified
+- [ ] Uncertainties are technological in nature (not business/market uncertainties)
+- [ ] Explanation of why existing knowledge was inadequate
+- [ ] Description of what information needed to be discovered
+- [ ] Uncertainties existed at the project's commencement
+
+### 2. Process of Experimentation (Required)
+- [ ] Systematic process for evaluating alternatives is described
+- [ ] Specific experiments, tests, or trials are documented
+- [ ] Multiple approaches or designs were considered
+- [ ] Evaluation methodology is explained
+- [ ] Iterative refinement process is demonstrated
+- [ ] Results were analyzed and used to inform next steps
+
+### 3. Technological Nature (Required)
+- [ ] Reliance on hard sciences is clearly demonstrated
+- [ ] Specific scientific or engineering principles are referenced
+- [ ] Technical methodologies are described in detail
+- [ ] Work required specialized technical knowledge
+- [ ] Not primarily based on social sciences, arts, or humanities
+
+### 4. Qualified Purpose (Required)
+- [ ] Business component is clearly identified
+- [ ] New or improved functionality is described
+- [ ] Purpose aligns with IRS definition of qualified research
+- [ ] Improvements are technical, not cosmetic or stylistic
+- [ ] Result provides new capabilities or enhanced performance
+
+### 5. Documentation Quality
+- [ ] Language is specific and technical (not vague or generic)
+- [ ] Concrete examples and details are provided
+- [ ] Professional, objective tone is maintained
+- [ ] Narrative is well-organized with clear structure
+- [ ] Sufficient detail for IRS examiner to understand the work
+- [ ] No exaggerated or unsupported claims
+
+### 6. Audit Defense Readiness
+- [ ] Documentation would withstand IRS scrutiny
+- [ ] Technical claims are credible and verifiable
+- [ ] No obvious red flags or weaknesses
+- [ ] Appropriate level of technical detail
+- [ ] Clear connection between activities and qualified research
+
+## Review Output
+
+Provide a detailed compliance assessment including:
+
+1. **Overall Compliance Status**: Compliant / Needs Revision / Non-Compliant
+
+2. **Completeness Score**: 0-100% based on how well all requirements are met
+
+3. **Missing or Weak Elements**: Specific items that need to be added or strengthened
+
+4. **Strengths**: Aspects of the narrative that are particularly strong
+
+5. **Specific Recommendations**: Actionable suggestions for improvement
+
+6. **Risk Assessment**: Likelihood of IRS challenge and areas of concern
+
+7. **Required Revisions**: Must-fix issues before the narrative is audit-ready
+
+Be thorough and critical. The goal is to ensure this documentation will withstand IRS examination.
+"""
+
+
+YOUCOM_SEARCH_QUERY_TEMPLATE = """Search for recent IRS guidance, rulings, and precedents related to R&D tax credits.
+
+## Search Context
+
+**Tax Year:** {tax_year}
+
+**Industry/Sector:** {industry}
+
+**Specific Topic:** {topic}
+
+## Search Objectives
+
+Find authoritative IRS information about:
+
+1. **Recent Guidance and Rulings**
+   - Revenue rulings issued in {tax_year} or later
+   - IRS notices and announcements
+   - Chief Counsel Advice memoranda
+   - Technical Advice Memoranda (TAMs)
+
+2. **Industry-Specific Guidance**
+   - Guidance specific to {industry} sector
+   - Software development qualification criteria (if applicable)
+   - Manufacturing and engineering standards (if applicable)
+
+3. **Compliance Updates**
+   - Changes to Form 6765 or instructions
+   - Updates to Section 41 regulations
+   - New documentation requirements
+   - Audit technique guides
+
+4. **Case Law and Precedents**
+   - Recent Tax Court decisions on R&D credits
+   - Circuit court rulings affecting qualification
+   - Settled cases with published guidance
+
+## Search Query
+
+{search_query}
+
+## Expected Results
+
+Return relevant IRS documents, rulings, and guidance that could impact the qualification analysis for projects in {industry} for tax year {tax_year}.
+
+Focus on:
+- Official IRS publications and rulings
+- Recent updates or changes to existing guidance
+- Industry-specific clarifications
+- Precedents that could affect qualification decisions
+
+Prioritize authoritative sources and recent publications.
+"""
+
+
+# ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
 
@@ -767,6 +1030,202 @@ def create_batch_narrative_prompts(
             confidence_score=project.get("confidence_score", 0.0),
             qualification_reasoning=project.get("reasoning", ""),
             irs_citations=project.get("citations", [])
+        )
+        prompts.append(prompt)
+    
+    return prompts
+
+
+# ============================================================================
+# YOU.COM PROMPT HELPER FUNCTIONS
+# ============================================================================
+
+def populate_youcom_qualification_prompt(
+    rag_context: str,
+    project_name: str,
+    project_description: str,
+    technical_activities: str,
+    total_hours: float,
+    total_cost: float,
+    employee_roles: Optional[str] = None
+) -> str:
+    """
+    Populate the You.com qualification prompt with project data and RAG context.
+    
+    Args:
+        rag_context: Formatted RAG context from RD_Knowledge_Tool
+        project_name: Name of the project being analyzed
+        project_description: Description of the project
+        technical_activities: List or description of technical activities
+        total_hours: Total hours spent on the project
+        total_cost: Total cost of the project
+        employee_roles: Optional description of employee roles involved
+    
+    Returns:
+        Populated prompt string ready for You.com Agent API
+    
+    Example:
+        >>> prompt = populate_youcom_qualification_prompt(
+        ...     rag_context=context.format_for_llm_prompt(),
+        ...     project_name="API Optimization",
+        ...     project_description="Improve API response times",
+        ...     technical_activities="Algorithm optimization, caching strategies",
+        ...     total_hours=120.5,
+        ...     total_cost=15000.00,
+        ...     employee_roles="Senior Software Engineers, DevOps Engineers"
+        ... )
+    """
+    if employee_roles is None:
+        employee_roles = "Not specified"
+    
+    return YOUCOM_QUALIFICATION_PROMPT.format(
+        rag_context=rag_context,
+        project_name=project_name,
+        project_description=project_description,
+        technical_activities=technical_activities,
+        total_hours=total_hours,
+        total_cost=total_cost,
+        employee_roles=employee_roles
+    )
+
+
+def populate_youcom_narrative_template_fetch() -> str:
+    """
+    Get the You.com narrative template fetch prompt.
+    
+    This prompt is used with You.com Contents API to retrieve
+    R&D tax credit narrative templates from known sources.
+    
+    Returns:
+        Prompt string for You.com Contents API
+    
+    Example:
+        >>> prompt = populate_youcom_narrative_template_fetch()
+        >>> # Use with You.com Contents API to fetch template
+    """
+    return YOUCOM_NARRATIVE_TEMPLATE_FETCH
+
+
+def populate_youcom_compliance_review_prompt(narrative_text: str) -> str:
+    """
+    Populate the You.com compliance review prompt with a narrative to review.
+    
+    Args:
+        narrative_text: The technical narrative to review for compliance
+    
+    Returns:
+        Populated prompt string for You.com Express Agent API
+    
+    Example:
+        >>> prompt = populate_youcom_compliance_review_prompt(
+        ...     narrative_text="Project Overview: This project aimed to..."
+        ... )
+        >>> # Use with You.com Express Agent for quick compliance check
+    """
+    return YOUCOM_COMPLIANCE_REVIEW_PROMPT.format(
+        narrative_text=narrative_text
+    )
+
+
+def populate_youcom_search_query_template(
+    tax_year: int,
+    industry: str,
+    topic: str,
+    search_query: str
+) -> str:
+    """
+    Populate the You.com search query template for IRS guidance searches.
+    
+    Args:
+        tax_year: Tax year for the search (e.g., 2024)
+        industry: Industry or sector (e.g., "Software Development")
+        topic: Specific topic to search (e.g., "Four-Part Test")
+        search_query: The actual search query string
+    
+    Returns:
+        Populated prompt string for You.com Search API
+    
+    Example:
+        >>> prompt = populate_youcom_search_query_template(
+        ...     tax_year=2024,
+        ...     industry="Software Development",
+        ...     topic="Process of Experimentation",
+        ...     search_query="IRS Section 41 software development experimentation 2024"
+        ... )
+    """
+    return YOUCOM_SEARCH_QUERY_TEMPLATE.format(
+        tax_year=tax_year,
+        industry=industry,
+        topic=topic,
+        search_query=search_query
+    )
+
+
+def create_youcom_search_query(
+    tax_year: int,
+    industry: str,
+    keywords: List[str]
+) -> str:
+    """
+    Create a focused search query for You.com Search API.
+    
+    Args:
+        tax_year: Tax year for the search
+        industry: Industry or sector
+        keywords: List of keywords to include in search
+    
+    Returns:
+        Formatted search query string
+    
+    Example:
+        >>> query = create_youcom_search_query(
+        ...     tax_year=2024,
+        ...     industry="Software Development",
+        ...     keywords=["Section 41", "qualified research", "four-part test"]
+        ... )
+        >>> # Returns: "IRS Section 41 qualified research four-part test software development 2024"
+    """
+    # Combine keywords with industry and tax year
+    query_parts = ["IRS"] + keywords + [industry, str(tax_year)]
+    return " ".join(query_parts)
+
+
+def create_batch_youcom_qualification_prompts(
+    projects: List[Dict[str, Any]],
+    rag_contexts: List[str]
+) -> List[str]:
+    """
+    Create multiple You.com qualification prompts for batch processing.
+    
+    Args:
+        projects: List of project dictionaries with required fields
+        rag_contexts: List of RAG context strings (one per project)
+    
+    Returns:
+        List of populated prompt strings for You.com Agent API
+    
+    Example:
+        >>> prompts = create_batch_youcom_qualification_prompts(
+        ...     projects=[
+        ...         {"name": "Project A", "description": "...", ...},
+        ...         {"name": "Project B", "description": "...", ...}
+        ...     ],
+        ...     rag_contexts=[context_a, context_b]
+        ... )
+    """
+    if len(projects) != len(rag_contexts):
+        raise ValueError("Number of projects must match number of RAG contexts")
+    
+    prompts = []
+    for project, rag_context in zip(projects, rag_contexts):
+        prompt = populate_youcom_qualification_prompt(
+            rag_context=rag_context,
+            project_name=project.get("name", "Unknown Project"),
+            project_description=project.get("description", ""),
+            technical_activities=project.get("technical_activities", ""),
+            total_hours=project.get("total_hours", 0.0),
+            total_cost=project.get("total_cost", 0.0),
+            employee_roles=project.get("employee_roles")
         )
         prompts.append(prompt)
     

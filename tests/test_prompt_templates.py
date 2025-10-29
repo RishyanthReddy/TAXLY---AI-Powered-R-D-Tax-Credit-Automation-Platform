@@ -430,3 +430,215 @@ class TestPromptQuality:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+
+
+# ============================================================================
+# YOU.COM PROMPT TESTS
+# ============================================================================
+
+class TestYouComPrompts:
+    """Tests for You.com API prompt templates"""
+    
+    def test_youcom_qualification_prompt_exists(self):
+        """Test that You.com qualification prompt exists"""
+        from tools.prompt_templates import YOUCOM_QUALIFICATION_PROMPT
+        
+        assert YOUCOM_QUALIFICATION_PROMPT is not None
+        assert len(YOUCOM_QUALIFICATION_PROMPT) > 0
+        assert "{rag_context}" in YOUCOM_QUALIFICATION_PROMPT
+        assert "{project_name}" in YOUCOM_QUALIFICATION_PROMPT
+        assert "four-part test" in YOUCOM_QUALIFICATION_PROMPT.lower()
+    
+    def test_youcom_narrative_template_fetch_exists(self):
+        """Test that You.com narrative template fetch prompt exists"""
+        from tools.prompt_templates import YOUCOM_NARRATIVE_TEMPLATE_FETCH
+        
+        assert YOUCOM_NARRATIVE_TEMPLATE_FETCH is not None
+        assert len(YOUCOM_NARRATIVE_TEMPLATE_FETCH) > 0
+        assert "template" in YOUCOM_NARRATIVE_TEMPLATE_FETCH.lower()
+        assert "technical uncertainties" in YOUCOM_NARRATIVE_TEMPLATE_FETCH.lower()
+    
+    def test_youcom_compliance_review_prompt_exists(self):
+        """Test that You.com compliance review prompt exists"""
+        from tools.prompt_templates import YOUCOM_COMPLIANCE_REVIEW_PROMPT
+        
+        assert YOUCOM_COMPLIANCE_REVIEW_PROMPT is not None
+        assert len(YOUCOM_COMPLIANCE_REVIEW_PROMPT) > 0
+        assert "{narrative_text}" in YOUCOM_COMPLIANCE_REVIEW_PROMPT
+        assert "compliance" in YOUCOM_COMPLIANCE_REVIEW_PROMPT.lower()
+    
+    def test_youcom_search_query_template_exists(self):
+        """Test that You.com search query template exists"""
+        from tools.prompt_templates import YOUCOM_SEARCH_QUERY_TEMPLATE
+        
+        assert YOUCOM_SEARCH_QUERY_TEMPLATE is not None
+        assert len(YOUCOM_SEARCH_QUERY_TEMPLATE) > 0
+        assert "{tax_year}" in YOUCOM_SEARCH_QUERY_TEMPLATE
+        assert "{industry}" in YOUCOM_SEARCH_QUERY_TEMPLATE
+        assert "IRS" in YOUCOM_SEARCH_QUERY_TEMPLATE
+
+
+class TestYouComPromptHelpers:
+    """Tests for You.com prompt helper functions"""
+    
+    def test_populate_youcom_qualification_prompt(self):
+        """Test You.com qualification prompt population"""
+        from tools.prompt_templates import populate_youcom_qualification_prompt
+        
+        prompt = populate_youcom_qualification_prompt(
+            rag_context="Test IRS context",
+            project_name="Test Project",
+            project_description="Test description",
+            technical_activities="Test activities",
+            total_hours=100.0,
+            total_cost=10000.0,
+            employee_roles="Engineers"
+        )
+        
+        assert "Test IRS context" in prompt
+        assert "Test Project" in prompt
+        assert "Test description" in prompt
+        assert "Test activities" in prompt
+        assert "100.0" in prompt
+        assert "$10,000.00" in prompt
+        assert "Engineers" in prompt
+    
+    def test_populate_youcom_qualification_prompt_no_roles(self):
+        """Test You.com qualification prompt with no employee roles"""
+        from tools.prompt_templates import populate_youcom_qualification_prompt
+        
+        prompt = populate_youcom_qualification_prompt(
+            rag_context="Context",
+            project_name="Project",
+            project_description="Desc",
+            technical_activities="Activities",
+            total_hours=50.0,
+            total_cost=5000.0
+        )
+        
+        assert "Not specified" in prompt
+    
+    def test_populate_youcom_narrative_template_fetch(self):
+        """Test You.com narrative template fetch prompt"""
+        from tools.prompt_templates import populate_youcom_narrative_template_fetch
+        
+        prompt = populate_youcom_narrative_template_fetch()
+        
+        assert prompt is not None
+        assert len(prompt) > 0
+        assert "template" in prompt.lower()
+    
+    def test_populate_youcom_compliance_review_prompt(self):
+        """Test You.com compliance review prompt population"""
+        from tools.prompt_templates import populate_youcom_compliance_review_prompt
+        
+        narrative = "This is a test narrative about R&D activities."
+        prompt = populate_youcom_compliance_review_prompt(narrative)
+        
+        assert narrative in prompt
+        assert "compliance" in prompt.lower()
+        assert "technical uncertainties" in prompt.lower()
+    
+    def test_populate_youcom_search_query_template(self):
+        """Test You.com search query template population"""
+        from tools.prompt_templates import populate_youcom_search_query_template
+        
+        prompt = populate_youcom_search_query_template(
+            tax_year=2024,
+            industry="Software Development",
+            topic="Four-Part Test",
+            search_query="IRS Section 41 software 2024"
+        )
+        
+        assert "2024" in prompt
+        assert "Software Development" in prompt
+        assert "Four-Part Test" in prompt
+        assert "IRS Section 41 software 2024" in prompt
+    
+    def test_create_youcom_search_query(self):
+        """Test You.com search query creation"""
+        from tools.prompt_templates import create_youcom_search_query
+        
+        query = create_youcom_search_query(
+            tax_year=2024,
+            industry="Software Development",
+            keywords=["Section 41", "qualified research"]
+        )
+        
+        assert "IRS" in query
+        assert "Section 41" in query
+        assert "qualified research" in query
+        assert "Software Development" in query
+        assert "2024" in query
+    
+    def test_create_batch_youcom_qualification_prompts(self):
+        """Test batch You.com qualification prompt creation"""
+        from tools.prompt_templates import create_batch_youcom_qualification_prompts
+        
+        projects = [
+            {
+                "name": "Project A",
+                "description": "Description A",
+                "technical_activities": "Activities A",
+                "total_hours": 100.0,
+                "total_cost": 10000.0
+            },
+            {
+                "name": "Project B",
+                "description": "Description B",
+                "technical_activities": "Activities B",
+                "total_hours": 200.0,
+                "total_cost": 20000.0
+            }
+        ]
+        
+        rag_contexts = ["Context A", "Context B"]
+        
+        prompts = create_batch_youcom_qualification_prompts(projects, rag_contexts)
+        
+        assert len(prompts) == 2
+        assert "Project A" in prompts[0]
+        assert "Project B" in prompts[1]
+        assert "Context A" in prompts[0]
+        assert "Context B" in prompts[1]
+    
+    def test_batch_youcom_prompts_length_mismatch(self):
+        """Test that batch You.com prompts raises error on length mismatch"""
+        from tools.prompt_templates import create_batch_youcom_qualification_prompts
+        
+        projects = [{"name": "Project A"}]
+        rag_contexts = ["Context A", "Context B"]
+        
+        with pytest.raises(ValueError, match="must match"):
+            create_batch_youcom_qualification_prompts(projects, rag_contexts)
+
+
+class TestYouComPromptQuality:
+    """Tests for You.com prompt quality and completeness"""
+    
+    def test_youcom_qualification_includes_four_part_test(self):
+        """Test that You.com qualification prompt includes four-part test"""
+        from tools.prompt_templates import YOUCOM_QUALIFICATION_PROMPT
+        
+        assert "technological in nature" in YOUCOM_QUALIFICATION_PROMPT.lower()
+        assert "elimination of uncertainty" in YOUCOM_QUALIFICATION_PROMPT.lower()
+        assert "process of experimentation" in YOUCOM_QUALIFICATION_PROMPT.lower()
+        assert "qualified purpose" in YOUCOM_QUALIFICATION_PROMPT.lower()
+    
+    def test_youcom_compliance_includes_checklist(self):
+        """Test that You.com compliance prompt includes review checklist"""
+        from tools.prompt_templates import YOUCOM_COMPLIANCE_REVIEW_PROMPT
+        
+        assert "technical uncertainties" in YOUCOM_COMPLIANCE_REVIEW_PROMPT.lower()
+        assert "process of experimentation" in YOUCOM_COMPLIANCE_REVIEW_PROMPT.lower()
+        assert "technological nature" in YOUCOM_COMPLIANCE_REVIEW_PROMPT.lower()
+        assert "qualified purpose" in YOUCOM_COMPLIANCE_REVIEW_PROMPT.lower()
+        assert "audit" in YOUCOM_COMPLIANCE_REVIEW_PROMPT.lower()
+    
+    def test_youcom_search_includes_irs_focus(self):
+        """Test that You.com search template focuses on IRS sources"""
+        from tools.prompt_templates import YOUCOM_SEARCH_QUERY_TEMPLATE
+        
+        assert "IRS" in YOUCOM_SEARCH_QUERY_TEMPLATE
+        assert "guidance" in YOUCOM_SEARCH_QUERY_TEMPLATE.lower()
+        assert "rulings" in YOUCOM_SEARCH_QUERY_TEMPLATE.lower()

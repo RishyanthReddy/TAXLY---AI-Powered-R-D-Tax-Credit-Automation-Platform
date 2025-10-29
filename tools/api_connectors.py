@@ -167,7 +167,8 @@ class BaseAPIConnector(ABC):
         params: Optional[Dict[str, Any]] = None,
         json_data: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
-        retry: bool = True
+        retry: bool = True,
+        base_url: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Make an HTTP request to the API with retry logic.
@@ -179,6 +180,7 @@ class BaseAPIConnector(ABC):
             json_data: JSON request body
             headers: Additional headers (merged with auth headers)
             retry: Whether to retry on failure
+            base_url: Optional custom base URL (overrides _get_base_url())
         
         Returns:
             Response JSON as dictionary
@@ -194,7 +196,8 @@ class BaseAPIConnector(ABC):
                 logger.debug(f"Rate limit: waited {wait_time:.2f}s before request")
         
         # Construct full URL
-        base_url = self._get_base_url()
+        if base_url is None:
+            base_url = self._get_base_url()
         url = f"{base_url.rstrip('/')}/{endpoint.lstrip('/')}"
         
         # Merge headers
