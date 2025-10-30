@@ -2007,3 +2007,240 @@ class YouComClient(BaseAPIConnector):
         )
         
         return result
+    
+    def check_rate_limits(self) -> Dict[str, Any]:
+        """
+        Check current rate limit status by making a test request and examining headers.
+        
+        This method makes a lightweight API call and inspects the response headers
+        for rate limit information, which is commonly provided by APIs in headers
+        like X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, etc.
+        
+        Returns:
+            Dictionary with rate limit information:
+                - request_successful: Whether the test request succeeded
+                - headers: All response headers (for debugging)
+                - rate_limit_info: Parsed rate limit data from headers
+                - credits_remaining: Estimated credits remaining (if available)
+                - reset_time: When rate limits reset (if available)
+                - error: Error message if request failed
+        
+        Example:
+
+            >>> client = YouComClient(api_key="ydc-sk-...")
+            >>> limits = client.check_rate_limits()
+            >>> print(f"Request successful: {limits['request_successful']}")
+            >>> if limits['rate_limit_info']:
+            ...     print(f"Remaining requests: {limits['rate_limit_info'].get('remaining')}")
+            ...     print(f"Reset time: {limits['rate_limit_info'].get('reset_time')}")
+        """
+        logger.info("Checking You.com API rate limits via test request...")
+        
+        result = {
+            'request_successful': False,
+            'headers': {},
+            'rate_limit_info': {},
+            'credits_remaining': None,
+            'reset_time': None,
+            'error': None
+        }
+        
+        try:
+            # Make a lightweight test request to check headers
+            # Use the search endpoint with minimal parameters to avoid consuming credits
+            response_data, response_headers = self._make_request_with_headers(
+                method="GET",
+                endpoint="/search",
+                params={"query": "test", "num_web_results": 1},
+                base_url="https://api.ydc-index.io"
+            )
+            
+            result['request_successful'] = True
+            result['headers'] = dict(response_headers)  # Convert to dict for JSON serialization
+            
+            # Parse common rate limit headers
+            rate_info = self._parse_rate_limit_headers(response_headers)
+            result['rate_limit_info'] = rate_info
+            
+            # Extract specific values
+            result['credits_remaining'] = rate_info.get('remaining_credits')
+            result['reset_time'] = rate_info.get('reset_time')
+            
+            logger.info(
+                f"Rate limit check successful. "
+                f"Remaining credits: {result['credits_remaining']}, "
+                f"Reset time: {result['reset_time']}"
+            )
+            
+        except APIConnectionError as e:
+            result['error'] = f"API Error: {e.message} (Status: {e.status_code})"
+            logger.warning(f"Rate limit check failed: {result['error']}")
+            
+        except Exception as e:
+            result['error'] = f"Unexpected error: {str(e)}"
+            logger.error(f"Unexpected error during rate limit check: {result['error']}")
+        
+        return result
+    
+    def _make_request_with_headers(
+        self,
+        method: str,
+        endpoint: str,
+        params: Optional[Dict[str, Any]] = None,
+        json_data: Optional[Dict[str, Any]] = None,
+        headers: Optional[Dict[str, str]] = None,
+        base_url: Optional[str] = None,
+        timeout: Optional[float] = None,
+        retry: bool = True
+    ) -> tuple:
+        """
+        Make an HTTP request and return both response data and headers.
+        
+        This is a modified version of _make_request that also returns response headers
+        for rate limit inspection.
+        
+        Returns:
+            Tuple of (response_data, response_headers)
+        """
+        import requests
+        
+        if base_url is None:
+            base_url = self._get_base_url()
+        
+        url = f"{base_url}{endpoint}"
+        
+        # Use provided headers or get default auth headers
+        if headers is None:
+            headers = self._get_auth_headers()
+        
+        # Set timeout
+        if timeout is None:
+            timeout = self.timeout
+        
+        logger.debug(f"Making {method} request to {url}")
+        
+        try:
+            # Make the request
+            response = requests.request(
+                method=method,
+                url=url,
+                params=params,
+                json=json_data,
+                headers=headers,
+                timeout=timeout
+            )
+            
+            # Check for HTTP errors
+            if response.status_code >= 400:
+                self._handle_error(response, endpoint)
+            
+            # Try to parse JSON response
+            try:
+                response_data = response.json()
+            except ValueError:
+                # If not JSON, return text
+                response_data = response.text
+            
+            # Return both data and headers
+            return response_data, response.headers
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Request failed: {str(e)}")
+            raise APIConnectionError(
+                message=f"Request failed: {str(e)}",
+                api_name=self.api_name,
+                endpoint=endpoint,
+                details={"error": str(e), "type": type(e).__name__}
+            )
+    
+    def _parse_rate_limit_headers(self, headers) -> Dict[str, Any]:
+        """
+        Parse rate limit information from HTTP response headers.
+        
+        Looks for common rate limit header patterns used by various APIs.
+        
+        Args:
+            headers: Response headers dictionary
+        
+        Returns:
+            Dictionary with parsed rate limit information
+        """
+        rate_info = {}
+        
+        # Convert header keys to lowercase for case-insensitive matching
+        headers_lower = {k.lower(): v for k, v in headers.items()}
+        
+        # Common rate limit header patterns
+        header_patterns = {
+            'limit': [
+                'x-ratelimit-limit',
+                'x-rate-limit-limit',
+                'ratelimit-limit',
+                'rate-limit-limit'
+            ],
+            'remaining': [
+                'x-ratelimit-remaining',
+                'x-rate-limit-remaining', 
+                'ratelimit-remaining',
+                'rate-limit-remaining'
+            ],
+            'reset': [
+                'x-ratelimit-reset',
+                'x-rate-limit-reset',
+                'ratelimit-reset',
+                'rate-limit-reset'
+            ],
+            'reset_time': [
+                'x-ratelimit-reset-time',
+                'x-rate-limit-reset-time',
+                'ratelimit-reset-time'
+            ]
+        }
+        
+        # Extract values
+        for key, patterns in header_patterns.items():
+            for pattern in patterns:
+                if pattern in headers_lower:
+                    value = headers_lower[pattern]
+                    rate_info[key] = value
+                    break
+        
+        # Try to parse specific You.com patterns
+        # You.com might use different header names
+        youcom_patterns = {
+            'remaining_credits': [
+                'x-remaining-credits',
+                'x-credits-remaining',
+                'remaining-credits'
+            ],
+            'total_credits': [
+                'x-total-credits',
+                'x-credits-total',
+                'total-credits'
+            ],
+            'reset_timestamp': [
+                'x-reset-timestamp',
+                'x-rate-limit-reset-timestamp'
+            ]
+        }
+        
+        for key, patterns in youcom_patterns.items():
+            for pattern in patterns:
+                if pattern in headers_lower:
+                    value = headers_lower[pattern]
+                    rate_info[key] = value
+                    break
+        
+        # Parse reset time if it's a timestamp
+        if 'reset' in rate_info:
+            try:
+                # Try to parse as Unix timestamp
+                reset_ts = int(rate_info['reset'])
+                from datetime import datetime
+                reset_time = datetime.fromtimestamp(reset_ts)
+                rate_info['reset_datetime'] = reset_time.isoformat()
+            except (ValueError, TypeError):
+                # If not a timestamp, keep as-is
+                pass
+        
+        return rate_info
