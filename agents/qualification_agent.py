@@ -1349,9 +1349,26 @@ class QualificationAgent:
             
             logger.info(f"You.com Search returned {len(search_results)} results")
             
-            # Filter for IRS-related results
+            # Also call You.com News API for recent IRS news articles
+            news_query = f"IRS R&D tax credit {tax_year} guidance ruling"
+            logger.info(f"Searching You.com News for: '{news_query}'")
+            
+            news_results = self.youcom_client.news(
+                query=news_query,
+                count=10,  # Get top 10 news results
+                freshness="year",  # Only news from past year
+                country="US"
+            )
+            
+            logger.info(f"You.com News returned {len(news_results)} results")
+            
+            # Combine search and news results
+            all_results = search_results + news_results
+            logger.info(f"Total results from Search + News: {len(all_results)}")
+            
+            # Filter for IRS-related results from combined search and news
             irs_results = []
-            for result_item in search_results:
+            for result_item in all_results:
                 url = result_item.get('url', '').lower()
                 title = result_item.get('title', '').lower()
                 

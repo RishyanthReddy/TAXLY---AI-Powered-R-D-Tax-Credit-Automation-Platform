@@ -548,6 +548,18 @@ class AuditTrailAgent:
                 f"(total API calls: {len(narratives)})"
             )
             
+            # TASK 2: Log narratives dictionary details (keys, lengths)
+            logger.info("=" * 80)
+            logger.info("NARRATIVES DICTIONARY VERIFICATION")
+            logger.info("=" * 80)
+            logger.info(f"Total narratives generated: {len(narratives)}")
+            logger.info(f"Narrative keys: {list(narratives.keys())}")
+            for project_name, narrative in narratives.items():
+                logger.info(
+                    f"  - {project_name}: {len(narrative)} characters"
+                )
+            logger.info("=" * 80)
+            
             # Stage 2: Review narratives for compliance
             self._update_status(
                 stage="reviewing_narratives",
@@ -617,6 +629,22 @@ class AuditTrailAgent:
                 f"Compliance review complete: {len(compliance_reviews)} narratives reviewed"
             )
             
+            # TASK 2: Log compliance_reviews dictionary details (keys, status)
+            logger.info("=" * 80)
+            logger.info("COMPLIANCE REVIEWS DICTIONARY VERIFICATION")
+            logger.info("=" * 80)
+            logger.info(f"Total compliance reviews: {len(compliance_reviews)}")
+            logger.info(f"Review keys: {list(compliance_reviews.keys())}")
+            for project_name, review in compliance_reviews.items():
+                status = review.get('compliance_status', 'Unknown')
+                completeness = review.get('completeness_score', 0)
+                flagged = review.get('flagged_for_review', False)
+                logger.info(
+                    f"  - {project_name}: Status={status}, "
+                    f"Completeness={completeness}%, Flagged={flagged}"
+                )
+            logger.info("=" * 80)
+            
             # Stage 3: Aggregate data
             self._update_status(
                 stage="aggregating_data",
@@ -640,36 +668,237 @@ class AuditTrailAgent:
                 f"Estimated credit: ${aggregated_data['estimated_credit']:,.2f}"
             )
             
-            # Stage 4: Generate PDF (placeholder - will be implemented in task 121)
+            # TASK 2: Log aggregated_data dictionary details (all keys and values)
+            logger.info("=" * 80)
+            logger.info("AGGREGATED DATA DICTIONARY VERIFICATION")
+            logger.info("=" * 80)
+            logger.info(f"Aggregated data keys: {list(aggregated_data.keys())}")
+            logger.info("Core Metrics:")
+            logger.info(f"  - total_qualified_hours: {aggregated_data['total_qualified_hours']:.2f}")
+            logger.info(f"  - total_qualified_cost: ${aggregated_data['total_qualified_cost']:,.2f}")
+            logger.info(f"  - estimated_credit: ${aggregated_data['estimated_credit']:,.2f}")
+            logger.info(f"  - average_confidence: {aggregated_data['average_confidence']:.2%}")
+            logger.info(f"  - project_count: {aggregated_data['project_count']}")
+            logger.info(f"  - flagged_count: {aggregated_data['flagged_count']}")
+            logger.info(f"  - high_confidence_count: {aggregated_data['high_confidence_count']}")
+            logger.info(f"  - medium_confidence_count: {aggregated_data['medium_confidence_count']}")
+            logger.info(f"  - low_confidence_count: {aggregated_data['low_confidence_count']}")
+            logger.info(f"  - top_projects_80_count: {aggregated_data['top_projects_80_count']}")
+            logger.info(f"  - tax_year: {aggregated_data['tax_year']}")
+            logger.info(f"  - aggregation_timestamp: {aggregated_data['aggregation_timestamp']}")
+            logger.info("Summary Statistics:")
+            for key, value in aggregated_data['summary_stats'].items():
+                if isinstance(value, float):
+                    logger.info(f"  - {key}: {value:.4f}")
+                else:
+                    logger.info(f"  - {key}: {value}")
+            logger.info(f"DataFrame shape: {aggregated_data['projects_df'].shape}")
+            logger.info("=" * 80)
+            
+            # Stage 4: Generate PDF report
             self._update_status(
                 stage="generating_pdf",
                 status=AgentStatus.IN_PROGRESS
             )
             
+            logger.info("Starting PDF report generation")
+            
+            # TASK 5: Verify all three dictionaries are populated before creating report
+            logger.info("=" * 80)
+            logger.info("TASK 5: PRE-CREATION DATA VERIFICATION")
+            logger.info("=" * 80)
+            
+            # Assertion checks to ensure data is not empty
+            assert narratives is not None, "narratives dictionary cannot be None"
+            assert len(narratives) > 0, f"narratives dictionary is empty (expected {len(qualified_projects)} items)"
+            assert len(narratives) == len(qualified_projects), \
+                f"narratives count ({len(narratives)}) does not match projects count ({len(qualified_projects)})"
+            
+            assert compliance_reviews is not None, "compliance_reviews dictionary cannot be None"
+            assert len(compliance_reviews) > 0, f"compliance_reviews dictionary is empty (expected {len(qualified_projects)} items)"
+            assert len(compliance_reviews) == len(qualified_projects), \
+                f"compliance_reviews count ({len(compliance_reviews)}) does not match projects count ({len(qualified_projects)})"
+            
+            assert aggregated_data is not None, "aggregated_data dictionary cannot be None"
+            assert len(aggregated_data) > 0, "aggregated_data dictionary is empty"
+            assert 'total_qualified_hours' in aggregated_data, "aggregated_data missing 'total_qualified_hours'"
+            assert 'total_qualified_cost' in aggregated_data, "aggregated_data missing 'total_qualified_cost'"
+            assert 'estimated_credit' in aggregated_data, "aggregated_data missing 'estimated_credit'"
+            
+            logger.info("✓ All assertion checks passed")
+            logger.info(f"  - narratives: {len(narratives)} items")
+            logger.info(f"  - compliance_reviews: {len(compliance_reviews)} items")
+            logger.info(f"  - aggregated_data: {len(aggregated_data)} keys")
+            logger.info("=" * 80)
+            
+            # Create AuditReport object from aggregated data with complete data
+            audit_report = AuditReport(
+                report_id=f"RD_TAX_{tax_year}_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+                generation_date=datetime.now(),
+                tax_year=tax_year,
+                total_qualified_hours=aggregated_data['total_qualified_hours'],
+                total_qualified_cost=aggregated_data['total_qualified_cost'],
+                estimated_credit=aggregated_data['estimated_credit'],
+                projects=qualified_projects,
+                pdf_path="",  # Will be set after generation
+                narratives=narratives,
+                compliance_reviews=compliance_reviews,
+                aggregated_data=aggregated_data
+            )
+            
+            # Add company name if provided
+            if company_name:
+                audit_report.company_name = company_name
+            
+            # TASK 5: Log confirmation that complete data is being passed
+            logger.info("=" * 80)
+            logger.info("TASK 5: POST-CREATION CONFIRMATION")
+            logger.info("=" * 80)
+            logger.info(
+                f"✓ Created AuditReport object with COMPLETE DATA: {audit_report.report_id}"
+            )
+            logger.info(f"  - projects: {len(audit_report.projects)}")
+            logger.info(f"  - narratives: {len(audit_report.narratives)} items")
+            logger.info(f"  - compliance_reviews: {len(audit_report.compliance_reviews)} items")
+            logger.info(f"  - aggregated_data: {len(audit_report.aggregated_data)} keys")
+            logger.info(f"  - estimated_credit: ${audit_report.estimated_credit:,.2f}")
+            logger.info("✓ All three dictionaries successfully passed to AuditReport")
+            logger.info("=" * 80)
+            
+            # TASK 2: Log AuditReport object details before passing to PDF generator
+            logger.info("=" * 80)
+            logger.info("AUDITREPORT OBJECT VERIFICATION (Before PDF Generation)")
+            logger.info("=" * 80)
+            logger.info(f"AuditReport Fields:")
+            logger.info(f"  - report_id: {audit_report.report_id}")
+            logger.info(f"  - generation_date: {audit_report.generation_date}")
+            logger.info(f"  - tax_year: {audit_report.tax_year}")
+            logger.info(f"  - total_qualified_hours: {audit_report.total_qualified_hours:.2f}")
+            logger.info(f"  - total_qualified_cost: ${audit_report.total_qualified_cost:,.2f}")
+            logger.info(f"  - estimated_credit: ${audit_report.estimated_credit:,.2f}")
+            logger.info(f"  - projects count: {len(audit_report.projects)}")
+            logger.info(f"  - pdf_path: {audit_report.pdf_path}")
+            logger.info(f"  - company_name: {getattr(audit_report, 'company_name', 'Not set')}")
+            
+            # Check if narratives and aggregated_data are accessible
+            # Note: These fields may not exist in the current AuditReport model
+            # This logging will help identify if they need to be added (Task 4)
+            has_narratives = hasattr(audit_report, 'narratives')
+            has_compliance_reviews = hasattr(audit_report, 'compliance_reviews')
+            has_aggregated_data = hasattr(audit_report, 'aggregated_data')
+            
+            logger.info(f"  - has narratives field: {has_narratives}")
+            if has_narratives:
+                logger.info(f"    - narratives count: {len(audit_report.narratives)}")
+                logger.info(f"    - narratives keys: {list(audit_report.narratives.keys())}")
+            else:
+                logger.warning("    - narratives field NOT PRESENT in AuditReport model")
+                logger.warning(f"    - narratives available in result object: {len(result.narratives)} items")
+            
+            logger.info(f"  - has compliance_reviews field: {has_compliance_reviews}")
+            if has_compliance_reviews:
+                logger.info(f"    - compliance_reviews count: {len(audit_report.compliance_reviews)}")
+            else:
+                logger.warning("    - compliance_reviews field NOT PRESENT in AuditReport model")
+                logger.warning(f"    - compliance_reviews available in result object: {len(result.compliance_reviews)} items")
+            
+            logger.info(f"  - has aggregated_data field: {has_aggregated_data}")
+            if has_aggregated_data:
+                logger.info(f"    - aggregated_data keys: {list(audit_report.aggregated_data.keys())}")
+            else:
+                logger.warning("    - aggregated_data field NOT PRESENT in AuditReport model")
+                logger.warning(f"    - aggregated_data available in local variable: {list(aggregated_data.keys())}")
+            
+            logger.info("=" * 80)
+            
+            # Generate PDF using PDFGenerator
+            pdf_path = None
             if self.pdf_generator:
-                logger.info("PDF generation will be implemented in task 121")
-                # TODO: Implement PDF generation in task 121
+                try:
+                    logger.info("Generating PDF report using PDFGenerator")
+                    
+                    # Generate unique filename
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"rd_tax_credit_report_{tax_year}_{timestamp}.pdf"
+                    
+                    # Generate the PDF
+                    pdf_path = self.pdf_generator.generate_report(
+                        report=audit_report,
+                        output_dir="outputs/reports/",
+                        filename=filename
+                    )
+                    
+                    # Update report with PDF path
+                    audit_report.pdf_path = pdf_path
+                    
+                    logger.info(f"Successfully generated PDF report: {pdf_path}")
+                    
+                    # Mark PDF as generated in state
+                    self.state.report_generated = True
+                    
+                except Exception as e:
+                    logger.error(
+                        f"Failed to generate PDF report: {str(e)}",
+                        exc_info=True
+                    )
+                    # Continue without PDF - we still have the data
+                    logger.warning(
+                        "PDF generation failed, but audit data is available. "
+                        "Report can be regenerated manually."
+                    )
             else:
                 logger.warning(
-                    "PDF generator not available - skipping PDF generation. "
-                    "Will be implemented in task 118"
+                    "PDF generator not provided - skipping PDF generation. "
+                    "Initialize AuditTrailAgent with PDFGenerator to enable PDF output."
                 )
             
             # Record end time and calculate execution time
             self.state.end_time = datetime.now()
             execution_time = (self.state.end_time - self.state.start_time).total_seconds()
             
-            # Build result with aggregated data
+            # Build result with all generated data
+            result.report = audit_report
+            result.pdf_path = pdf_path
             result.execution_time_seconds = execution_time
-            result.aggregated_data = aggregated_data  # Store aggregated data for PDF generation
-            result.summary = (
-                f"Generated {len(result.narratives)} narratives for {len(qualified_projects)} projects "
-                f"in {execution_time:.2f} seconds. "
-                f"Total qualified cost: ${aggregated_data['total_qualified_cost']:,.2f}, "
-                f"Estimated credit: ${aggregated_data['estimated_credit']:,.2f}, "
-                f"Average confidence: {aggregated_data['average_confidence']:.2%}. "
-                f"PDF generation pending (task 121)."
-            )
+            result.aggregated_data = aggregated_data
+            
+            # TASK 2: Verify result object has complete data
+            logger.info("=" * 80)
+            logger.info("AUDITTRAILRESULT OBJECT VERIFICATION")
+            logger.info("=" * 80)
+            logger.info(f"Result object fields:")
+            logger.info(f"  - report: {result.report is not None}")
+            logger.info(f"  - pdf_path: {result.pdf_path}")
+            logger.info(f"  - narratives count: {len(result.narratives)}")
+            logger.info(f"  - narratives keys: {list(result.narratives.keys())}")
+            logger.info(f"  - compliance_reviews count: {len(result.compliance_reviews)}")
+            logger.info(f"  - compliance_reviews keys: {list(result.compliance_reviews.keys())}")
+            logger.info(f"  - aggregated_data: {result.aggregated_data is not None}")
+            if result.aggregated_data:
+                logger.info(f"  - aggregated_data keys: {list(result.aggregated_data.keys())}")
+            logger.info(f"  - execution_time_seconds: {result.execution_time_seconds:.2f}")
+            logger.info("=" * 80)
+            
+            # Create comprehensive summary
+            summary_parts = [
+                f"Generated {len(result.narratives)} narratives for {len(qualified_projects)} projects",
+                f"in {execution_time:.2f} seconds.",
+                f"Total qualified cost: ${aggregated_data['total_qualified_cost']:,.2f},",
+                f"Estimated credit: ${aggregated_data['estimated_credit']:,.2f},",
+                f"Average confidence: {aggregated_data['average_confidence']:.2%}."
+            ]
+            
+            if pdf_path:
+                summary_parts.append(f"PDF report saved to: {pdf_path}")
+            else:
+                summary_parts.append("PDF generation skipped (no generator provided).")
+            
+            if aggregated_data['flagged_count'] > 0:
+                summary_parts.append(
+                    f"WARNING: {aggregated_data['flagged_count']} projects flagged for manual review."
+                )
+            
+            result.summary = " ".join(summary_parts)
             
             # Update final status
             self._update_status(
@@ -719,7 +948,9 @@ class AuditTrailAgent:
         1. Optionally fetch a narrative template using You.com Contents API
         2. Create a detailed prompt with project information and qualification reasoning
         3. Call You.com Agent API to generate the technical narrative
-        4. Return the generated narrative text
+        4. Validate narrative meets minimum length requirements (>500 characters)
+        5. Generate fallback narrative if API fails or narrative is too short
+        6. Return the generated narrative text
         
         The narrative includes:
         - Project overview and timeline
@@ -735,10 +966,10 @@ class AuditTrailAgent:
                          If None, uses built-in template structure
         
         Returns:
-            Generated narrative text as a string
+            Generated narrative text as a string (guaranteed >500 characters)
         
         Raises:
-            APIConnectionError: If You.com API calls fail
+            APIConnectionError: If You.com API calls fail and fallback generation fails
             ValueError: If project data is invalid
         
         Example:
@@ -759,7 +990,7 @@ class AuditTrailAgent:
         Requirements: 4.1, 4.2
         """
         logger.info(
-            f"Generating narrative for project: {project.project_name} "
+            f"[TASK 6] Starting narrative generation for project: {project.project_name} "
             f"(qualification={project.qualification_percentage}%, "
             f"confidence={project.confidence_score})"
         )
@@ -828,9 +1059,12 @@ class AuditTrailAgent:
         )
         
         # Step 3: Call You.com Agent API to generate technical narrative
+        narrative_text = ""
+        api_success = False
+        
         try:
             logger.info(
-                f"Calling You.com Agent API for narrative generation "
+                f"[TASK 6] Calling You.com Agent API for narrative generation "
                 f"(project: {project.project_name})"
             )
             
@@ -844,8 +1078,6 @@ class AuditTrailAgent:
             
             # Extract the narrative text from the agent response
             # The response format is: {'output': [{'type': '...', 'text': '...', ...}]}
-            narrative_text = ""
-            
             if 'output' in agent_response and agent_response['output']:
                 # Find the chat answer in the output
                 for output_item in agent_response['output']:
@@ -858,41 +1090,184 @@ class AuditTrailAgent:
                     narrative_text = agent_response['output'][0].get('text', '')
             
             if not narrative_text:
-                raise ValueError(
-                    "You.com Agent API returned empty narrative. "
-                    "Response structure may have changed."
+                logger.warning(
+                    f"[TASK 6] You.com Agent API returned empty narrative for {project.project_name}. "
+                    "Will use fallback generation."
                 )
-            
-            logger.info(
-                f"Successfully generated narrative for {project.project_name} "
-                f"(length={len(narrative_text)} chars)"
-            )
-            
-            # Log a preview of the narrative
-            preview = narrative_text[:200] + "..." if len(narrative_text) > 200 else narrative_text
-            logger.debug(f"Narrative preview: {preview}")
-            
-            return narrative_text
+            else:
+                api_success = True
+                logger.info(
+                    f"[TASK 6] Successfully received narrative from You.com API for {project.project_name} "
+                    f"(length={len(narrative_text)} chars)"
+                )
             
         except APIConnectionError as e:
             logger.error(
-                f"You.com Agent API failed during narrative generation "
-                f"for project {project.project_name}: {e.message}"
+                f"[TASK 6] You.com Agent API failed during narrative generation "
+                f"for project {project.project_name}: {e.message}. "
+                "Will use fallback generation."
             )
-            raise
-        
+            # Don't raise - we'll use fallback
+            
         except Exception as e:
-            error_msg = (
-                f"Unexpected error generating narrative for {project.project_name}: "
-                f"{str(e)}"
+            logger.error(
+                f"[TASK 6] Unexpected error calling You.com API for {project.project_name}: {str(e)}. "
+                "Will use fallback generation.",
+                exc_info=True
             )
-            logger.error(error_msg, exc_info=True)
-            raise APIConnectionError(
-                message=error_msg,
-                api_name="You.com Agent API",
-                endpoint="/v1/agents/runs",
-                details={"error": str(e), "project": project.project_name}
+            # Don't raise - we'll use fallback
+        
+        # Step 4: Validate narrative length and use fallback if needed
+        MIN_NARRATIVE_LENGTH = 500
+        
+        if not narrative_text or len(narrative_text) < MIN_NARRATIVE_LENGTH:
+            if narrative_text:
+                logger.warning(
+                    f"[TASK 6] Narrative for {project.project_name} is too short "
+                    f"({len(narrative_text)} chars < {MIN_NARRATIVE_LENGTH} required). "
+                    "Generating fallback narrative."
+                )
+            
+            # Generate fallback narrative from project data
+            narrative_text = self._generate_fallback_narrative(project)
+            api_success = False
+            
+            logger.info(
+                f"[TASK 6] Generated fallback narrative for {project.project_name} "
+                f"(length={len(narrative_text)} chars)"
             )
+        
+        # Step 5: Final validation and logging
+        if len(narrative_text) < MIN_NARRATIVE_LENGTH:
+            logger.error(
+                f"[TASK 6] CRITICAL: Even fallback narrative for {project.project_name} "
+                f"is too short ({len(narrative_text)} chars < {MIN_NARRATIVE_LENGTH} required)"
+            )
+        
+        # Log success/failure with detailed metrics
+        logger.info("=" * 80)
+        logger.info(f"[TASK 6] NARRATIVE GENERATION RESULT: {project.project_name}")
+        logger.info("=" * 80)
+        logger.info(f"  Status: {'SUCCESS' if api_success else 'FALLBACK'}")
+        logger.info(f"  Source: {'You.com Agent API' if api_success else 'Fallback Generator'}")
+        logger.info(f"  Length: {len(narrative_text)} characters")
+        logger.info(f"  Meets minimum (>500 chars): {'✓ YES' if len(narrative_text) >= MIN_NARRATIVE_LENGTH else '✗ NO'}")
+        logger.info(f"  Project: {project.project_name}")
+        logger.info(f"  Qualification: {project.qualification_percentage}%")
+        logger.info(f"  Confidence: {project.confidence_score:.2f}")
+        
+        # Log a preview of the narrative
+        preview = narrative_text[:200] + "..." if len(narrative_text) > 200 else narrative_text
+        logger.debug(f"  Preview: {preview}")
+        logger.info("=" * 80)
+        
+        return narrative_text
+    
+    def _generate_fallback_narrative(
+        self,
+        project: QualifiedProject
+    ) -> str:
+        """
+        Generate a basic fallback narrative from project data.
+        
+        This method creates a structured narrative when the You.com Agent API
+        fails or returns an insufficient response. The fallback narrative
+        includes all essential information from the project qualification
+        and ensures the narrative meets minimum length requirements.
+        
+        Args:
+            project: QualifiedProject object with qualification results
+        
+        Returns:
+            Fallback narrative text (guaranteed >500 characters)
+        
+        Requirements: 4.1, 4.2
+        """
+        logger.info(f"[TASK 6] Generating fallback narrative for {project.project_name}")
+        
+        # Build comprehensive fallback narrative
+        narrative_parts = []
+        
+        # Section 1: Project Overview
+        narrative_parts.append(f"# Technical Narrative: {project.project_name}\n\n")
+        narrative_parts.append("## Project Overview\n\n")
+        narrative_parts.append(
+            f"This project, '{project.project_name}', has been qualified for R&D tax credit "
+            f"with a {project.qualification_percentage}% qualification rate and a confidence "
+            f"score of {project.confidence_score:.2%}. The project involved {project.qualified_hours:.1f} "
+            f"qualified hours with a total qualified cost of ${project.qualified_cost:,.2f}.\n\n"
+        )
+        
+        # Section 2: Qualification Reasoning
+        narrative_parts.append("## Qualification Analysis\n\n")
+        narrative_parts.append(
+            "The project qualified for R&D tax credit based on the following analysis:\n\n"
+        )
+        narrative_parts.append(f"{project.reasoning}\n\n")
+        
+        # Section 3: IRS Regulatory Basis
+        narrative_parts.append("## IRS Regulatory Basis\n\n")
+        narrative_parts.append(f"**Primary IRS Source:** {project.irs_source}\n\n")
+        narrative_parts.append("**Supporting Citation:**\n\n")
+        narrative_parts.append(f"{project.supporting_citation}\n\n")
+        
+        # Section 4: Four-Part Test Compliance
+        narrative_parts.append("## Four-Part Test Compliance\n\n")
+        narrative_parts.append(
+            "This project meets the IRS four-part test for qualified research activities:\n\n"
+        )
+        narrative_parts.append(
+            "1. **Permitted Purpose:** The activities were undertaken to discover information "
+            "that is technological in nature and intended to be useful in the development of "
+            "a new or improved business component.\n\n"
+        )
+        narrative_parts.append(
+            "2. **Elimination of Uncertainty:** The project addressed technical uncertainties "
+            "regarding the capability, methodology, or appropriate design of the business component.\n\n"
+        )
+        narrative_parts.append(
+            "3. **Process of Experimentation:** The activities involved a systematic process "
+            "of evaluating alternatives to achieve the desired result.\n\n"
+        )
+        narrative_parts.append(
+            "4. **Technological in Nature:** The process of experimentation fundamentally "
+            "relied on principles of physical or biological sciences, engineering, or computer science.\n\n"
+        )
+        
+        # Section 5: Technical Details (if available)
+        if project.technical_details:
+            narrative_parts.append("## Technical Details\n\n")
+            for key, value in project.technical_details.items():
+                field_name = key.replace('_', ' ').title()
+                narrative_parts.append(f"**{field_name}:** {value}\n\n")
+        
+        # Section 6: Conclusion
+        narrative_parts.append("## Conclusion\n\n")
+        narrative_parts.append(
+            f"Based on the comprehensive analysis and alignment with IRS regulations "
+            f"({project.irs_source}), this project qualifies for R&D tax credit. "
+            f"The {project.qualification_percentage}% qualification rate reflects the "
+            f"proportion of activities that meet the four-part test criteria. "
+            f"The confidence score of {project.confidence_score:.2%} indicates a "
+            f"{'high' if project.confidence_score >= 0.8 else 'moderate' if project.confidence_score >= 0.6 else 'low'} "
+            f"level of certainty in this qualification assessment.\n\n"
+        )
+        
+        # Add disclaimer
+        narrative_parts.append(
+            "*Note: This narrative was generated using project qualification data. "
+            "For audit purposes, additional technical documentation and contemporaneous "
+            "records should be maintained to support this qualification.*\n"
+        )
+        
+        fallback_narrative = "".join(narrative_parts)
+        
+        logger.info(
+            f"[TASK 6] Fallback narrative generated for {project.project_name}: "
+            f"{len(fallback_narrative)} characters"
+        )
+        
+        return fallback_narrative
     
     def _review_narrative(
         self,

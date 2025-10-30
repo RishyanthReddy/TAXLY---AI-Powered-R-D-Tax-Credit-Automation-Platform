@@ -358,7 +358,7 @@ class BaseAPIConnector(ABC):
                     endpoint_name = 'contents'
                 elif 'express' in endpoint.lower():
                     endpoint_name = 'express_agent'
-                elif '/news' in endpoint:
+                elif '/news' in endpoint or '/livenews' in endpoint:
                     endpoint_name = 'news'
                 
                 wait_time = self.rate_limiter.acquire(endpoint_name)

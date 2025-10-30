@@ -772,7 +772,7 @@ class YouComClient(BaseAPIConnector):
             # Prepare query parameters
             params = {
                 "query": query.strip(),
-                "num_web_results": count,  # API uses num_web_results, not count
+                "count": count,  # Number of results per section (web/news)
                 "offset": offset,
                 "country": country,
                 "safesearch": safesearch
@@ -1531,17 +1531,19 @@ class YouComClient(BaseAPIConnector):
         
         try:
             # Prepare request payload according to You.com Contents API spec
+            # Note: Contents API expects "urls" as an array, not a single "url"
             payload = {
-                "url": url,
+                "urls": [url],  # Must be an array
                 "format": format
             }
             
             # Make API request
-            # Contents API uses the main api.you.com base URL
+            # Contents API uses api.ydc-index.io base URL (not api.you.com)
             response = self._make_request(
                 method="POST",
                 endpoint="/v1/contents",
-                json_data=payload
+                json_data=payload,
+                base_url="https://api.ydc-index.io"
             )
             
             # Parse and structure the response
@@ -1599,16 +1601,32 @@ class YouComClient(BaseAPIConnector):
         Parse You.com Contents API response into structured format.
         
         Args:
-            response: Raw API response dictionary
+            response: Raw API response (array of content objects)
             url: Original URL that was fetched
             format: Format that was requested ("markdown" or "html")
         
         Returns:
             Dictionary with structured content data
         """
-        # Extract content from response
-        # The API returns content in the 'content' field
-        content = response.get('content', '')
+        # The Contents API returns an array of results
+        # Since we only request one URL, we take the first result
+        if isinstance(response, list) and len(response) > 0:
+            content_obj = response[0]
+        elif isinstance(response, dict):
+            # Fallback for single object response
+            content_obj = response
+        else:
+            logger.warning(f"Unexpected response format from Contents API: {type(response)}")
+            content_obj = {}
+        
+        # Extract content based on format
+        if format == "markdown":
+            content = content_obj.get('markdown', '')
+        elif format == "html":
+            content = content_obj.get('html', '')
+        else:
+            # Fallback: try both
+            content = content_obj.get('markdown', content_obj.get('html', ''))
         
         if not content:
             logger.warning(f"No content extracted from {url}")
@@ -1616,22 +1634,22 @@ class YouComClient(BaseAPIConnector):
         # Build structured result
         result = {
             'content': content,
-            'url': url,
+            'url': content_obj.get('url', url),
             'format': format
         }
         
         # Add optional metadata fields if present
-        if 'title' in response:
-            result['title'] = response['title']
+        if 'title' in content_obj:
+            result['title'] = content_obj['title']
         
-        if 'description' in response:
-            result['description'] = response['description']
+        if 'description' in content_obj:
+            result['description'] = content_obj['description']
         
-        if 'author' in response:
-            result['author'] = response['author']
+        if 'author' in content_obj:
+            result['author'] = content_obj['author']
         
-        if 'published_date' in response:
-            result['published_date'] = response['published_date']
+        if 'published_date' in content_obj:
+            result['published_date'] = content_obj['published_date']
         
         # Calculate word count
         if content:

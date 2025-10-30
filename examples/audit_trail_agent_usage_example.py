@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from agents.audit_trail_agent import AuditTrailAgent, AuditTrailState, AuditTrailResult
 from tools.you_com_client import YouComClient
 from tools.glm_reasoner import GLMReasoner
+from utils.pdf_generator import PDFGenerator
 from models.tax_models import QualifiedProject
 from models.websocket_models import StatusUpdateMessage
 from datetime import datetime
@@ -57,15 +58,20 @@ def main():
     glm_reasoner = GLMReasoner(api_key=config.openrouter_api_key)
     print("✓ GLM reasoner initialized")
     
+    # Initialize PDF generator
+    print("Initializing PDF generator...")
+    pdf_generator = PDFGenerator()
+    print("✓ PDF generator initialized")
+    
     print()
     print("Step 2: Initialize Audit Trail Agent")
     print("-" * 80)
     
-    # Initialize agent with status callback
+    # Initialize agent with status callback and PDF generator
     agent = AuditTrailAgent(
         youcom_client=youcom_client,
         glm_reasoner=glm_reasoner,
-        pdf_generator=None,  # Will be implemented in task 118
+        pdf_generator=pdf_generator,
         status_callback=status_callback
     )
     
@@ -124,14 +130,14 @@ def main():
         print(f"  - {project.project_name}: {project.qualified_hours}h, ${project.qualified_cost:,.2f}")
     print()
     
-    # Demonstrate agent run (placeholder - full implementation in tasks 114-121)
-    print("Step 5: Run audit trail generation (placeholder)")
+    # Run the complete audit trail generation workflow
+    print("Step 5: Run audit trail generation workflow")
     print("-" * 80)
-    print("Note: Full implementation will be completed in tasks 114-121")
-    print("      - Task 114: Narrative generation with You.com Agent API")
-    print("      - Task 116: Compliance review with You.com Express Agent")
-    print("      - Task 117: Data aggregation with Pandas")
-    print("      - Task 118-121: PDF generation with ReportLab")
+    print("This will:")
+    print("  1. Generate narratives for all projects using You.com Agent API")
+    print("  2. Review narratives for compliance using You.com Express Agent")
+    print("  3. Aggregate all data using Pandas")
+    print("  4. Generate PDF report using ReportLab")
     print()
     
     try:
@@ -145,9 +151,40 @@ def main():
         print()
         print("Result Summary:")
         print(f"  - Execution time: {result.execution_time_seconds:.2f}s")
-        print(f"  - Summary: {result.summary}")
         print(f"  - Narratives generated: {len(result.narratives)}")
-        print(f"  - PDF path: {result.pdf_path or 'Not generated (pending task 118)'}")
+        print(f"  - Compliance reviews: {len(result.compliance_reviews)}")
+        print(f"  - PDF path: {result.pdf_path or 'Not generated'}")
+        print()
+        print(f"Summary: {result.summary}")
+        print()
+        
+        # Display aggregated data
+        if result.aggregated_data:
+            print("Aggregated Data:")
+            print(f"  - Total qualified hours: {result.aggregated_data['total_qualified_hours']:.2f}")
+            print(f"  - Total qualified cost: ${result.aggregated_data['total_qualified_cost']:,.2f}")
+            print(f"  - Estimated credit: ${result.aggregated_data['estimated_credit']:,.2f}")
+            print(f"  - Average confidence: {result.aggregated_data['average_confidence']:.2%}")
+            print(f"  - Projects flagged: {result.aggregated_data['flagged_count']}")
+        
+        # Display narrative samples
+        if result.narratives:
+            print()
+            print("Narrative Samples:")
+            for project_name, narrative in list(result.narratives.items())[:2]:
+                preview = narrative[:150] + "..." if len(narrative) > 150 else narrative
+                print(f"  - {project_name}: {preview}")
+        
+        # Display compliance review results
+        if result.compliance_reviews:
+            print()
+            print("Compliance Review Results:")
+            for project_name, review in result.compliance_reviews.items():
+                status = review.get('compliance_status', 'Unknown')
+                score = review.get('completeness_score', 0)
+                flagged = review.get('flagged_for_review', False)
+                flag_indicator = " [FLAGGED]" if flagged else ""
+                print(f"  - {project_name}: {status} ({score}%){flag_indicator}")
         
     except Exception as e:
         print(f"✗ Error during agent run: {e}")

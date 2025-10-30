@@ -269,6 +269,9 @@ class AuditReport(BaseModel):
         projects: List of all qualified projects included in this report
         company_name: Optional company name for the report
         report_notes: Optional additional notes or disclaimers
+        narratives: Technical narratives for each project (maps project_name to narrative text)
+        compliance_reviews: Compliance review results for each narrative (maps project_name to review data)
+        aggregated_data: Complete aggregated statistics and analysis including DataFrames and metrics
     
     Example:
         >>> from datetime import datetime
@@ -290,7 +293,10 @@ class AuditReport(BaseModel):
         ...     total_qualified_cost=1045.74,
         ...     estimated_credit=209.15,
         ...     projects=[project1],
-        ...     company_name="Acme Corp"
+        ...     company_name="Acme Corp",
+        ...     narratives={"Alpha Development": "Technical narrative..."},
+        ...     compliance_reviews={"Alpha Development": {"status": "compliant"}},
+        ...     aggregated_data={"total_hours": 14.5}
         ... )
         >>> print(report.project_count)
         1
@@ -348,6 +354,26 @@ class AuditReport(BaseModel):
     report_notes: Optional[str] = Field(
         default=None,
         description="Additional notes or disclaimers for the report"
+    )
+    
+    pdf_path: str = Field(
+        default="",
+        description="Path to the generated PDF report file"
+    )
+    
+    narratives: Optional[Dict[str, str]] = Field(
+        default=None,
+        description="Technical narratives for each project (maps project_name to narrative text)"
+    )
+    
+    compliance_reviews: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None,
+        description="Compliance review results for each narrative (maps project_name to review data)"
+    )
+    
+    aggregated_data: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Complete aggregated statistics and analysis including DataFrames and metrics"
     )
     
     @field_validator('tax_year')
@@ -416,6 +442,61 @@ class AuditReport(BaseModel):
                 raise ValueError(
                     f"total_qualified_cost ({self.total_qualified_cost}) does not match "
                     f"sum of project costs ({calculated_cost})"
+                )
+        
+        return self
+    
+    @model_validator(mode='after')
+    def validate_complete_data(self) -> 'AuditReport':
+        """
+        Validate that narratives, compliance_reviews, and aggregated_data are populated.
+        
+        This validator ensures that the AuditReport contains all generated data needed
+        for complete PDF generation. It checks that narratives exist for all projects
+        and that aggregated_data contains required keys.
+        
+        Returns:
+            The model instance after validation
+            
+        Raises:
+            ValueError: If required fields are missing or incomplete
+        """
+        # Only validate if there are projects (empty reports are allowed)
+        if self.projects:
+            # Validate narratives
+            if self.narratives is None:
+                raise ValueError("narratives field is required when projects are present")
+            
+            # Check that narratives exist for all projects
+            project_names = {p.project_name for p in self.projects}
+            narrative_names = set(self.narratives.keys())
+            
+            if project_names != narrative_names:
+                missing = project_names - narrative_names
+                extra = narrative_names - project_names
+                error_parts = []
+                if missing:
+                    error_parts.append(f"Missing narratives for projects: {missing}")
+                if extra:
+                    error_parts.append(f"Extra narratives for non-existent projects: {extra}")
+                raise ValueError("; ".join(error_parts))
+            
+            # Validate aggregated_data
+            if self.aggregated_data is None:
+                raise ValueError("aggregated_data field is required when projects are present")
+            
+            # Check for required keys in aggregated_data
+            required_keys = {
+                'total_qualified_hours',
+                'total_qualified_cost',
+                'estimated_credit',
+                'average_confidence'
+            }
+            
+            missing_keys = required_keys - set(self.aggregated_data.keys())
+            if missing_keys:
+                raise ValueError(
+                    f"aggregated_data is missing required keys: {missing_keys}"
                 )
         
         return self

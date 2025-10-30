@@ -34,6 +34,44 @@ class RDTaxAgentError(Exception):
         return self.message
 
 
+class ConfigurationError(RDTaxAgentError):
+    """
+    Exception raised when application configuration is invalid or missing.
+    
+    This exception is used when required environment variables are missing,
+    configuration files are malformed, or configuration validation fails.
+    
+    Attributes:
+        config_key: Name of the configuration key that is invalid
+        expected_type: Expected type or format of the configuration value
+    """
+    
+    def __init__(
+        self,
+        message: str,
+        config_key: str = None,
+        expected_type: str = None,
+        details: dict = None
+    ):
+        """
+        Initialize configuration error.
+        
+        Args:
+            message: Human-readable error message
+            config_key: Name of the configuration key
+            expected_type: Expected type or format
+            details: Additional error context
+        """
+        error_details = details or {}
+        error_details.update({
+            'config_key': config_key,
+            'expected_type': expected_type
+        })
+        super().__init__(message, error_details)
+        self.config_key = config_key
+        self.expected_type = expected_type
+
+
 class APIConnectionError(RDTaxAgentError):
     """
     Exception raised when external API connections fail.
