@@ -1,0 +1,167 @@
+{
+  "exported_at": "2025-10-28T12:53:12.949509",
+  "total_metrics": 12,
+  "metrics": [
+    {
+      "function_name": "__main__.fetch_api_data",
+      "execution_time": 0.5010654926300049,
+      "timestamp": "2025-10-28T12:53:05.707337",
+      "memory_used": null,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "__main__.process_large_dataset",
+      "execution_time": 1.4262206554412842,
+      "timestamp": "2025-10-28T12:53:07.137347",
+      "memory_used": 38.56732177734375,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "__main__.ingest_time_entries",
+      "execution_time": 0.40056920051574707,
+      "timestamp": "2025-10-28T12:53:07.538934",
+      "memory_used": null,
+      "success": true,
+      "error_message": null,
+      "metadata": {
+        "stage": "ingestion",
+        "source": "clockify"
+      }
+    },
+    {
+      "function_name": "cost_correlation",
+      "execution_time": 0.6450304985046387,
+      "timestamp": "2025-10-28T12:53:08.194175",
+      "memory_used": 2.1405105590820312,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "__main__.fetch_api_data",
+      "execution_time": 0.5008282661437988,
+      "timestamp": "2025-10-28T12:53:08.997718",
+      "memory_used": null,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "__main__.ingest_time_entries",
+      "execution_time": 0.40150880813598633,
+      "timestamp": "2025-10-28T12:53:09.600342",
+      "memory_used": null,
+      "success": true,
+      "error_message": null,
+      "metadata": {
+        "stage": "ingestion",
+        "source": "clockify"
+      }
+    },
+    {
+      "function_name": "agent.data_ingestion.run_data_ingestion_agent",
+      "execution_time": 1.4050145149230957,
+      "timestamp": "2025-10-28T12:53:09.601327",
+      "memory_used": 0.003956794738769531,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "__main__.fetch_api_data",
+      "execution_time": 0.5024831295013428,
+      "timestamp": "2025-10-28T12:53:10.424850",
+      "memory_used": null,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "__main__.ingest_time_entries",
+      "execution_time": 0.40192699432373047,
+      "timestamp": "2025-10-28T12:53:11.028893",
+      "memory_used": null,
+      "success": true,
+      "error_message": null,
+      "metadata": {
+        "stage": "ingestion",
+        "source": "clockify"
+      }
+    },
+    {
+      "function_name": "agent.data_ingestion.run_data_ingestion_agent",
+      "execution_time": 1.409576177597046,
+      "timestamp": "2025-10-28T12:53:11.029862",
+      "memory_used": 0.003933906555175781,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "agent.qualification.run_qualification_agent",
+      "execution_time": 0.9014091491699219,
+      "timestamp": "2025-10-28T12:53:11.933440",
+      "memory_used": 0.0027904510498046875,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    },
+    {
+      "function_name": "agent.audit_trail.run_audit_trail_agent",
+      "execution_time": 1.001587152481079,
+      "timestamp": "2025-10-28T12:53:12.937625",
+      "memory_used": 0.0027904510498046875,
+      "success": true,
+      "error_message": null,
+      "metadata": {}
+    }
+  ],
+  "agent_metrics": {
+    "data_ingestion": [
+      {
+        "function_name": "agent.data_ingestion.run_data_ingestion_agent",
+        "execution_time": 1.4050145149230957,
+        "timestamp": "2025-10-28T12:53:09.601327",
+        "memory_used": 0.003956794738769531,
+        "success": true,
+        "error_message": null,
+        "metadata": {}
+      },
+      {
+        "function_name": "agent.data_ingestion.run_data_ingestion_agent",
+        "execution_time": 1.409576177597046,
+        "timestamp": "2025-10-28T12:53:11.029862",
+        "memory_used": 0.003933906555175781,
+        "success": true,
+        "error_message": null,
+        "metadata": {}
+      }
+    ],
+    "qualification": [
+      {
+        "function_name": "agent.qualification.run_qualification_agent",
+        "execution_time": 0.9014091491699219,
+        "timestamp": "2025-10-28T12:53:11.933440",
+        "memory_used": 0.0027904510498046875,
+        "success": true,
+        "error_message": null,
+        "metadata": {}
+      }
+    ],
+    "audit_trail": [
+      {
+        "function_name": "agent.audit_trail.run_audit_trail_agent",
+        "execution_time": 1.001587152481079,
+        "timestamp": "2025-10-28T12:53:12.937625",
+        "memory_used": 0.0027904510498046875,
+        "success": true,
+        "error_message": null,
+        "metadata": {}
+      }
+    ]
+  }
+}

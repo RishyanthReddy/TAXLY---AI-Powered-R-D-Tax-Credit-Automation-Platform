@@ -49,8 +49,10 @@ env/
 logs/
 *.log
 
-# Outputs
-outputs/
+# Outputs (keep sample reports for demo)
+outputs/diagnostic/
+outputs/temp/
+outputs/new_folder/
 
 # Testing
 .pytest_cache/
