@@ -1110,7 +1110,7 @@ RD_TAX_2024_20251029_091500.pdf    92.3 KB    14 pages    ✅ Complete
 RD_TAX_2024_20251028_154500.pdf    78.9 KB    10 pages    ✅ Complete
 ```
 
-**Download Sample Report**: [View Sample PDF](rd_tax_agent/outputs/reports/RD_TAX_2024_20251030_143000.pdf)
+**Download Sample Report**: [View Sample PDF](outputs/reports/rd_tax_credit_report_2024_20251031_060518.pdf)
 
 ---
 
