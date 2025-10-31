@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard Data Loading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Data Loading Test</h1>
+    
+    <div class="section">
+        <h2>Backend Health Check</h2>
+        <button onclick="testHealthCheck()">Test Health Check</button>
+        <div id="healthResult"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Load Reports</h2>
+        <button onclick="testLoadReports()">Test Load Reports</button>
+        <div id="reportsResult"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Load Qualified Projects</h2>
+        <button onclick="testLoadProjects()">Test Load Projects</button>
+        <div id="projectsResult"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Calculate Metrics</h2>
+        <button onclick="testCalculateMetrics()">Test Calculate Metrics</button>
+        <div id="metricsResult"></div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        async function testHealthCheck() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.innerHTML = '<p>Loading...</p>';
+            
+            try {
+                const health = await api.getHealth();
+                resultDiv.innerHTML = `
+                    <p class="success">✓ Health check successful</p>
+                    <pre>${JSON.stringify(health, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">✗ Health check failed: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testLoadReports() {
+            const resultDiv = document.getElementById('reportsResult');
+            resultDiv.innerHTML = '<p>Loading...</p>';
+            
+            try {
+                const reportsData = await api.loadExistingReports();
+                const reports = reportsData.reports || [];
+                
+                resultDiv.innerHTML = `
+                    <p class="success">✓ Loaded ${reports.length} reports</p>
+                    <pre>${JSON.stringify(reports, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">✗ Failed to load reports: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testLoadProjects() {
+            const resultDiv = document.getElementById('projectsResult');
+            resultDiv.innerHTML = '<p>Loading...</p>';
+            
+            try {
+                const projects = await loadSampleQualifiedProjects();
+                
+                resultDiv.innerHTML = `
+                    <p class="success">✓ Loaded ${projects.length} qualified projects</p>
+                    <pre>${JSON.stringify(projects.slice(0, 2), null, 2)}</pre>
+                    <p><em>Showing first 2 projects...</em></p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">✗ Failed to load projects: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testCalculateMetrics() {
+            const resultDiv = document.getElementById('metricsResult');
+            resultDiv.innerHTML = '<p>Loading...</p>';
+            
+            try {
+                // Load data
+                const reportsData = await api.loadExistingReports();
+                const reports = reportsData.reports || [];
+                const projects = await loadSampleQualifiedProjects();
+                
+                // Calculate metrics
+                let metrics = {
+                    totalProjects: 0,
+                    qualificationRate: 0,
+                    estimatedCredits: 0,
+                    qualifiedHours: 0,
+                    averageConfidence: 0
+                };
+                
+                if (reports.length > 0) {
+                    metrics.totalProjects = reports.reduce((sum, r) => sum + (r.projectCount || 0), 0);
+                    metrics.estimatedCredits = reports.reduce((sum, r) => sum + (r.estimatedCredit || 0), 0);
+                    metrics.qualifiedHours = reports.reduce((sum, r) => sum + (r.totalQualifiedHours || 0), 0);
+                }
+                
+                if (projects.length > 0) {
+                    metrics.totalProjects = projects.length;
+                    metrics.qualifiedHours = projects.reduce((sum, p) => sum + (p.qualified_hours || 0), 0);
+                    metrics.estimatedCredits = projects.reduce((sum, p) => sum + (p.qualified_cost || 0) * 0.20, 0);
+                    
+                    const totalConfidence = projects.reduce((sum, p) => sum + (p.confidence_score || 0), 0);
+                    metrics.averageConfidence = projects.length > 0 
+                        ? (totalConfidence / projects.length) * 100 
+                        : 0;
+                    
+                    metrics.qualificationRate = 85;
+                }
+                
+                resultDiv.innerHTML = `
+                    <p class="success">✓ Metrics calculated successfully</p>
+                    <pre>${JSON.stringify(metrics, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">✗ Failed to calculate metrics: ${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

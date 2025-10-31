@@ -1,0 +1,136 @@
+[
+  {
+    "project_name": "Alpha Development",
+    "qualified_hours": 14.5,
+    "qualified_cost": 1045.74,
+    "confidence_score": 0.92,
+    "qualification_percentage": 95.0,
+    "supporting_citation": "The project involves developing a new authentication algorithm with encryption, which constitutes qualified research under IRC Section 41. The work addresses technological uncertainty regarding secure authentication methods and involves a process of experimentation to evaluate alternatives.",
+    "reasoning": "This project clearly meets the four-part test: (1) Technological in nature - involves computer science and cryptography; (2) Qualified purpose - developing new functionality; (3) Technological uncertainty - uncertainty about optimal encryption approach; (4) Process of experimentation - systematic evaluation of different authentication methods.",
+    "irs_source": "CFR Title 26 § 1.41-4(a)(1) - Four-Part Test for Qualified Research",
+    "flagged_for_review": false,
+    "technical_details": {
+      "technological_uncertainty": "Uncertainty existed regarding the most secure and performant authentication algorithm that could handle high-volume concurrent requests while maintaining cryptographic integrity.",
+      "experimentation_process": "Team evaluated multiple encryption standards (AES-256, RSA-4096, ECC) and authentication protocols (OAuth 2.0, JWT, SAML) through systematic testing and benchmarking.",
+      "business_component": "User Authentication System",
+      "qualified_activities": [
+        "Algorithm design and prototyping",
+        "Security vulnerability testing",
+        "Performance optimization experiments",
+        "Integration testing with existing systems"
+      ]
+    }
+  },
+  {
+    "project_name": "Beta Infrastructure",
+    "qualified_hours": 15.5,
+    "qualified_cost": 1229.62,
+    "confidence_score": 0.88,
+    "qualification_percentage": 90.0,
+    "supporting_citation": "Development of a novel data compression algorithm and distributed caching strategies represents qualified research. The work involves eliminating technical uncertainty through systematic experimentation with different compression techniques.",
+    "reasoning": "Meets four-part test: (1) Technological in nature - computer science and data structures; (2) Qualified purpose - improving performance; (3) Technological uncertainty - unknown optimal compression ratio vs. speed tradeoff; (4) Process of experimentation - tested multiple algorithms and measured performance.",
+    "irs_source": "CFR Title 26 § 1.41-4(a)(5) - Substantially All Requirement",
+    "flagged_for_review": false,
+    "technical_details": {
+      "technological_uncertainty": "Uncertainty about achieving optimal compression ratios while maintaining acceptable decompression speeds for real-time data access in distributed systems.",
+      "experimentation_process": "Systematic evaluation of compression algorithms (LZ4, Zstandard, Brotli) combined with various caching strategies (LRU, LFU, ARC) through load testing and performance profiling.",
+      "business_component": "Data Storage and Retrieval System",
+      "qualified_activities": [
+        "Compression algorithm research and implementation",
+        "Distributed cache architecture design",
+        "Performance benchmarking",
+        "Scalability testing"
+      ]
+    }
+  },
+  {
+    "project_name": "Gamma Analytics",
+    "qualified_hours": 9.0,
+    "qualified_cost": 757.17,
+    "confidence_score": 0.85,
+    "qualification_percentage": 85.0,
+    "supporting_citation": "Building a real-time data processing pipeline involves qualified research activities. The project addresses technological uncertainty regarding processing latency and data consistency in distributed systems.",
+    "reasoning": "Satisfies four-part test: (1) Technological in nature - distributed systems and data engineering; (2) Qualified purpose - new capability development; (3) Technological uncertainty - achieving sub-second latency at scale; (4) Process of experimentation - iterative testing of different architectures.",
+    "irs_source": "CFR Title 26 § 1.41-4(a)(3) - Technological Uncertainty",
+    "flagged_for_review": false,
+    "technical_details": {
+      "technological_uncertainty": "Technical uncertainty existed regarding achieving sub-second end-to-end latency for real-time analytics while ensuring data consistency across distributed nodes.",
+      "experimentation_process": "Evaluated stream processing frameworks (Apache Kafka, Apache Flink, AWS Kinesis) and consistency models (eventual consistency, strong consistency) through prototype implementations and stress testing.",
+      "business_component": "Real-Time Analytics Platform",
+      "qualified_activities": [
+        "Stream processing architecture design",
+        "Latency optimization experiments",
+        "Data consistency testing",
+        "Fault tolerance implementation"
+      ]
+    }
+  },
+  {
+    "project_name": "Delta Security",
+    "qualified_hours": 15.0,
+    "qualified_cost": 1370.25,
+    "confidence_score": 0.94,
+    "qualification_percentage": 98.0,
+    "supporting_citation": "Research into quantum-resistant cryptography and development of new encryption protocols constitutes highly qualified research. This represents cutting-edge work addressing future technological challenges.",
+    "reasoning": "Strongly meets four-part test: (1) Technological in nature - advanced cryptography; (2) Qualified purpose - developing new security capabilities; (3) Technological uncertainty - quantum computing threats to current encryption; (4) Process of experimentation - systematic evaluation of post-quantum cryptographic algorithms.",
+    "irs_source": "CFR Title 26 § 1.41-4(a)(1) - Qualified Research Definition",
+    "flagged_for_review": false,
+    "technical_details": {
+      "technological_uncertainty": "Significant uncertainty regarding which post-quantum cryptographic algorithms would provide adequate security while maintaining acceptable performance for production systems.",
+      "experimentation_process": "Systematic research and prototyping of NIST post-quantum cryptography candidates (CRYSTALS-Kyber, CRYSTALS-Dilithium, SPHINCS+) with performance benchmarking and security analysis.",
+      "business_component": "Quantum-Resistant Security Layer",
+      "qualified_activities": [
+        "Post-quantum cryptography research",
+        "Algorithm implementation and testing",
+        "Performance optimization",
+        "Security vulnerability assessment",
+        "Protocol design and validation"
+      ]
+    }
+  },
+  {
+    "project_name": "Epsilon AI",
+    "qualified_hours": 16.5,
+    "qualified_cost": 1586.48,
+    "confidence_score": 0.91,
+    "qualification_percentage": 93.0,
+    "supporting_citation": "Development of custom neural network architectures represents qualified research. The work involves substantial experimentation to determine optimal network topology and training approaches.",
+    "reasoning": "Meets four-part test: (1) Technological in nature - machine learning and AI; (2) Qualified purpose - new AI capabilities; (3) Technological uncertainty - optimal architecture for specific use case unknown; (4) Process of experimentation - iterative design, training, and evaluation of multiple architectures.",
+    "irs_source": "CFR Title 26 § 1.41-4(a)(4) - Process of Experimentation",
+    "flagged_for_review": false,
+    "technical_details": {
+      "technological_uncertainty": "Uncertainty about optimal neural network architecture, layer configurations, and training methodologies to achieve target accuracy while managing computational costs.",
+      "experimentation_process": "Designed and tested multiple custom architectures combining CNNs, RNNs, and Transformer components. Experimented with various hyperparameters, regularization techniques, and training strategies through systematic A/B testing.",
+      "business_component": "AI-Powered Prediction Engine",
+      "qualified_activities": [
+        "Neural network architecture design",
+        "Model training and hyperparameter tuning",
+        "Performance evaluation across datasets",
+        "Optimization for inference speed",
+        "Transfer learning experiments"
+      ]
+    }
+  },
+  {
+    "project_name": "Zeta Optimization",
+    "qualified_hours": 7.5,
+    "qualified_cost": 612.98,
+    "confidence_score": 0.78,
+    "qualification_percentage": 80.0,
+    "supporting_citation": "Investigation of novel optimization algorithms for resource allocation involves qualified research. The project addresses technological uncertainty through systematic experimentation with different algorithmic approaches.",
+    "reasoning": "Meets four-part test: (1) Technological in nature - algorithm design and optimization; (2) Qualified purpose - improving system efficiency; (3) Technological uncertainty - optimal resource allocation strategy unknown; (4) Process of experimentation - tested multiple algorithms and measured performance.",
+    "irs_source": "CFR Title 26 § 1.41-4(a)(5) - Substantially All Requirement",
+    "flagged_for_review": false,
+    "technical_details": {
+      "technological_uncertainty": "Uncertainty regarding which optimization algorithm would provide the best balance between allocation efficiency, computational complexity, and real-time responsiveness for dynamic resource management.",
+      "experimentation_process": "Evaluated and compared genetic algorithms, simulated annealing, and reinforcement learning approaches through simulation and real-world testing scenarios.",
+      "business_component": "Resource Allocation System",
+      "qualified_activities": [
+        "Algorithm research and selection",
+        "Implementation and testing",
+        "Performance benchmarking",
+        "Optimization for real-time constraints"
+      ]
+    }
+  }
+]

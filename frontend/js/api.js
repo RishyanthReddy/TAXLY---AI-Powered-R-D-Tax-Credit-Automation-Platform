@@ -228,20 +228,30 @@ const api = {
  */
 async function loadSampleQualifiedProjects() {
     try {
-        // Try to load from backend first
-        const response = await fetch('/tests/fixtures/sample_qualified_projects.json');
-        if (response.ok) {
-            return await response.json();
+        // Try multiple paths to find the fixture file
+        const paths = [
+            '../tests/fixtures/sample_qualified_projects.json',
+            '../../tests/fixtures/sample_qualified_projects.json',
+            '/tests/fixtures/sample_qualified_projects.json',
+            'data/sample_qualified_projects.json'
+        ];
+        
+        for (const path of paths) {
+            try {
+                const response = await fetch(path);
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(`Loaded sample qualified projects from ${path}`);
+                    return data;
+                }
+            } catch (e) {
+                // Continue to next path
+                continue;
+            }
         }
         
-        // Fallback: Load from relative path
-        const fallbackResponse = await fetch('../tests/fixtures/sample_qualified_projects.json');
-        if (fallbackResponse.ok) {
-            return await fallbackResponse.json();
-        }
-        
-        // If both fail, return empty array
-        console.warn('Could not load sample_qualified_projects.json, using empty array');
+        // If all paths fail, return empty array
+        console.warn('Could not load sample_qualified_projects.json from any path, using empty array');
         return [];
     } catch (error) {
         console.error('Error loading sample qualified projects:', error);

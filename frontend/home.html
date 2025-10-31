@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&D Tax Credit Automation Agent - Unified Frontend">
+    <title>R&D Tax Credit Automation - Home</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard-enhanced.css">
+    
+    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: var(--spacing-20) 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-4);
+        }
+        
+        .hero p {
+            font-size: var(--font-size-xl);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto var(--spacing-8);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-4);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero-buttons .btn {
+            padding: var(--spacing-4) var(--spacing-8);
+            font-size: var(--font-size-lg);
+        }
+        
+        .btn-white {
+            background-color: white;
+            color: var(--color-primary);
+        }
+        
+        .btn-white:hover {
+            background-color: var(--color-gray-100);
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            text-align: center;
+            padding: var(--spacing-8);
+            transition: transform var(--transition-base);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-4);
+        }
+        
+        .feature-card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-3);
+            color: var(--text-primary);
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+        
+        /* Navigation Cards */
+        .nav-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border: 2px solid transparent;
+        }
+        
+        .nav-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .nav-card-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-3);
+        }
+        
+        .nav-card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-2);
+        }
+        
+        .nav-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-4);
+        }
+        
+        .nav-card .btn {
+            width: 100%;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-12) 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-2);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="brand-name">🚀 R&D Tax Credit Automation</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="workflow.html">Workflow</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <button class="btn btn-primary" onclick="window.location.href='onboarding.html'">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Automate Your R&D Tax Credits</h1>
+            <p>AI-powered platform that generates audit-ready documentation in minutes, not weeks</p>
+            <div class="hero-buttons">
+                <button class="btn btn-white btn-lg" onclick="window.location.href='onboarding.html'">
+                    <span class="icon">🎯</span> Start Onboarding
+                </button>
+                <button class="btn btn-outline btn-lg" onclick="window.location.href='index.html'" style="color: white; border-color: white;">
+                    <span class="icon">📊</span> View Dashboard
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="grid grid-4">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalProjects">10</div>
+                    <div class="stat-label">Qualified Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalHours">320</div>
+                    <div class="stat-label">Qualified Hours</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalCredits">$4.6K</div>
+                    <div class="stat-label">Estimated Credits</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="qualificationRate">85%</div>
+                    <div class="stat-label">Qualification Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Key Features</h2>
+            <div class="grid grid-3">
+                <div class="card feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>GLM 4.5 Air and You.com APIs analyze your projects against IRS guidelines with 90%+ confidence scores</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Audit-Ready Reports</h3>
+                    <p>Generate comprehensive 80KB+ PDF reports with executive summaries, technical narratives, and IRS citations</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Processing</h3>
+                    <p>Watch your data flow through the pipeline with live WebSocket updates and stage-by-stage progress tracking</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Seamless Integration</h3>
+                    <p>Connect Clockify, BambooHR, and other platforms via Unified.to for automatic data ingestion</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Interactive Dashboard</h3>
+                    <p>Monitor compliance health, track deadlines, and visualize metrics with beautiful donut charts and progress circles</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Compliance First</h3>
+                    <p>Every decision backed by IRS document citations and confidence scoring for complete audit trail transparency</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Cards Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Explore the Platform</h2>
+            <div class="grid grid-4">
+                <!-- Onboarding Card -->
+                <div class="card nav-card" onclick="window.location.href='onboarding.html'">
+                    <div class="nav-card-icon">🎯</div>
+                    <h3>Onboarding</h3>
+                    <p>Set up your integrations and configure your company information</p>
+                    <button class="btn btn-primary">Start Setup</button>
+                </div>
+
+                <!-- Dashboard Card -->
+                <div class="card nav-card" onclick="window.location.href='index.html'">
+                    <div class="nav-card-icon">📊</div>
+                    <h3>Dashboard</h3>
+                    <p>View real-time metrics, integration status, and compliance health</p>
+                    <button class="btn btn-primary">View Dashboard</button>
+                </div>
+
+                <!-- Workflow Card -->
+                <div class="card nav-card" onclick="window.location.href='workflow.html'">
+                    <div class="nav-card-icon">⚙️</div>
+                    <h3>Workflow</h3>
+                    <p>Watch the AI pipeline process your data in real-time</p>
+                    <button class="btn btn-primary">Run Pipeline</button>
+                </div>
+
+                <!-- Reports Card -->
+                <div class="card nav-card" onclick="window.location.href='reports.html'">
+                    <div class="nav-card-icon">📄</div>
+                    <h3>Reports</h3>
+                    <p>Download audit-ready PDF reports with complete documentation</p>
+                    <button class="btn btn-primary">View Reports</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title text-center">Technology Stack</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <h3 class="card-title">Backend</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">✅ PydanticAI Framework</li>
+                        <li class="mb-2">✅ FastAPI + WebSockets</li>
+                        <li class="mb-2">✅ GLM 4.5 Air (OpenRouter)</li>
+                        <li class="mb-2">✅ You.com APIs (Search, Agent, Contents)</li>
+                        <li class="mb-2">✅ ChromaDB + RAG System</li>
+                        <li class="mb-2">✅ ReportLab PDF Generation</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Frontend</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">✅ Pure HTML5 + CSS3</li>
+                        <li class="mb-2">✅ Vanilla JavaScript</li>
+                        <li class="mb-2">✅ WebSocket Integration</li>
+                        <li class="mb-2">✅ Responsive Design</li>
+                        <li class="mb-2">✅ Enhanced Charts & Visualizations</li>
+                        <li class="mb-2">✅ Real-time Updates</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Integrations</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">✅ Clockify API</li>
+                        <li class="mb-2">✅ BambooHR via Unified.to</li>
+                        <li class="mb-2">✅ Unified.to HRIS/Payroll</li>
+                        <li class="mb-2">✅ IRS Document Knowledge Base</li>
+                        <li class="mb-2">✅ OpenRouter LLM Gateway</li>
+                        <li class="mb-2">✅ You.com Expert APIs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex justify-between align-center">
+                <p>&copy; 2024 R&D Tax Credit Automation Agent. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="home.html" class="text-secondary">Home</a>
+                    <a href="index.html" class="text-secondary">Dashboard</a>
+                    <a href="workflow.html" class="text-secondary">Workflow</a>
+                    <a href="reports.html" class="text-secondary">Reports</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // Load real stats from backend
+        async function loadStats() {
+            try {
+                const health = await api.getHealth();
+                const reports = await api.loadExistingReports();
+                
+                // Update stats if data available
+                if (reports && reports.reports) {
+                    const totalReports = reports.reports.length;
+                    document.getElementById('totalProjects').textContent = totalReports || '10';
+                }
+                
+                // Load sample qualified projects for metrics
+                const response = await fetch('data/sample-integration-data.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.qualifiedProjects) {
+                        const totalHours = data.qualifiedProjects.reduce((sum, p) => sum + (p.qualified_hours || 0), 0);
+                        const totalCost = data.qualifiedProjects.reduce((sum, p) => sum + (p.qualified_cost || 0), 0);
+                        const estimatedCredit = totalCost * 0.20;
+                        
+                        document.getElementById('totalHours').textContent = Math.round(totalHours);
+                        document.getElementById('totalCredits').textContent = formatCurrency(estimatedCredit);
+                    }
+                }
+            } catch (error) {
+                console.log('Using default stats (backend may be offline)');
+            }
+        }
+        
+        // Load stats on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadStats);
+        } else {
+            loadStats();
+        }
+    </script>
+</body>
+</html>

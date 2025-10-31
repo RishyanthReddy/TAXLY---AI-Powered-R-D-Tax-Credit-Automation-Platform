@@ -1,0 +1,558 @@
+/**
+ * Enhanced Dashboard Styles
+ * Polished design matching reference images (Arcadia & Engagement Tracking)
+ */
+
+/* ========== Enhanced Donut Charts ========== */
+.donut-chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-8);
+    padding: var(--spacing-4);
+}
+
+.donut-chart {
+    position: relative;
+    width: 160px;
+    height: 160px;
+}
+
+.donut-chart svg {
+    transform: rotate(-90deg);
+}
+
+.donut-chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.donut-chart-value {
+    display: block;
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.donut-chart-label {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-1);
+}
+
+/* ========== Status Breakdown ========== */
+.status-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-4);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-2);
+    border-radius: var(--radius-base);
+    transition: background-color var(--transition-base);
+}
+
+.status-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.status-healthy {
+    background-color: var(--color-success);
+}
+
+.status-dot.status-info {
+    background-color: var(--color-info);
+}
+
+.status-dot.status-warning {
+    background-color: var(--color-warning);
+}
+
+.status-dot.status-error {
+    background-color: var(--color-error);
+}
+
+.status-dot.status-pending {
+    background-color: var(--color-gray-400);
+}
+
+.status-label {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+}
+
+.status-count {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    min-width: 24px;
+    text-align: right;
+}
+
+.status-toggle {
+    padding: var(--spacing-1);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+}
+
+.status-toggle:hover {
+    color: var(--text-primary);
+}
+
+.status-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+/* ========== Enhanced Stat Cards ========== */
+.stat-card-enhanced {
+    position: relative;
+    text-align: center;
+    padding: var(--spacing-6);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.stat-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    margin-top: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-full);
+}
+
+.stat-trend.trend-up {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--color-success-dark);
+}
+
+.stat-trend.trend-down {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--color-error-dark);
+}
+
+.stat-trend.trend-neutral {
+    background-color: rgba(156, 163, 175, 0.1);
+    color: var(--color-gray-600);
+}
+
+.trend-icon {
+    font-size: var(--font-size-sm);
+    line-height: 1;
+}
+
+.trend-value {
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ========== Enhanced Tables ========== */
+.data-table-enhanced {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.data-table-enhanced thead {
+    background-color: var(--bg-secondary);
+}
+
+.data-table-enhanced th {
+    padding: var(--spacing-3) var(--spacing-4);
+    text-align: left;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.data-table-enhanced th:first-child {
+    border-top-left-radius: var(--radius-base);
+}
+
+.data-table-enhanced th:last-child {
+    border-top-right-radius: var(--radius-base);
+}
+
+.data-table-enhanced td {
+    padding: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color-light);
+}
+
+.data-table-enhanced tbody tr {
+    transition: all var(--transition-base);
+}
+
+.data-table-enhanced tbody tr:hover {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.data-table-enhanced tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-actions {
+    display: flex;
+    gap: var(--spacing-2);
+    justify-content: flex-end;
+}
+
+.table-action-btn {
+    padding: var(--spacing-1);
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border-radius: var(--radius-sm);
+}
+
+.table-action-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+}
+
+/* ========== Filter Dropdown ========== */
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.dropdown-trigger:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color-dark);
+}
+
+.dropdown-icon {
+    font-size: var(--font-size-xs);
+    transition: transform var(--transition-base);
+}
+
+.filter-dropdown.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + var(--spacing-1));
+    left: 0;
+    min-width: 200px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all var(--transition-base);
+    z-index: var(--z-dropdown);
+}
+
+.filter-dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background-color var(--transition-base);
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.dropdown-item:first-child {
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+
+.dropdown-item:last-child {
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+.dropdown-item.active {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ========== Loading Skeletons ========== */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-tertiary) 0%,
+        var(--bg-secondary) 50%,
+        var(--bg-tertiary) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: var(--radius-base);
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-text {
+    height: 16px;
+    margin-bottom: var(--spacing-2);
+}
+
+.skeleton-text.large {
+    height: 24px;
+}
+
+.skeleton-text.small {
+    height: 12px;
+}
+
+.skeleton-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.skeleton-card {
+    height: 200px;
+}
+
+/* ========== Enhanced Progress Circles ========== */
+.progress-circle-enhanced {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.progress-circle-enhanced svg {
+    transform: rotate(-90deg);
+}
+
+.progress-circle-bg {
+    fill: none;
+    stroke: var(--bg-tertiary);
+    stroke-width: 12;
+}
+
+.progress-circle-fill {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke-dashoffset var(--transition-slow);
+}
+
+.progress-circle-enhanced .progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+/* ========== Metric Comparison Cards ========== */
+.metric-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-base);
+    margin-bottom: var(--spacing-3);
+}
+
+.metric-comparison-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.metric-comparison-values {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.metric-comparison-value {
+    text-align: right;
+}
+
+.metric-comparison-year {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.metric-comparison-amount {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.metric-comparison-bar {
+    width: 200px;
+    height: 8px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.metric-comparison-bar-fill {
+    height: 100%;
+    background-color: var(--color-warning);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+/* ========== Enhanced Chart Tooltips ========== */
+.chart-tooltip {
+    position: absolute;
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: var(--color-gray-900);
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    border-radius: var(--radius-base);
+    box-shadow: var(--shadow-lg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: var(--z-tooltip);
+}
+
+.chart-tooltip.visible {
+    opacity: 1;
+}
+
+.chart-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--color-gray-900);
+}
+
+/* ========== Responsive Enhancements ========== */
+@media (max-width: 768px) {
+    .donut-chart-container {
+        flex-direction: column;
+        gap: var(--spacing-4);
+    }
+    
+    .metric-comparison {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-3);
+    }
+    
+    .metric-comparison-bar {
+        width: 100%;
+    }
+}
+
+/* ========== Animation Utilities ========== */
+.fade-in {
+    animation: fadeIn var(--transition-slow) ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight var(--transition-slow) ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========== Hover Effects ========== */
+.hover-lift {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.hover-scale {
+    transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Dashboard Example - R&D Tax Credit Automation</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard-enhanced.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="brand-name">R&D Tax Credit Automation - Enhanced Dashboard</span>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-secondary" id="refreshBtn">
+                    <span class="icon">🔄</span> Refresh
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1>Enhanced Dashboard Design</h1>
+                <p class="subtitle">Polished components matching reference images</p>
+            </header>
+
+            <!-- Section 1: Donut Charts with Status Breakdown -->
+            <section class="section">
+                <div class="flex justify-between align-center mb-4">
+                    <h2 class="section-title">Engagement Status</h2>
+                    <div class="filter-dropdown" id="engagementFilter">
+                        <button class="dropdown-trigger">
+                            All engagements
+                            <span class="dropdown-icon">▼</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item active">All engagements</a>
+                            <a href="#" class="dropdown-item">Active only</a>
+                            <a href="#" class="dropdown-item">Completed only</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-3">
+                    <!-- Engagement Status Donut -->
+                    <div class="card">
+                        <h3 class="card-title">Engagement Status</h3>
+                        <div id="engagementStatusChart"></div>
+                        <div id="engagementStatusBreakdown"></div>
+                    </div>
+
+                    <!-- PBC Request Status Donut -->
+                    <div class="card">
+                        <h3 class="card-title">PBC Request Status</h3>
+                        <div id="pbcStatusChart"></div>
+                        <div id="pbcStatusBreakdown"></div>
+                    </div>
+
+                    <!-- Questionnaire Status Donut -->
+                    <div class="card">
+                        <h3 class="card-title">Questionnaire Status</h3>
+                        <div id="questionnaireStatusChart"></div>
+                        <div id="questionnaireStatusBreakdown"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Metric Cards with Trends -->
+            <section class="section">
+                <h2 class="section-title">Key Metrics</h2>
+                <div class="grid grid-4" id="metricCardsContainer"></div>
+            </section>
+
+            <!-- Section 3: Enhanced Progress Circles -->
+            <section class="section">
+                <h2 class="section-title">Compliance Health</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3 class="card-title">PBC Completion</h3>
+                        <div class="flex justify-center">
+                            <div id="pbcProgressCircle"></div>
+                        </div>
+                        <p class="text-center mt-3 text-secondary">12 of 16 completed</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Questionnaires</h3>
+                        <div class="flex justify-center">
+                            <div id="questionnaireProgressCircle"></div>
+                        </div>
+                        <p class="text-center mt-3 text-secondary">All questionnaires complete</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Audit Readiness</h3>
+                        <div class="flex justify-center">
+                            <div id="auditReadinessCircle"></div>
+                        </div>
+                        <p class="text-center mt-3 text-secondary">Excellent readiness score</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Enhanced Table -->
+            <section class="section">
+                <h2 class="section-title">Current Engagements</h2>
+                <div class="card">
+                    <div class="table-container">
+                        <table class="data-table-enhanced">
+                            <thead>
+                                <tr>
+                                    <th>Engagement</th>
+                                    <th>Client</th>
+                                    <th>Status</th>
+                                    <th>Deadline</th>
+                                    <th>Staff List</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="engagementsTableBody">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Metric Comparisons (Arcadia Style) -->
+            <section class="section">
+                <h2 class="section-title">Year-over-Year Comparison</h2>
+                <div class="card">
+                    <div id="metricComparisonsContainer"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 R&D Tax Credit Automation Agent. Enhanced Dashboard Design.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/charts-enhanced.js"></script>
+    <script>
+        // Initialize enhanced dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEnhancedDashboard();
+            setupEventListeners();
+        });
+
+        function initializeEnhancedDashboard() {
+            // 1. Render Engagement Status Donut Chart
+            renderDonutChart('engagementStatusChart', [
+                { label: 'Complete', value: 1, color: '#10b981' },
+                { label: 'In progress', value: 4, color: '#3b82f6' }
+            ], {
+                centerValue: '5',
+                centerLabel: 'Total',
+                showLegend: false
+            });
+
+            renderStatusBreakdown('engagementStatusBreakdown', [
+                { label: 'Complete', count: 1, status: 'healthy', expandable: true },
+                { label: 'In progress', count: 4, status: 'info', expandable: true }
+            ]);
+
+            // 2. Render PBC Request Status Donut Chart
+            renderDonutChart('pbcStatusChart', [
+                { label: 'Approved', value: 4, color: '#10b981' },
+                { label: 'Ready for review', value: 4, color: '#f59e0b' },
+                { label: 'In progress', value: 4, color: '#3b82f6' },
+                { label: 'Sent', value: 2, color: '#94a3b8' }
+            ], {
+                centerValue: '14',
+                centerLabel: 'Total',
+                showLegend: false
+            });
+
+            renderStatusBreakdown('pbcStatusBreakdown', [
+                { label: 'Approved', count: 4, status: 'healthy', expandable: true },
+                { label: 'Ready for review', count: 4, status: 'warning', expandable: true },
+                { label: 'In progress', count: 4, status: 'info', expandable: true },
+                { label: 'Sent', count: 2, status: 'pending', expandable: true }
+            ]);
+
+            // 3. Render Questionnaire Status Donut Chart
+            renderDonutChart('questionnaireStatusChart', [
+                { label: 'Complete', value: 3, color: '#10b981' },
+                { label: 'In progress', value: 3, color: '#3b82f6' },
+                { label: 'Sent', value: 3, color: '#94a3b8' }
+            ], {
+                centerValue: '9',
+                centerLabel: 'Total',
+                showLegend: false
+            });
+
+            renderStatusBreakdown('questionnaireStatusBreakdown', [
+                { label: 'Complete', count: 3, status: 'healthy', expandable: true },
+                { label: 'In progress', count: 3, status: 'info', expandable: true },
+                { label: 'Sent', count: 3, status: 'pending', expandable: true }
+            ]);
+
+            // 4. Render Metric Cards with Trends
+            const metrics = [
+                { value: '10', label: 'Total Projects', trend: 15, trendValue: '+15%', icon: '📊' },
+                { value: '85%', label: 'Qualification Rate', trend: 5, trendValue: '+5%', icon: '✅' },
+                { value: '$4,608', label: 'Estimated Credits', trend: 20, trendValue: '+$768', icon: '💰' },
+                { value: '320', label: 'Qualified Hours', trend: -3, trendValue: '-10 hrs', icon: '⏱️' }
+            ];
+
+            const container = document.getElementById('metricCardsContainer');
+            metrics.forEach(metric => {
+                const div = document.createElement('div');
+                renderMetricCard(div, metric);
+                container.appendChild(div.firstElementChild);
+            });
+
+            // 5. Render Enhanced Progress Circles
+            renderEnhancedProgressCircle('pbcProgressCircle', 75, {
+                color: '#2563eb'
+            });
+
+            renderEnhancedProgressCircle('questionnaireProgressCircle', 100, {
+                color: '#10b981'
+            });
+
+            renderEnhancedProgressCircle('auditReadinessCircle', 92, {
+                color: '#8b5cf6'
+            });
+
+            // 6. Populate Enhanced Table
+            populateEngagementsTable();
+
+            // 7. Render Metric Comparisons
+            renderMetricComparisons('metricComparisonsContainer', [
+                { label: 'Total Qualified Hours', current: 320, previous: 280, unit: 'number' },
+                { label: 'Estimated Tax Credits', current: 4608, previous: 3840, unit: 'currency' },
+                { label: 'Qualification Rate', current: 85, previous: 78, unit: 'percentage' },
+                { label: 'Average Confidence Score', current: 90, previous: 85, unit: 'percentage' }
+            ]);
+        }
+
+        function populateEngagementsTable() {
+            const tbody = document.getElementById('engagementsTableBody');
+            const engagements = [
+                { name: 'Chain Tax credit 2022', client: 'Chain', status: 'Complete', deadline: '10/12/22', staff: ['A'] },
+                { name: 'Chain PBC 2022', client: 'Chain', status: 'In progress', deadline: '10/12/22', staff: ['A', 'D', 'C', 'P', '+2'] },
+                { name: 'Penta Tax credit 2022', client: 'Penta', status: 'In progress', deadline: '10/01/23', staff: ['C'] },
+                { name: 'Glossy Tax credit 2022', client: 'Glossy', status: 'In progress', deadline: '10/12/22', staff: ['A', 'D', 'C', 'P', '+2'] },
+                { name: 'Vision Tax credit 2022', client: 'Vision', status: 'In progress', deadline: '10/12/22', staff: ['A'] }
+            ];
+
+            tbody.innerHTML = engagements.map(eng => `
+                <tr>
+                    <td><strong>${eng.name}</strong></td>
+                    <td>${eng.client}</td>
+                    <td>
+                        <span class="status-badge ${eng.status === 'Complete' ? 'status-healthy' : 'status-info'}">
+                            ${eng.status}
+                        </span>
+                    </td>
+                    <td>${eng.deadline}</td>
+                    <td>
+                        <div class="flex gap-1">
+                            ${eng.staff.map(s => `
+                                <span class="status-badge status-info" style="border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px;">
+                                    ${s}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="table-action-btn" title="More options">⋮</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function setupEventListeners() {
+            // Dropdown toggle
+            const dropdown = document.getElementById('engagementFilter');
+            if (dropdown) {
+                const trigger = dropdown.querySelector('.dropdown-trigger');
+                trigger.addEventListener('click', function() {
+                    dropdown.classList.toggle('active');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+
+                // Handle dropdown item selection
+                dropdown.querySelectorAll('.dropdown-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        dropdown.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        trigger.childNodes[0].textContent = this.textContent + ' ';
+                        dropdown.classList.remove('active');
+                    });
+                });
+            }
+
+            // Refresh button
+            const refreshBtn = document.getElementById('refreshBtn');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', function() {
+                    this.disabled = true;
+                    this.innerHTML = '<span class="spinner"></span> Refreshing...';
+                    
+                    setTimeout(() => {
+                        initializeEnhancedDashboard();
+                        this.disabled = false;
+                        this.innerHTML = '<span class="icon">🔄</span> Refresh';
+                    }, 1000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

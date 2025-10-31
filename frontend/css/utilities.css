@@ -29,6 +29,7 @@
 .d-grid { display: grid !important; }
 
 /* Flexbox */
+.flex { display: flex; }
 .flex-row { flex-direction: row; }
 .flex-column { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
@@ -48,6 +49,13 @@
 .flex-1 { flex: 1; }
 .flex-auto { flex: auto; }
 .flex-none { flex: none; }
+
+/* Gap utilities */
+.gap-1 { gap: var(--spacing-1); }
+.gap-2 { gap: var(--spacing-2); }
+.gap-3 { gap: var(--spacing-3); }
+.gap-4 { gap: var(--spacing-4); }
+.gap-6 { gap: var(--spacing-6); }
 
 /* Grid */
 .grid {
