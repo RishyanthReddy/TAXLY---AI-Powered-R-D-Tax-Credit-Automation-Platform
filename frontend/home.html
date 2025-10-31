@@ -11,136 +11,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/dashboard-enhanced.css">
-    
-    <style>
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            padding: var(--spacing-20) 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: var(--font-weight-bold);
-            margin-bottom: var(--spacing-4);
-        }
-        
-        .hero p {
-            font-size: var(--font-size-xl);
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto var(--spacing-8);
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: var(--spacing-4);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .hero-buttons .btn {
-            padding: var(--spacing-4) var(--spacing-8);
-            font-size: var(--font-size-lg);
-        }
-        
-        .btn-white {
-            background-color: white;
-            color: var(--color-primary);
-        }
-        
-        .btn-white:hover {
-            background-color: var(--color-gray-100);
-        }
-        
-        /* Feature Cards */
-        .feature-card {
-            text-align: center;
-            padding: var(--spacing-8);
-            transition: transform var(--transition-base);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-4px);
-        }
-        
-        .feature-icon {
-            font-size: 4rem;
-            margin-bottom: var(--spacing-4);
-        }
-        
-        .feature-card h3 {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            margin-bottom: var(--spacing-3);
-            color: var(--text-primary);
-        }
-        
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: var(--line-height-relaxed);
-        }
-        
-        /* Navigation Cards */
-        .nav-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            border: 2px solid transparent;
-        }
-        
-        .nav-card:hover {
-            border-color: var(--color-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .nav-card-icon {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-3);
-        }
-        
-        .nav-card h3 {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            margin-bottom: var(--spacing-2);
-        }
-        
-        .nav-card p {
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-4);
-        }
-        
-        .nav-card .btn {
-            width: 100%;
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            background-color: var(--bg-secondary);
-            padding: var(--spacing-12) 0;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: var(--font-size-4xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-primary);
-            margin-bottom: var(--spacing-2);
-        }
-        
-        .stat-label {
-            font-size: var(--font-size-base);
-            color: var(--text-secondary);
-        }
-    </style>
+    <link rel="stylesheet" href="css/home-new.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -169,10 +40,10 @@
             <h1>Automate Your R&D Tax Credits</h1>
             <p>AI-powered platform that generates audit-ready documentation in minutes, not weeks</p>
             <div class="hero-buttons">
-                <button class="btn btn-white btn-lg" onclick="window.location.href='onboarding.html'">
+                <button class="btn btn-white" onclick="window.location.href='onboarding.html'">
                     <span class="icon">🎯</span> Start Onboarding
                 </button>
-                <button class="btn btn-outline btn-lg" onclick="window.location.href='index.html'" style="color: white; border-color: white;">
+                <button class="btn btn-outline-white" onclick="window.location.href='index.html'">
                     <span class="icon">📊</span> View Dashboard
                 </button>
             </div>
@@ -206,7 +77,7 @@
     <!-- Features Section -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title text-center">Key Features</h2>
+            <h2 class="section-title-center">Key Features</h2>
             <div class="grid grid-3">
                 <div class="card feature-card">
                     <div class="feature-icon">🤖</div>
@@ -245,7 +116,7 @@
     <!-- Navigation Cards Section -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title text-center">Explore the Platform</h2>
+            <h2 class="section-title-center">Explore the Platform</h2>
             <div class="grid grid-4">
                 <!-- Onboarding Card -->
                 <div class="card nav-card" onclick="window.location.href='onboarding.html'">
@@ -283,12 +154,12 @@
     </section>
 
     <!-- Technology Stack Section -->
-    <section class="section" style="background-color: var(--bg-secondary);">
+    <section class="section tech-section">
         <div class="container">
-            <h2 class="section-title text-center">Technology Stack</h2>
+            <h2 class="section-title-center">Technology Stack</h2>
             <div class="grid grid-3">
-                <div class="card">
-                    <h3 class="card-title">Backend</h3>
+                <div class="card tech-card">
+                    <h3>Backend</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li class="mb-2">✅ PydanticAI Framework</li>
                         <li class="mb-2">✅ FastAPI + WebSockets</li>
@@ -298,8 +169,8 @@
                         <li class="mb-2">✅ ReportLab PDF Generation</li>
                     </ul>
                 </div>
-                <div class="card">
-                    <h3 class="card-title">Frontend</h3>
+                <div class="card tech-card">
+                    <h3>Frontend</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li class="mb-2">✅ Pure HTML5 + CSS3</li>
                         <li class="mb-2">✅ Vanilla JavaScript</li>
@@ -309,8 +180,8 @@
                         <li class="mb-2">✅ Real-time Updates</li>
                     </ul>
                 </div>
-                <div class="card">
-                    <h3 class="card-title">Integrations</h3>
+                <div class="card tech-card">
+                    <h3>Integrations</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li class="mb-2">✅ Clockify API</li>
                         <li class="mb-2">✅ BambooHR via Unified.to</li>

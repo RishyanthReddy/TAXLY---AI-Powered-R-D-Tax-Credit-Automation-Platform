@@ -22,7 +22,7 @@
 
 .btn:hover {
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-base);
 }
 
 .btn:active {
@@ -45,13 +45,13 @@
 }
 
 .btn-secondary {
-    background-color: var(--color-gray-100);
+    background-color: var(--bg-secondary);
     color: var(--text-primary);
     border-color: var(--border-color);
 }
 
 .btn-secondary:hover {
-    background-color: var(--color-gray-200);
+    background-color: var(--bg-tertiary);
 }
 
 .btn-outline {
@@ -263,7 +263,7 @@ textarea.form-control {
     top: 0;
     z-index: var(--z-sticky);
     height: var(--navbar-height);
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
     box-shadow: var(--shadow-sm);
 }
@@ -287,14 +287,14 @@ textarea.form-control {
 }
 
 .brand-name {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
 }
 
 .navbar-menu {
     display: flex;
-    gap: var(--spacing-6);
+    gap: var(--spacing-2);
 }
 
 .navbar-menu a {
@@ -302,18 +302,18 @@ textarea.form-control {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     color: var(--text-secondary);
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-md);
     transition: all var(--transition-base);
 }
 
 .navbar-menu a:hover {
     color: var(--text-primary);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-tertiary);
 }
 
 .navbar-menu a.active {
-    color: var(--color-primary);
-    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
 }
 
 .navbar-actions {

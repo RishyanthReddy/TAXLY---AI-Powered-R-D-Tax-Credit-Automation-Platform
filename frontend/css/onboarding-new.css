@@ -1,0 +1,378 @@
+/**
+ * Onboarding Page Styles - Clean Design
+ */
+
+/* Onboarding Body */
+.onboarding-body {
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-6);
+}
+
+/* Onboarding Container */
+.onboarding-container {
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* Progress Bar */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-6);
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex: 1;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    transition: all var(--transition-base);
+}
+
+.progress-step.active .step-circle {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.progress-step.complete .step-circle {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+    color: white;
+}
+
+.step-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.progress-step.active .step-label {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.progress-line {
+    flex: 1;
+    height: 2px;
+    background-color: var(--border-color);
+    margin: 0 var(--spacing-2);
+    align-self: flex-start;
+    margin-top: 20px;
+}
+
+.progress-step.complete + .progress-line {
+    background-color: var(--color-success);
+}
+
+/* Step Content */
+.step-content {
+    padding: var(--spacing-8);
+}
+
+.step-panel {
+    display: none;
+}
+
+.step-panel.active {
+    display: block;
+}
+
+/* Step Header */
+.step-header {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+}
+
+.step-header h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.step-header .subtitle {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+}
+
+/* Step Body */
+.step-body {
+    margin-bottom: var(--spacing-8);
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-4);
+}
+
+.feature-card {
+    padding: var(--spacing-5);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-3);
+}
+
+.feature-card h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.feature-card p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+/* Onboarding Form */
+.onboarding-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Platform Grid */
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-4);
+}
+
+.platform-card {
+    padding: var(--spacing-5);
+    background-color: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.platform-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.platform-card.selected {
+    border-color: var(--color-primary);
+    background-color: rgba(99, 102, 241, 0.05);
+}
+
+.platform-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto var(--spacing-3);
+    object-fit: contain;
+}
+
+.platform-logo-placeholder {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-2xl);
+    color: var(--text-tertiary);
+}
+
+.platform-card h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.platform-card p {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+/* Auth Container */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.auth-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.auth-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-5);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.auth-header h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.auth-body {
+    padding: var(--spacing-5);
+}
+
+.auth-body p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-4);
+}
+
+.auth-status {
+    margin-top: var(--spacing-4);
+    padding: var(--spacing-3);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.auth-status.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--color-success-dark);
+}
+
+.status-icon {
+    font-size: var(--font-size-base);
+}
+
+/* Review Container */
+.review-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.review-section {
+    padding: var(--spacing-5);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-4);
+}
+
+.review-section h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-4);
+}
+
+.review-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-sm);
+}
+
+.review-list dt {
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.review-list dd {
+    color: var(--text-primary);
+}
+
+.next-steps-list {
+    list-style: none;
+    padding: 0;
+}
+
+.next-steps-list li {
+    padding: var(--spacing-2) 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+/* Step Footer */
+.step-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .progress-bar {
+        overflow-x: auto;
+    }
+    
+    .step-label {
+        display: none;
+    }
+    
+    .progress-step.active .step-label {
+        display: block;
+    }
+    
+    .feature-grid,
+    .platform-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .step-footer {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,346 @@
+/**
+ * Workflow Page Styles - Clean Design
+ */
+
+/* Page Layout */
+.container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+/* Page Header */
+.page-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-8);
+}
+
+.backend-status-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Workflow Controls */
+.workflow-controls {
+    display: flex;
+    gap: var(--spacing-6);
+    align-items: center;
+    padding: var(--spacing-4);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.control-group label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+/* Pipeline Container */
+.workflow-canvas {
+    margin-bottom: var(--spacing-8);
+}
+
+.pipeline-container {
+    display: flex;
+    gap: var(--spacing-4);
+    padding: var(--spacing-6);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+}
+
+/* Pipeline Stage */
+.pipeline-stage {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage-node {
+    width: 100%;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-5);
+    transition: all var(--transition-base);
+}
+
+.pipeline-stage[data-status="active"] .stage-node {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.pipeline-stage[data-status="complete"] .stage-node {
+    border-color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.02);
+}
+
+.pipeline-stage[data-status="error"] .stage-node {
+    border-color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.02);
+}
+
+.stage-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: var(--spacing-3);
+}
+
+.stage-content {
+    text-align: center;
+}
+
+.stage-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-1);
+}
+
+.stage-subtitle {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-3);
+}
+
+.stage-status {
+    margin: var(--spacing-3) 0;
+}
+
+.stage-timing {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+/* Stage Progress Bar */
+.stage-progress {
+    width: 100%;
+    height: 4px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    margin-top: var(--spacing-3);
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+/* Stage Connector */
+.stage-connector {
+    width: 40px;
+    height: 2px;
+    background-color: var(--border-color);
+    margin: var(--spacing-4) 0;
+    position: relative;
+}
+
+.pipeline-stage[data-status="complete"] .stage-connector {
+    background-color: var(--color-success);
+}
+
+/* Stage Details Panel */
+.stage-details-panel {
+    position: fixed;
+    right: 0;
+    top: var(--navbar-height);
+    width: 400px;
+    height: calc(100vh - var(--navbar-height));
+    background-color: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    z-index: var(--z-fixed);
+    display: flex;
+    flex-direction: column;
+}
+
+.stage-details-panel.active {
+    transform: translateX(0);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-6);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-header h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.panel-body {
+    flex: 1;
+    padding: var(--spacing-6);
+    overflow-y: auto;
+}
+
+/* Workflow Log */
+.workflow-log {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+    overflow: hidden;
+}
+
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-4) var(--spacing-6);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.log-header h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.log-body {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: var(--spacing-4);
+    background-color: var(--bg-primary);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+}
+
+.log-entry {
+    padding: var(--spacing-1) 0;
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.log-timestamp {
+    color: var(--text-tertiary);
+}
+
+.log-message {
+    color: var(--text-secondary);
+}
+
+.log-entry.log-info .log-message {
+    color: var(--color-info);
+}
+
+.log-entry.log-success .log-message {
+    color: var(--color-success);
+}
+
+.log-entry.log-error .log-message {
+    color: var(--color-error);
+}
+
+.log-entry.log-warning .log-message {
+    color: var(--color-warning);
+}
+
+/* Overall Progress */
+.overall-progress {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-6);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-4);
+}
+
+.progress-header h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.progress-header span {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--spacing-4);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.progress-stats strong {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .pipeline-container {
+        flex-direction: column;
+    }
+    
+    .stage-connector {
+        width: 2px;
+        height: 40px;
+        margin: 0 auto;
+    }
+    
+    .stage-details-panel {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .workflow-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .control-group {
+        justify-content: space-between;
+    }
+}

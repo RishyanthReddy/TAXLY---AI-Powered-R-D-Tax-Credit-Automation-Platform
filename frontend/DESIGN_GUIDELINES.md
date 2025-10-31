@@ -1,13 +1,13 @@
-# Frontend Design Guidelines
+# Frontend Design Guidelines - Reference-Based Design
 
-## Quick Reference for All Future Pages
+## Design Philosophy
+Our design follows a clean, professional aesthetic inspired by modern SaaS dashboards. The focus is on clarity, readability, and a subtle, sophisticated color palette.
+
+## Quick Reference for All Pages
 
 ### CSS Stack (Required Order)
 ```html
 <link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/utilities.css">
-<link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/dashboard-enhanced.css">
 <link rel="stylesheet" href="css/your-page.css">
 ```

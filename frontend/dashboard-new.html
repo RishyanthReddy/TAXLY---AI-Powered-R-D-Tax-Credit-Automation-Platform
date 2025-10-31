@@ -3,44 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="R&D Tax Credit Automation Agent - Dashboard">
     <title>Dashboard - R&D Tax Credit Automation</title>
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dashboard-new.css">
-    <link rel="stylesheet" href="css/pdf-viewer.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <span class="brand-name">R&D Tax Credit Automation</span>
-            </div>
-            <ul class="navbar-menu">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="index.html" class="active">Dashboard</a></li>
-                <li><a href="workflow.html">Workflow</a></li>
-                <li><a href="reports.html">Reports</a></li>
-            </ul>
-            <div class="navbar-actions">
-                <button class="btn btn-secondary" id="syncBtn">
-                    <span class="icon">🔄</span> Refresh Data
-                </button>
-                <button class="btn btn-primary" id="generateReportBtn">
-                    <span class="icon">📄</span> Generate Report
-                </button>
-            </div>
-        </div>
-    </nav>
-
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
@@ -70,12 +41,12 @@
                             <svg class="donut-chart" viewBox="0 0 120 120">
                                 <circle cx="60" cy="60" r="50" fill="none" stroke="#e5e7eb" stroke-width="20"></circle>
                                 <circle cx="60" cy="60" r="50" fill="none" stroke="#10b981" stroke-width="20" 
-                                        stroke-dasharray="62.8 251.2" stroke-dashoffset="0" id="engagementComplete"></circle>
+                                        stroke-dasharray="62.8 251.2" stroke-dashoffset="0"></circle>
                                 <circle cx="60" cy="60" r="50" fill="none" stroke="#6366f1" stroke-width="20" 
-                                        stroke-dasharray="251.2 62.8" stroke-dashoffset="-62.8" id="engagementProgress"></circle>
+                                        stroke-dasharray="251.2 62.8" stroke-dashoffset="-62.8"></circle>
                             </svg>
                             <div class="donut-chart-center">
-                                <div class="donut-chart-value" id="totalEngagements">5</div>
+                                <div class="donut-chart-value">5</div>
                             </div>
                         </div>
                         <div class="status-legend">
@@ -85,7 +56,7 @@
                                     <span>Complete</span>
                                 </div>
                                 <div class="status-legend-value">
-                                    <span id="completeCount">1</span>
+                                    <span>1</span>
                                     <span class="status-legend-toggle">▼</span>
                                 </div>
                             </div>
@@ -95,7 +66,7 @@
                                     <span>In progress</span>
                                 </div>
                                 <div class="status-legend-value">
-                                    <span id="progressCount">4</span>
+                                    <span>4</span>
                                     <span class="status-legend-toggle">▼</span>
                                 </div>
                             </div>
@@ -327,8 +298,88 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody id="engagementsTableBody">
-                            <!-- Rows will be populated by JavaScript -->
+                        <tbody>
+                            <tr>
+                                <td>Chain Tax credit 2022</td>
+                                <td>Chain</td>
+                                <td><span class="table-status-badge complete">Complete</span></td>
+                                <td>10/12/22</td>
+                                <td>
+                                    <div class="staff-list">
+                                        <span class="staff-avatar">A</span>
+                                        <span>Alexander Chung</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-menu-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Chain PBC 2022</td>
+                                <td>Chain</td>
+                                <td><span class="table-status-badge in-progress">In progress</span></td>
+                                <td>10/12/22</td>
+                                <td>
+                                    <div class="staff-list">
+                                        <span class="staff-avatar">A</span>
+                                        <span class="staff-avatar">D</span>
+                                        <span class="staff-avatar">C</span>
+                                        <span class="staff-avatar">P</span>
+                                        <span class="staff-count">+2</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-menu-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Penta Tax credit 2022</td>
+                                <td>Penta</td>
+                                <td><span class="table-status-badge in-progress">In progress</span></td>
+                                <td>10/01/23</td>
+                                <td>
+                                    <div class="staff-list">
+                                        <span class="staff-avatar">C</span>
+                                        <span>Clarice Lispector</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-menu-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Glossy Tax credit 2022</td>
+                                <td>Glossy</td>
+                                <td><span class="table-status-badge in-progress">In progress</span></td>
+                                <td>10/12/22</td>
+                                <td>
+                                    <div class="staff-list">
+                                        <span class="staff-avatar">A</span>
+                                        <span class="staff-avatar">D</span>
+                                        <span class="staff-avatar">C</span>
+                                        <span class="staff-avatar">P</span>
+                                        <span class="staff-count">+2</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-menu-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Vision Tax credit 2022</td>
+                                <td>Vision</td>
+                                <td><span class="table-status-badge in-progress">In progress</span></td>
+                                <td>10/12/22</td>
+                                <td>
+                                    <div class="staff-list">
+                                        <span class="staff-avatar">A</span>
+                                        <span>Alexander Chung</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="action-menu-btn">⋮</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -336,130 +387,15 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 R&D Tax Credit Automation Agent. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- PDF Viewer Modal -->
-    <div class="pdf-viewer-modal" id="pdfViewerModal">
-        <!-- Header -->
-        <div class="pdf-viewer-header">
-            <div class="pdf-viewer-title-section">
-                <h2 class="pdf-viewer-title" id="pdfViewerTitle" data-report-id="">PDF Report</h2>
-                <div class="pdf-metadata" id="pdfMetadata"></div>
-            </div>
-            <div class="pdf-viewer-actions">
-                <button class="pdf-toolbar-btn primary" id="pdfDownloadBtn" title="Download PDF">
-                    ⬇️
-                </button>
-                <button class="pdf-toolbar-btn" id="pdfViewerCloseBtn" title="Close Viewer (Esc)">
-                    ✕
-                </button>
-            </div>
-        </div>
-
-        <!-- Toolbar -->
-        <div class="pdf-viewer-toolbar">
-            <div class="pdf-toolbar-group">
-                <button class="pdf-toolbar-btn" id="pdfPrevBtn" title="Previous Page (←)">
-                    ◀
-                </button>
-                <span class="pdf-page-info" id="pdfPageInfo">Page 1 of 1</span>
-                <button class="pdf-toolbar-btn" id="pdfNextBtn" title="Next Page (→)">
-                    ▶
-                </button>
-            </div>
-
-            <div class="pdf-toolbar-separator"></div>
-
-            <div class="pdf-toolbar-group">
-                <button class="pdf-toolbar-btn" id="pdfZoomOutBtn" title="Zoom Out (-)">
-                    −
-                </button>
-                <span class="pdf-zoom-info" id="pdfZoomInfo">100%</span>
-                <button class="pdf-toolbar-btn" id="pdfZoomInBtn" title="Zoom In (+)">
-                    +
-                </button>
-                <button class="pdf-toolbar-btn" id="pdfResetZoomBtn" title="Reset Zoom (0)">
-                    ⟲
-                </button>
-                <button class="pdf-toolbar-btn" id="pdfFitWidthBtn" title="Fit to Width">
-                    ⇔
-                </button>
-            </div>
-        </div>
-
-        <!-- PDF Canvas Container -->
-        <div class="pdf-viewer-content">
-            <div class="pdf-canvas-container" id="pdfCanvasContainer">
-                <canvas id="pdfCanvas"></canvas>
-            </div>
-        </div>
-
-        <!-- Keyboard Shortcuts Hint -->
-        <div class="pdf-shortcuts-hint">
-            <ul>
-                <li><span>Navigate:</span> <kbd>←</kbd> <kbd>→</kbd></li>
-                <li><span>Zoom:</span> <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd></li>
-                <li><span>Close:</span> <kbd>Esc</kbd></li>
-            </ul>
-        </div>
-    </div>
-
     <!-- JavaScript -->
     <script src="js/utils.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/pdf-viewer.js"></script>
-    <script src="js/charts.js"></script>
-    <script src="js/dashboard.js"></script>
     <script>
-        // Simple interactivity for toggles
+        // Simple interactivity
         document.querySelectorAll('.status-legend-toggle, .deadline-item-dropdown').forEach(btn => {
             btn.addEventListener('click', function() {
                 this.textContent = this.textContent === '▼' ? '▲' : '▼';
             });
         });
-
-        // Load sample data for table
-        async function loadEngagements() {
-            const tbody = document.getElementById('engagementsTableBody');
-            const sampleData = [
-                { name: 'Chain Tax credit 2022', client: 'Chain', status: 'complete', deadline: '10/12/22', staff: ['A'], staffNames: ['Alexander Chung'] },
-                { name: 'Chain PBC 2022', client: 'Chain', status: 'in-progress', deadline: '10/12/22', staff: ['A', 'D', 'C', 'P'], count: '+2' },
-                { name: 'Penta Tax credit 2022', client: 'Penta', status: 'in-progress', deadline: '10/01/23', staff: ['C'], staffNames: ['Clarice Lispector'] },
-                { name: 'Glossy Tax credit 2022', client: 'Glossy', status: 'in-progress', deadline: '10/12/22', staff: ['A', 'D', 'C', 'P'], count: '+2' },
-                { name: 'Vision Tax credit 2022', client: 'Vision', status: 'in-progress', deadline: '10/12/22', staff: ['A'], staffNames: ['Alexander Chung'] }
-            ];
-
-            tbody.innerHTML = sampleData.map(item => `
-                <tr>
-                    <td>${item.name}</td>
-                    <td>${item.client}</td>
-                    <td><span class="table-status-badge ${item.status}">${item.status === 'complete' ? 'Complete' : 'In progress'}</span></td>
-                    <td>${item.deadline}</td>
-                    <td>
-                        <div class="staff-list">
-                            ${item.staff.map(s => `<span class="staff-avatar">${s}</span>`).join('')}
-                            ${item.staffNames ? `<span>${item.staffNames[0]}</span>` : ''}
-                            ${item.count ? `<span class="staff-count">${item.count}</span>` : ''}
-                        </div>
-                    </td>
-                    <td>
-                        <button class="action-menu-btn">⋮</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // Load on page ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadEngagements);
-        } else {
-            loadEngagements();
-        }
     </script>
 </body>
 </html>
