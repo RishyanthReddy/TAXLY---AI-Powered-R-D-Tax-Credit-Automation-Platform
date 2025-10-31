@@ -1972,31 +1972,31 @@ A: TAXLY is production-ready with 90%+ test coverage. For production deployment:
 ### Screenshots
 
 #### 1. Dashboard
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](images/Dashboard.png)
 - Real-time metrics and KPIs
 - Engagement status visualization
 - PBC request tracking
 - Compliance health indicators
 
 #### 2. Onboarding Wizard
-![Onboarding](docs/screenshots/onboarding.png)
+![Onboarding](images/Onboarding.png)
 - 3-step client setup
 - HR platform integration
 - Team member invitation
 
 #### 3. Workflow Visualization
-![Workflow](docs/screenshots/workflow.png)
+![Workflow](images/workflow.png)
 - Real-time status updates
 - Interactive node details
 
 #### 4. Reports Showcase
-![Reports](docs/screenshots/reports.png)
+![Reports](images/report.png)
 - Generated PDF reports
 - Download and preview
 - Report metadata display
 
 #### 5. PDF Report Sample
-![PDF Report](docs/screenshots/pdf-report.png)
+**Download Sample Report**: [View Sample PDF](outputs/reports/rd_tax_credit_report_2024_20251031_060518.pdf)
 - Executive summary
 - Project breakdown
 - Technical narratives
