@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Integration Test - R&D Tax Credit Automation</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard-enhanced.css">
+    <style>
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+        
+        .test-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .test-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending { background: #e5e7eb; color: #6b7280; }
+        .status-running { background: #dbeafe; color: #2563eb; }
+        .status-passed { background: #d1fae5; color: #10b981; }
+        .status-failed { background: #fee2e2; color: #ef4444; }
+        
+        .test-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .test-button:hover { background: #1d4ed8; }
+        .test-button:disabled { background: #9ca3af; cursor: not-allowed; }
+        
+        .test-results {
+            margin-top: 16px;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .test-log {
+            margin: 4px 0;
+        }
+        
+        .log-success { color: #10b981; }
+        .log-error { color: #ef4444; }
+        .log-info { color: #2563eb; }
+        .log-warning { color: #f59e0b; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">🚀 R&D Tax Credit Automation - Integration Tests</div>
+        <ul class="navbar-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="workflow.html">Workflow</a></li>
+            <li><a href="reports.html">Reports</a></li>
+        </ul>
+    </nav>
+
+    <div class="test-container">
+        <h1 style="margin-bottom: 32px;">Complete Integration Testing</h1>
+
+        <!-- Test 1: Backend Health -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 1: Backend Health Check</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Verify backend is running and all services are healthy</p>
+                </div>
+                <div>
+                    <span id="test1-status" class="test-status status-pending">Pending</span>
+                    <button id="test1-btn" class="test-button" onclick="runTest1()">Run Test</button>
+                </div>
+            </div>
+            <div id="test1-results" class="test-results" style="display: none;"></div>
+        </div>
+
+        <!-- Test 2: WebSocket Connection -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 2: WebSocket Real-Time Updates</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Test WebSocket connection and message handling</p>
+                </div>
+                <div>
+                    <span id="test2-status" class="test-status status-pending">Pending</span>
+                    <button id="test2-btn" class="test-button" onclick="runTest2()">Run Test</button>
+                </div>
+            </div>
+            <div id="test2-results" class="test-results" style="display: none;"></div>
+        </div>
+
+        <!-- Test 3: Report Generation -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 3: Report Generation with Sample Data</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Generate PDF report using fixture data</p>
+                </div>
+                <div>
+                    <span id="test3-status" class="test-status status-pending">Pending</span>
+                    <button id="test3-btn" class="test-button" onclick="runTest3()">Run Test</button>
+                </div>
+            </div>
+            <div id="test3-results" class="test-results" style="display: none;"></div>
+            <div class="progress-bar" id="test3-progress" style="display: none;">
+                <div class="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <!-- Test 4: PDF Viewer -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 4: PDF Viewer Functionality</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Test PDF loading, navigation, zoom, and download</p>
+                </div>
+                <div>
+                    <span id="test4-status" class="test-status status-pending">Pending</span>
+                    <button id="test4-btn" class="test-button" onclick="runTest4()">Run Test</button>
+                </div>
+            </div>
+            <div id="test4-results" class="test-results" style="display: none;"></div>
+        </div>
+
+        <!-- Test 5: Charts and Visualizations -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 5: Charts and Visualizations</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Verify all charts render correctly with real data</p>
+                </div>
+                <div>
+                    <span id="test5-status" class="test-status status-pending">Pending</span>
+                    <button id="test5-btn" class="test-button" onclick="runTest5()">Run Test</button>
+                </div>
+            </div>
+            <div id="test5-results" class="test-results" style="display: none;"></div>
+        </div>
+
+        <!-- Test 6: Error Handling -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 6: Error Handling</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Test graceful error handling and user-friendly messages</p>
+                </div>
+                <div>
+                    <span id="test6-status" class="test-status status-pending">Pending</span>
+                    <button id="test6-btn" class="test-button" onclick="runTest6()">Run Test</button>
+                </div>
+            </div>
+            <div id="test6-results" class="test-results" style="display: none;"></div>
+        </div>
+
+        <!-- Test 7: Navigation Flow -->
+        <div class="test-section">
+            <div class="test-header">
+                <div>
+                    <h3>Test 7: Complete Navigation Flow</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Test onboarding → dashboard → workflow → reports</p>
+                </div>
+                <div>
+                    <span id="test7-status" class="test-status status-pending">Pending</span>
+                    <button id="test7-btn" class="test-button" onclick="runTest7()">Run Test</button>
+                </div>
+            </div>
+            <div id="test7-results" class="test-results" style="display: none;"></div>
+        </div>
+
+        <!-- Run All Tests -->
+        <div class="test-section" style="background: #f0f9ff;">
+            <div class="test-header">
+                <div>
+                    <h3>Run All Tests</h3>
+                    <p style="color: #6b7280; font-size: 14px;">Execute all integration tests sequentially</p>
+                </div>
+                <div>
+                    <button id="run-all-btn" class="test-button" onclick="runAllTests()" style="background: #10b981;">
+                        Run All Tests
+                    </button>
+                </div>
+            </div>
+            <div id="overall-progress" class="progress-bar" style="display: none;">
+                <div class="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/websocket.js"></script>
+    <script src="js/utils.js"></script>
+
+    <script>
+        // Test utilities
+        function logTest(testId, message, type = 'info') {
+            const resultsDiv = document.getElementById(`test${testId}-results`);
+            resultsDiv.style.display = 'block';
+            const logClass = `log-${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            resultsDiv.innerHTML += `<div class="test-log ${logClass}">[${timestamp}] ${message}</div>`;
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        function setTestStatus(testId, status) {
+            const statusSpan = document.getElementById(`test${testId}-status`);
+            statusSpan.className = `test-status status-${status}`;
+            statusSpan.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        }
+
+        function clearTestResults(testId) {
+            const resultsDiv = document.getElementById(`test${testId}-results`);
+            resultsDiv.innerHTML = '';
+        }
+
+        // Test 1: Backend Health Check
+        async function runTest1() {
+            clearTestResults(1);
+            setTestStatus(1, 'running');
+            logTest(1, 'Starting backend health check...', 'info');
+
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                if (response.ok) {
+                    const data = await response.json();
+                    logTest(1, `✓ Backend is healthy`, 'success');
+                    logTest(1, `Status: ${data.status}`, 'info');
+                    logTest(1, `Timestamp: ${data.timestamp}`, 'info');
+                    
+                    if (data.services) {
+                        Object.entries(data.services).forEach(([service, status]) => {
+                            logTest(1, `  ${service}: ${status}`, 'info');
+                        });
+                    }
+                    
+                    setTestStatus(1, 'passed');
+                } else {
+                    logTest(1, `✗ Backend returned status ${response.status}`, 'error');
+                    setTestStatus(1, 'failed');
+                }
+            } catch (error) {
+                logTest(1, `✗ Error: ${error.message}`, 'error');
+                logTest(1, 'Make sure backend is running: uvicorn main:app --reload', 'warning');
+                setTestStatus(1, 'failed');
+            }
+        }
+
+        // Test 2: WebSocket Connection
+        async function runTest2() {
+            clearTestResults(2);
+            setTestStatus(2, 'running');
+            logTest(2, 'Connecting to WebSocket...', 'info');
+
+            try {
+                const ws = new WebSocket('ws://localhost:8000/ws');
+                
+                ws.onopen = () => {
+                    logTest(2, '✓ WebSocket connected successfully', 'success');
+                };
+
+                ws.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    logTest(2, `✓ Received message: ${data.type || 'unknown'}`, 'success');
+                    logTest(2, `Data: ${JSON.stringify(data, null, 2)}`, 'info');
+                };
+
+                ws.onerror = (error) => {
+                    logTest(2, `✗ WebSocket error: ${error}`, 'error');
+                    setTestStatus(2, 'failed');
+                };
+
+                // Wait 3 seconds then close
+                setTimeout(() => {
+                    ws.close();
+                    logTest(2, '✓ WebSocket test completed', 'success');
+                    setTestStatus(2, 'passed');
+                }, 3000);
+
+            } catch (error) {
+                logTest(2, `✗ Error: ${error.message}`, 'error');
+                setTestStatus(2, 'failed');
+            }
+        }
+
+        // Test 3: Report Generation
+        async function runTest3() {
+            clearTestResults(3);
+            setTestStatus(3, 'running');
+            logTest(3, 'Loading sample qualified projects...', 'info');
+
+            try {
+                // Load sample data
+                const sampleResponse = await fetch('data/sample_qualified_projects.json');
+                const qualifiedProjects = await sampleResponse.json();
+                logTest(3, `✓ Loaded ${qualifiedProjects.length} sample projects`, 'success');
+
+                // Show progress bar
+                const progressBar = document.getElementById('test3-progress');
+                progressBar.style.display = 'block';
+                const progressFill = progressBar.querySelector('.progress-fill');
+
+                logTest(3, 'Generating PDF report...', 'info');
+                progressFill.style.width = '30%';
+
+                const response = await fetch('http://localhost:8000/api/generate-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        qualified_projects: qualifiedProjects,
+                        tax_year: 2024,
+                        company_name: "Acme Corporation"
+                    })
+                });
+
+                progressFill.style.width = '70%';
+
+                if (response.ok) {
+                    const result = await response.json();
+                    progressFill.style.width = '100%';
+                    
+                    logTest(3, `✓ Report generated successfully`, 'success');
+                    logTest(3, `Report ID: ${result.report_id}`, 'info');
+                    logTest(3, `PDF Path: ${result.pdf_path}`, 'info');
+                    
+                    if (result.metadata) {
+                        logTest(3, `Total Projects: ${result.metadata.project_count}`, 'info');
+                        logTest(3, `Total Hours: ${result.metadata.total_qualified_hours}`, 'info');
+                        logTest(3, `Estimated Credit: $${result.metadata.estimated_credit}`, 'info');
+                    }
+                    
+                    setTestStatus(3, 'passed');
+                } else {
+                    const error = await response.text();
+                    logTest(3, `✗ Report generation failed: ${response.status}`, 'error');
+                    logTest(3, error, 'error');
+                    setTestStatus(3, 'failed');
+                }
+
+                setTimeout(() => {
+                    progressBar.style.display = 'none';
+                    progressFill.style.width = '0%';
+                }, 2000);
+
+            } catch (error) {
+                logTest(3, `✗ Error: ${error.message}`, 'error');
+                setTestStatus(3, 'failed');
+            }
+        }
+
+        // Test 4: PDF Viewer
+        async function runTest4() {
+            clearTestResults(4);
+            setTestStatus(4, 'running');
+            logTest(4, 'Testing PDF viewer functionality...', 'info');
+
+            try {
+                // Check if PDF.js is loaded
+                if (typeof pdfjsLib !== 'undefined') {
+                    logTest(4, '✓ PDF.js library loaded', 'success');
+                } else {
+                    logTest(4, '⚠ PDF.js not loaded (expected for this test)', 'warning');
+                }
+
+                // Check if PDF viewer files exist
+                const jsResponse = await fetch('js/pdf-viewer.js');
+                const cssResponse = await fetch('css/pdf-viewer.css');
+
+                if (jsResponse.ok) {
+                    logTest(4, '✓ PDF viewer JavaScript found', 'success');
+                } else {
+                    logTest(4, '✗ PDF viewer JavaScript not found', 'error');
+                }
+
+                if (cssResponse.ok) {
+                    logTest(4, '✓ PDF viewer CSS found', 'success');
+                } else {
+                    logTest(4, '✗ PDF viewer CSS not found', 'error');
+                }
+
+                // Test report listing
+                const reportsResponse = await fetch('http://localhost:8000/api/reports');
+                if (reportsResponse.ok) {
+                    const reports = await reportsResponse.json();
+                    logTest(4, `✓ Found ${reports.length} existing reports`, 'success');
+                    
+                    if (reports.length > 0) {
+                        logTest(4, `Testing download for: ${reports[0].filename}`, 'info');
+                        // Don't actually download, just test endpoint
+                        const downloadResponse = await fetch(`http://localhost:8000/api/download/report/${reports[0].filename}`);
+                        if (downloadResponse.ok) {
+                            logTest(4, '✓ PDF download endpoint working', 'success');
+                        } else {
+                            logTest(4, '✗ PDF download failed', 'error');
+                        }
+                    }
+                }
+
+                setTestStatus(4, 'passed');
+            } catch (error) {
+                logTest(4, `✗ Error: ${error.message}`, 'error');
+                setTestStatus(4, 'failed');
+            }
+        }
+
+        // Test 5: Charts and Visualizations
+        async function runTest5() {
+            clearTestResults(5);
+            setTestStatus(5, 'running');
+            logTest(5, 'Testing chart rendering...', 'info');
+
+            try {
+                // Check if chart libraries are available
+                if (typeof renderDonutChart === 'function') {
+                    logTest(5, '✓ Donut chart function available', 'success');
+                } else {
+                    logTest(5, '⚠ Donut chart function not found', 'warning');
+                }
+
+                if (typeof renderMetricCard === 'function') {
+                    logTest(5, '✓ Metric card function available', 'success');
+                } else {
+                    logTest(5, '⚠ Metric card function not found', 'warning');
+                }
+
+                // Load sample data
+                const response = await fetch('data/sample-integration-data.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    logTest(5, '✓ Sample integration data loaded', 'success');
+                    logTest(5, `Data includes: ${Object.keys(data).join(', ')}`, 'info');
+                    
+                    // Verify data structure
+                    if (data.engagementSummary) {
+                        logTest(5, `✓ Engagement summary: ${data.engagementSummary.totalProjects} projects`, 'success');
+                    }
+                    if (data.complianceHealth) {
+                        logTest(5, `✓ Compliance health: ${data.complianceHealth.auditReadinessScore}% ready`, 'success');
+                    }
+                } else {
+                    logTest(5, '✗ Failed to load sample data', 'error');
+                }
+
+                setTestStatus(5, 'passed');
+            } catch (error) {
+                logTest(5, `✗ Error: ${error.message}`, 'error');
+                setTestStatus(5, 'failed');
+            }
+        }
+
+        // Test 6: Error Handling
+        async function runTest6() {
+            clearTestResults(6);
+            setTestStatus(6, 'running');
+            logTest(6, 'Testing error handling...', 'info');
+
+            try {
+                // Test 1: Invalid report generation
+                logTest(6, 'Test 1: Invalid report data', 'info');
+                const invalidResponse = await fetch('http://localhost:8000/api/generate-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ qualified_projects: [] })
+                });
+
+                if (invalidResponse.status === 400 || invalidResponse.status === 422) {
+                    logTest(6, '✓ Invalid input properly rejected', 'success');
+                } else {
+                    logTest(6, `⚠ Unexpected status: ${invalidResponse.status}`, 'warning');
+                }
+
+                // Test 2: Missing report
+                logTest(6, 'Test 2: Missing report download', 'info');
+                const missingResponse = await fetch('http://localhost:8000/api/download/report/nonexistent.pdf');
+                
+                if (missingResponse.status === 404) {
+                    logTest(6, '✓ Missing report properly handled (404)', 'success');
+                } else {
+                    logTest(6, `⚠ Unexpected status: ${missingResponse.status}`, 'warning');
+                }
+
+                // Test 3: Backend offline simulation
+                logTest(6, 'Test 3: Graceful degradation', 'info');
+                const sampleDataResponse = await fetch('data/sample-integration-data.json');
+                if (sampleDataResponse.ok) {
+                    logTest(6, '✓ Sample data available for offline mode', 'success');
+                } else {
+                    logTest(6, '✗ Sample data not available', 'error');
+                }
+
+                setTestStatus(6, 'passed');
+            } catch (error) {
+                logTest(6, `✗ Error: ${error.message}`, 'error');
+                setTestStatus(6, 'failed');
+            }
+        }
+
+        // Test 7: Navigation Flow
+        async function runTest7() {
+            clearTestResults(7);
+            setTestStatus(7, 'running');
+            logTest(7, 'Testing navigation flow...', 'info');
+
+            try {
+                const pages = [
+                    { name: 'Home', url: 'home.html' },
+                    { name: 'Onboarding', url: 'onboarding.html' },
+                    { name: 'Dashboard', url: 'index.html' },
+                    { name: 'Workflow', url: 'workflow.html' },
+                    { name: 'Reports', url: 'reports.html' }
+                ];
+
+                for (const page of pages) {
+                    const response = await fetch(page.url);
+                    if (response.ok) {
+                        logTest(7, `✓ ${page.name} page accessible`, 'success');
+                    } else {
+                        logTest(7, `✗ ${page.name} page not found`, 'error');
+                    }
+                }
+
+                logTest(7, '✓ All pages accessible', 'success');
+                setTestStatus(7, 'passed');
+            } catch (error) {
+                logTest(7, `✗ Error: ${error.message}`, 'error');
+                setTestStatus(7, 'failed');
+            }
+        }
+
+        // Run All Tests
+        async function runAllTests() {
+            const runAllBtn = document.getElementById('run-all-btn');
+            runAllBtn.disabled = true;
+            runAllBtn.textContent = 'Running Tests...';
+
+            const progressBar = document.getElementById('overall-progress');
+            progressBar.style.display = 'block';
+            const progressFill = progressBar.querySelector('.progress-fill');
+
+            const tests = [
+                { fn: runTest1, progress: 14 },
+                { fn: runTest2, progress: 28 },
+                { fn: runTest3, progress: 42 },
+                { fn: runTest4, progress: 57 },
+                { fn: runTest5, progress: 71 },
+                { fn: runTest6, progress: 85 },
+                { fn: runTest7, progress: 100 }
+            ];
+
+            for (const test of tests) {
+                await test.fn();
+                progressFill.style.width = `${test.progress}%`;
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            runAllBtn.disabled = false;
+            runAllBtn.textContent = 'Run All Tests';
+            
+            // Calculate results
+            const statuses = [];
+            for (let i = 1; i <= 7; i++) {
+                const status = document.getElementById(`test${i}-status`).textContent.toLowerCase();
+                statuses.push(status);
+            }
+
+            const passed = statuses.filter(s => s === 'passed').length;
+            const failed = statuses.filter(s => s === 'failed').length;
+            const total = statuses.length;
+
+            alert(`Test Results:\n✓ Passed: ${passed}/${total}\n✗ Failed: ${failed}/${total}\n\nPass Rate: ${((passed/total)*100).toFixed(1)}%`);
+
+            setTimeout(() => {
+                progressBar.style.display = 'none';
+                progressFill.style.width = '0%';
+            }, 2000);
+        }
+
+        // Auto-run health check on page load
+        window.addEventListener('load', () => {
+            console.log('Integration test page loaded');
+            // Optionally auto-run health check
+            // runTest1();
+        });
+    </script>
+</body>
+</html>

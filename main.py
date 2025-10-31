@@ -804,6 +804,7 @@ class QualificationResponse(PydanticBaseModel):
         flagged_projects: List of project names flagged for review
         execution_time_seconds: Total execution time
         summary: Human-readable summary
+        enhancement: Optional enhancement data from You.com and GLM reasoner
     """
     
     success: bool = Field(
@@ -849,6 +850,11 @@ class QualificationResponse(PydanticBaseModel):
     summary: str = Field(
         default="",
         description="Human-readable summary of qualification results"
+    )
+    
+    enhancement: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Optional enhancement data from You.com and GLM reasoner"
     )
 
 
@@ -1088,7 +1094,8 @@ async def qualify_projects(request: QualificationRequest) -> QualificationRespon
             average_confidence=result.average_confidence,
             flagged_projects=result.flagged_projects,
             execution_time_seconds=result.execution_time_seconds,
-            summary=result.summary
+            summary=result.summary,
+            enhancement=result.enhancement
         )
         
         logger.info(
@@ -1389,31 +1396,6 @@ async def generate_report(request: ReportGenerationRequest) -> ReportGenerationR
         )
         logger.info("GLM reasoner initialized")
         
-        # Define status callback for real-time updates
-        import asyncio
-        
-        def status_callback(status_message):
-            """Callback to send status updates during agent execution."""
-            try:
-                # Get the current event loop and create a task for the async send_status_update
-                loop = asyncio.get_event_loop()
-                if loop.is_running():
-                    # If loop is running, create a task
-                    asyncio.create_task(send_status_update(
-                        stage=status_message.stage,
-                        status=status_message.status,
-                        details=status_message.details
-                    ))
-                else:
-                    # If loop is not running, run it synchronously (shouldn't happen in FastAPI)
-                    loop.run_until_complete(send_status_update(
-                        stage=status_message.stage,
-                        status=status_message.status,
-                        details=status_message.details
-                    ))
-            except Exception as e:
-                logger.error(f"Failed to send status update: {e}")
-        
         # Initialize PDF Generator
         from utils.pdf_generator import PDFGenerator
         
@@ -1423,11 +1405,13 @@ async def generate_report(request: ReportGenerationRequest) -> ReportGenerationR
         # Initialize Audit Trail Agent
         logger.info("Initializing Audit Trail Agent...")
         
+        # Note: Passing None for status_callback to avoid asyncio event loop issues
+        # Status updates will be sent at the endpoint level instead
         agent = AuditTrailAgent(
             youcom_client=youcom_client,
             glm_reasoner=glm_reasoner,
             pdf_generator=pdf_generator,
-            status_callback=status_callback
+            status_callback=None
         )
         
         # Run report generation

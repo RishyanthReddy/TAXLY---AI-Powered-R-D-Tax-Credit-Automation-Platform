@@ -25,6 +25,7 @@ httpx==0.28.1
 requests==2.32.3
 python-dotenv==1.0.1
 tenacity==9.0.0
+nest-asyncio==1.6.0
 
 # File Operations
 chardet==5.2.0

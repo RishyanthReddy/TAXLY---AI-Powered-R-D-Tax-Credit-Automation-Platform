@@ -531,7 +531,11 @@ class AuditTrailAgent:
             )
             
             # Run async batch narrative generation
-            # Use asyncio.run to execute the async method in sync context
+            # Use nest_asyncio to allow nested event loops
+            import nest_asyncio
+            nest_asyncio.apply()
+            
+            # Now we can use asyncio.run safely
             narratives = asyncio.run(
                 self._generate_narratives_batch(
                     qualified_projects=qualified_projects,

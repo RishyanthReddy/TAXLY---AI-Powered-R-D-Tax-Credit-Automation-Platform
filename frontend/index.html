@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/dashboard-enhanced.css">
+    <link rel="stylesheet" href="css/pdf-viewer.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/icons/favicon.png">
@@ -26,6 +27,7 @@
                 <span class="brand-name">R&D Tax Credit Automation</span>
             </div>
             <ul class="navbar-menu">
+                <li><a href="home.html">Home</a></li>
                 <li><a href="index.html" class="active">Dashboard</a></li>
                 <li><a href="workflow.html">Workflow</a></li>
                 <li><a href="reports.html">Reports</a></li>
@@ -98,7 +100,7 @@
                             <p class="metric"><strong>Coverage:</strong> 100%</p>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-sm btn-outline">Configure</button>
+                            <button class="btn btn-sm btn-outline">Sync Now</button>
                         </div>
                     </div>
                 </div>
@@ -196,6 +198,29 @@
                 </div>
             </section>
 
+            <!-- Recent Reports Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Reports</h2>
+                    <a href="reports.html" class="btn btn-sm btn-outline">View All Reports</a>
+                </div>
+                <div class="grid grid-3" id="recentReportsGrid">
+                    <!-- Report cards will be populated by JavaScript -->
+                </div>
+                <div id="noReportsMessage" style="display: none;">
+                    <div class="card text-center">
+                        <div class="empty-state">
+                            <div class="empty-icon">📄</div>
+                            <h3>No Reports Yet</h3>
+                            <p>Generate your first R&D tax credit report to get started</p>
+                            <button class="btn btn-primary" onclick="window.location.href='workflow.html'">
+                                Generate Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Team Information Section -->
             <section class="section">
                 <h2 class="section-title">Team Information</h2>
@@ -228,9 +253,76 @@
         </div>
     </footer>
 
+    <!-- PDF Viewer Modal -->
+    <div class="pdf-viewer-modal" id="pdfViewerModal">
+        <!-- Header -->
+        <div class="pdf-viewer-header">
+            <div class="pdf-viewer-title-section">
+                <h2 class="pdf-viewer-title" id="pdfViewerTitle" data-report-id="">PDF Report</h2>
+                <div class="pdf-metadata" id="pdfMetadata"></div>
+            </div>
+            <div class="pdf-viewer-actions">
+                <button class="pdf-toolbar-btn primary" id="pdfDownloadBtn" title="Download PDF">
+                    ⬇️
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfViewerCloseBtn" title="Close Viewer (Esc)">
+                    ✕
+                </button>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="pdf-viewer-toolbar">
+            <div class="pdf-toolbar-group">
+                <button class="pdf-toolbar-btn" id="pdfPrevBtn" title="Previous Page (←)">
+                    ◀
+                </button>
+                <span class="pdf-page-info" id="pdfPageInfo">Page 1 of 1</span>
+                <button class="pdf-toolbar-btn" id="pdfNextBtn" title="Next Page (→)">
+                    ▶
+                </button>
+            </div>
+
+            <div class="pdf-toolbar-separator"></div>
+
+            <div class="pdf-toolbar-group">
+                <button class="pdf-toolbar-btn" id="pdfZoomOutBtn" title="Zoom Out (-)">
+                    −
+                </button>
+                <span class="pdf-zoom-info" id="pdfZoomInfo">100%</span>
+                <button class="pdf-toolbar-btn" id="pdfZoomInBtn" title="Zoom In (+)">
+                    +
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfResetZoomBtn" title="Reset Zoom (0)">
+                    ⟲
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfFitWidthBtn" title="Fit to Width">
+                    ⇔
+                </button>
+            </div>
+        </div>
+
+        <!-- PDF Canvas Container -->
+        <div class="pdf-viewer-content">
+            <div class="pdf-canvas-container" id="pdfCanvasContainer">
+                <canvas id="pdfCanvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Keyboard Shortcuts Hint -->
+        <div class="pdf-shortcuts-hint">
+            <ul>
+                <li><span>Navigate:</span> <kbd>←</kbd> <kbd>→</kbd></li>
+                <li><span>Zoom:</span> <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd></li>
+                <li><span>Close:</span> <kbd>Esc</kbd></li>
+            </ul>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/pdf-viewer.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/charts-enhanced.js"></script>
     <script src="js/dashboard.js"></script>

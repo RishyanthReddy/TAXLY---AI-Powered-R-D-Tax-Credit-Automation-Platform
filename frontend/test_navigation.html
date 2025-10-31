@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Test - R&D Tax Credit Automation</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        body {
+            padding: var(--spacing-8);
+            background-color: var(--bg-secondary);
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            background: white;
+            padding: var(--spacing-6);
+            margin-bottom: var(--spacing-4);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .test-section h2 {
+            margin-bottom: var(--spacing-4);
+            color: var(--color-primary);
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-4);
+        }
+        
+        .test-card {
+            padding: var(--spacing-4);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            text-align: center;
+        }
+        
+        .test-card h3 {
+            margin-bottom: var(--spacing-2);
+            font-size: var(--font-size-lg);
+        }
+        
+        .test-card p {
+            margin-bottom: var(--spacing-3);
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        .test-result {
+            margin-top: var(--spacing-3);
+            padding: var(--spacing-2);
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-sm);
+        }
+        
+        .test-result.success {
+            background-color: var(--status-healthy);
+            color: white;
+        }
+        
+        .test-result.error {
+            background-color: var(--status-error);
+            color: white;
+        }
+        
+        .test-result.pending {
+            background-color: var(--color-gray-200);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="mb-6">Navigation & Routing Test Suite</h1>
+        
+        <!-- Page Navigation Tests -->
+        <div class="test-section">
+            <h2>Page Navigation Tests</h2>
+            <div class="test-grid">
+                <div class="test-card">
+                    <h3>Home Page</h3>
+                    <p>Test navigation to home.html</p>
+                    <button class="btn btn-primary" onclick="testNavigation('home.html', 'home-result')">
+                        Test Navigation
+                    </button>
+                    <div id="home-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Dashboard</h3>
+                    <p>Test navigation to index.html</p>
+                    <button class="btn btn-primary" onclick="testNavigation('index.html', 'dashboard-result')">
+                        Test Navigation
+                    </button>
+                    <div id="dashboard-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Workflow</h3>
+                    <p>Test navigation to workflow.html</p>
+                    <button class="btn btn-primary" onclick="testNavigation('workflow.html', 'workflow-result')">
+                        Test Navigation
+                    </button>
+                    <div id="workflow-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Reports</h3>
+                    <p>Test navigation to reports.html</p>
+                    <button class="btn btn-primary" onclick="testNavigation('reports.html', 'reports-result')">
+                        Test Navigation
+                    </button>
+                    <div id="reports-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Onboarding</h3>
+                    <p>Test navigation to onboarding.html</p>
+                    <button class="btn btn-primary" onclick="testNavigation('onboarding.html', 'onboarding-result')">
+                        Test Navigation
+                    </button>
+                    <div id="onboarding-result" class="test-result pending">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navbar Consistency Tests -->
+        <div class="test-section">
+            <h2>Navbar Consistency Tests</h2>
+            <div class="test-grid">
+                <div class="test-card">
+                    <h3>Home Navbar</h3>
+                    <p>Check navbar has all links</p>
+                    <button class="btn btn-primary" onclick="testNavbar('home.html', 'home-navbar-result')">
+                        Test Navbar
+                    </button>
+                    <div id="home-navbar-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Dashboard Navbar</h3>
+                    <p>Check navbar has all links</p>
+                    <button class="btn btn-primary" onclick="testNavbar('index.html', 'dashboard-navbar-result')">
+                        Test Navbar
+                    </button>
+                    <div id="dashboard-navbar-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Workflow Navbar</h3>
+                    <p>Check navbar has all links</p>
+                    <button class="btn btn-primary" onclick="testNavbar('workflow.html', 'workflow-navbar-result')">
+                        Test Navbar
+                    </button>
+                    <div id="workflow-navbar-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Reports Navbar</h3>
+                    <p>Check navbar has all links</p>
+                    <button class="btn btn-primary" onclick="testNavbar('reports.html', 'reports-navbar-result')">
+                        Test Navbar
+                    </button>
+                    <div id="reports-navbar-result" class="test-result pending">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Flow Tests -->
+        <div class="test-section">
+            <h2>User Flow Tests</h2>
+            <div class="test-grid">
+                <div class="test-card">
+                    <h3>Flow 1</h3>
+                    <p>Home → Onboarding → Dashboard</p>
+                    <button class="btn btn-primary" onclick="testFlow1()">
+                        Test Flow
+                    </button>
+                    <div id="flow1-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Flow 2</h3>
+                    <p>Dashboard → Workflow → Reports</p>
+                    <button class="btn btn-primary" onclick="testFlow2()">
+                        Test Flow
+                    </button>
+                    <div id="flow2-result" class="test-result pending">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Flow 3</h3>
+                    <p>Reports → Dashboard → Home</p>
+                    <button class="btn btn-primary" onclick="testFlow3()">
+                        Test Flow
+                    </button>
+                    <div id="flow3-result" class="test-result pending">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Run All Tests -->
+        <div class="test-section">
+            <h2>Run All Tests</h2>
+            <button class="btn btn-primary btn-lg" onclick="runAllTests()">
+                Run All Tests
+            </button>
+            <div id="all-tests-result" class="test-result pending mt-4">Not started</div>
+        </div>
+    </div>
+    
+    <script>
+        // Test navigation to a page
+        async function testNavigation(page, resultId) {
+            const resultEl = document.getElementById(resultId);
+            resultEl.textContent = 'Testing...';
+            resultEl.className = 'test-result pending';
+            
+            try {
+                const response = await fetch(page, { method: 'HEAD' });
+                if (response.ok) {
+                    resultEl.textContent = '✓ Page exists and loads';
+                    resultEl.className = 'test-result success';
+                } else {
+                    resultEl.textContent = `✗ Page returned ${response.status}`;
+                    resultEl.className = 'test-result error';
+                }
+            } catch (error) {
+                resultEl.textContent = `✗ Error: ${error.message}`;
+                resultEl.className = 'test-result error';
+            }
+        }
+        
+        // Test navbar consistency
+        async function testNavbar(page, resultId) {
+            const resultEl = document.getElementById(resultId);
+            resultEl.textContent = 'Testing...';
+            resultEl.className = 'test-result pending';
+            
+            try {
+                const response = await fetch(page);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const navLinks = doc.querySelectorAll('.navbar-menu a');
+                const expectedLinks = ['home.html', 'index.html', 'workflow.html', 'reports.html'];
+                
+                // For onboarding, navbar is intentionally missing
+                if (page === 'onboarding.html') {
+                    if (navLinks.length === 0) {
+                        resultEl.textContent = '✓ Onboarding has no navbar (correct)';
+                        resultEl.className = 'test-result success';
+                    } else {
+                        resultEl.textContent = '✗ Onboarding should not have navbar';
+                        resultEl.className = 'test-result error';
+                    }
+                    return;
+                }
+                
+                const foundLinks = Array.from(navLinks).map(a => a.getAttribute('href'));
+                const hasAllLinks = expectedLinks.every(link => foundLinks.includes(link));
+                
+                if (hasAllLinks) {
+                    resultEl.textContent = `✓ All ${expectedLinks.length} navbar links present`;
+                    resultEl.className = 'test-result success';
+                } else {
+                    const missing = expectedLinks.filter(link => !foundLinks.includes(link));
+                    resultEl.textContent = `✗ Missing links: ${missing.join(', ')}`;
+                    resultEl.className = 'test-result error';
+                }
+            } catch (error) {
+                resultEl.textContent = `✗ Error: ${error.message}`;
+                resultEl.className = 'test-result error';
+            }
+        }
+        
+        // Test user flow 1
+        function testFlow1() {
+            const resultEl = document.getElementById('flow1-result');
+            resultEl.textContent = 'Manual test: Click "Get Started" on home page, complete onboarding, verify dashboard loads';
+            resultEl.className = 'test-result pending';
+        }
+        
+        // Test user flow 2
+        function testFlow2() {
+            const resultEl = document.getElementById('flow2-result');
+            resultEl.textContent = 'Manual test: Navigate Dashboard → Workflow → Reports using navbar';
+            resultEl.className = 'test-result pending';
+        }
+        
+        // Test user flow 3
+        function testFlow3() {
+            const resultEl = document.getElementById('flow3-result');
+            resultEl.textContent = 'Manual test: Navigate Reports → Dashboard → Home using navbar';
+            resultEl.className = 'test-result pending';
+        }
+        
+        // Run all automated tests
+        async function runAllTests() {
+            const resultEl = document.getElementById('all-tests-result');
+            resultEl.textContent = 'Running all tests...';
+            resultEl.className = 'test-result pending';
+            
+            // Test all page navigations
+            await testNavigation('home.html', 'home-result');
+            await testNavigation('index.html', 'dashboard-result');
+            await testNavigation('workflow.html', 'workflow-result');
+            await testNavigation('reports.html', 'reports-result');
+            await testNavigation('onboarding.html', 'onboarding-result');
+            
+            // Test all navbars
+            await testNavbar('home.html', 'home-navbar-result');
+            await testNavbar('index.html', 'dashboard-navbar-result');
+            await testNavbar('workflow.html', 'workflow-navbar-result');
+            await testNavbar('reports.html', 'reports-navbar-result');
+            await testNavbar('onboarding.html', 'onboarding-navbar-result');
+            
+            resultEl.textContent = '✓ All automated tests completed! Check individual results above.';
+            resultEl.className = 'test-result success';
+        }
+    </script>
+</body>
+</html>

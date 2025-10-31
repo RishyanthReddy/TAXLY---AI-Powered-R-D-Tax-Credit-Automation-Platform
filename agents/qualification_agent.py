@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field
 from tools.rd_knowledge_tool import RD_Knowledge_Tool
 from tools.you_com_client import YouComClient
 from tools.glm_reasoner import GLMReasoner
+from tools.qualification_enhancer import QualificationEnhancer
 from models.financial_models import EmployeeTimeEntry, ProjectCost
 from models.tax_models import QualifiedProject, RAGContext
 from models.websocket_models import StatusUpdateMessage, AgentStage, AgentStatus
@@ -142,6 +143,7 @@ class QualificationResult(BaseModel):
         flagged_projects: List of project names flagged for review
         execution_time_seconds: Total execution time
         summary: Human-readable summary of qualification results
+        enhancement: Optional enhancement data from You.com and GLM reasoner
     """
     
     qualified_projects: List[QualifiedProject] = Field(
@@ -182,6 +184,11 @@ class QualificationResult(BaseModel):
     summary: str = Field(
         default="",
         description="Human-readable summary of qualification results"
+    )
+    
+    enhancement: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Optional enhancement data from You.com and GLM reasoner"
     )
 
 
@@ -230,7 +237,8 @@ class QualificationAgent:
         rag_tool: RD_Knowledge_Tool,
         youcom_client: YouComClient,
         glm_reasoner: GLMReasoner,
-        status_callback: Optional[callable] = None
+        status_callback: Optional[callable] = None,
+        enable_enhancement: bool = True
     ):
         """
         Initialize Qualification Agent.
@@ -241,6 +249,7 @@ class QualificationAgent:
             glm_reasoner: Initialized GLMReasoner for GLM 4.5 Air reasoning via OpenRouter
             status_callback: Optional callback function for status updates
                             (receives StatusUpdateMessage objects)
+            enable_enhancement: Whether to enable qualification enhancement with You.com APIs (default: True)
         
         Raises:
             ValueError: If any required tool is None
@@ -256,13 +265,21 @@ class QualificationAgent:
         self.youcom_client = youcom_client
         self.glm_reasoner = glm_reasoner
         self.status_callback = status_callback
+        self.enable_enhancement = enable_enhancement
+        
+        # Initialize QualificationEnhancer
+        self.enhancer = QualificationEnhancer(
+            youcom_client=youcom_client,
+            glm_reasoner=glm_reasoner
+        )
         
         # Initialize agent state
         self.state = QualificationState()
         
         logger.info(
             "Initialized Qualification Agent with RD_Knowledge_Tool, "
-            "YouComClient, and GLMReasoner (GLM 4.5 Air via OpenRouter)"
+            "YouComClient, and GLMReasoner (GLM 4.5 Air via OpenRouter). "
+            f"Enhancement enabled: {enable_enhancement}"
         )
     
     def _update_status(
@@ -432,7 +449,63 @@ class QualificationAgent:
                     for recommendation in flagging_result['recommendations']:
                         logger.warning(f"Recommendation: {recommendation}")
             
-            # Stage 4: Check for recent IRS guidance (if tax_year provided)
+            # Stage 4: Enhancement with You.com APIs and GLM reasoner (if enabled and tax_year provided)
+            enhancement_result = None
+            if self.enable_enhancement and tax_year and qualified_projects:
+                self._update_status(
+                    stage="enhancing_qualification",
+                    status=AgentStatus.IN_PROGRESS
+                )
+                
+                logger.info("Running qualification enhancement with You.com APIs and GLM reasoner")
+                
+                try:
+                    # Run enhancement for the first project as a representative sample
+                    # This provides context without overwhelming the response
+                    first_project = qualified_projects[0]
+                    
+                    # Build project description from time entries
+                    project_data = rd_projects.get(first_project.project_name, {})
+                    time_entries_list = project_data.get('time_entries', [])
+                    
+                    # Collect unique task descriptions
+                    task_descriptions = set()
+                    for entry in time_entries_list:
+                        if entry.task_description:
+                            task_descriptions.add(entry.task_description)
+                    
+                    # Create project description
+                    if task_descriptions:
+                        project_description = f"Project involving: {', '.join(list(task_descriptions)[:5])}"
+                    else:
+                        project_description = f"R&D project: {first_project.project_name}"
+                    
+                    # Run enhancement asynchronously
+                    enhancement_result = asyncio.run(
+                        self.enhancer.enhance_qualification(
+                            project_name=first_project.project_name,
+                            project_description=project_description,
+                            tax_year=tax_year
+                        )
+                    )
+                    
+                    logger.info(
+                        f"Enhancement complete: {len(enhancement_result.news_items)} news items, "
+                        f"{len(enhancement_result.search_results)} search results, "
+                        f"{len(enhancement_result.errors)} errors"
+                    )
+                    
+                    if enhancement_result.errors:
+                        logger.warning(
+                            f"Enhancement completed with {len(enhancement_result.errors)} non-blocking errors"
+                        )
+                    
+                except Exception as e:
+                    # Enhancement is non-blocking - log error and continue
+                    logger.warning(f"Enhancement failed (non-blocking): {e}")
+                    enhancement_result = None
+            
+            # Stage 5: Check for recent IRS guidance (if tax_year provided)
             if tax_year and qualified_projects:
                 self._update_status(
                     stage="checking_recent_guidance",
@@ -479,6 +552,11 @@ class QualificationAgent:
                 ]
             
             result.execution_time_seconds = execution_time
+            
+            # Add enhancement result if available
+            if enhancement_result:
+                result.enhancement = enhancement_result.to_dict()
+                logger.info("Enhancement data added to qualification result")
             
             # Build summary including guidance check results
             summary_parts = [

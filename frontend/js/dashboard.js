@@ -38,6 +38,7 @@ async function initDashboard() {
         // Update UI with real data
         updateDashboardMetrics();
         updateIntegrationStatus();
+        loadRecentReports();
         loadTeamData();
         renderCharts();
         updateProgressCircles();
@@ -232,6 +233,175 @@ function showNotification(message, type = 'info') {
     // Could add a toast notification here
     if (type === 'warning' || type === 'error') {
         alert(message);
+    }
+}
+
+/**
+ * Load recent reports with PDF preview
+ */
+async function loadRecentReports() {
+    const grid = document.getElementById('recentReportsGrid');
+    const noReportsMsg = document.getElementById('noReportsMessage');
+    
+    if (!grid) return;
+    
+    const { reports } = backendData;
+    
+    // Show/hide based on reports availability
+    if (!reports || reports.length === 0) {
+        grid.style.display = 'none';
+        if (noReportsMsg) noReportsMsg.style.display = 'block';
+        return;
+    }
+    
+    grid.style.display = 'grid';
+    if (noReportsMsg) noReportsMsg.style.display = 'none';
+    
+    // Get the 3 most recent reports
+    const recentReports = reports
+        .sort((a, b) => new Date(b.generationDate) - new Date(a.generationDate))
+        .slice(0, 3);
+    
+    // Render report cards
+    grid.innerHTML = recentReports.map(report => `
+        <div class="card report-card" data-report-id="${report.id}">
+            <div class="report-thumbnail-container" onclick="openReportViewer('${report.id}')">
+                <div class="pdf-thumbnail-preview" id="thumbnail-${report.id}">
+                    <div class="pdf-thumbnail-loading">
+                        <div class="spinner"></div>
+                        <p>Loading preview...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="report-card-body">
+                <h4 class="report-card-title">${report.companyName || 'Acme Corporation'} - ${report.taxYear}</h4>
+                <div class="report-card-meta">
+                    <span class="meta-item">
+                        <span class="meta-icon">📄</span>
+                        ${report.pageCount || 12} pages
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-icon">💾</span>
+                        ${formatFileSize(report.fileSize || 0)}
+                    </span>
+                </div>
+                <div class="report-card-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Projects</span>
+                        <span class="stat-value">${report.projectCount || 0}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Credit</span>
+                        <span class="stat-value">${formatCurrency(report.estimatedCredit || 0)}</span>
+                    </div>
+                </div>
+                <div class="report-card-actions">
+                    <button class="btn btn-sm btn-primary" onclick="openReportViewer('${report.id}')">
+                        <span class="icon">👁️</span> View PDF
+                    </button>
+                    <button class="btn btn-sm btn-outline" onclick="downloadReportFromDashboard('${report.id}')">
+                        <span class="icon">⬇️</span> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Generate thumbnails for each report
+    for (const report of recentReports) {
+        generateReportThumbnail(report);
+    }
+}
+
+/**
+ * Generate thumbnail for a report card
+ */
+async function generateReportThumbnail(report) {
+    const container = document.getElementById(`thumbnail-${report.id}`);
+    if (!container) return;
+    
+    try {
+        // Use the filename (without .pdf) as the report_id for the backend
+        const reportIdForBackend = report.filename.replace('.pdf', '');
+        
+        // Create image element
+        const img = document.createElement('img');
+        img.alt = 'PDF Preview';
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        
+        // Generate thumbnail using PDF.js
+        await generateThumbnail(reportIdForBackend, img, 300);
+        
+        // Replace loading state with thumbnail
+        container.innerHTML = '';
+        container.appendChild(img);
+        
+        console.log(`Generated thumbnail for ${report.id}`);
+    } catch (error) {
+        console.error(`Failed to generate thumbnail for ${report.id}:`, error);
+        
+        // Show placeholder on error
+        container.innerHTML = `
+            <img src="assets/images/pdf-placeholder.png" alt="PDF Preview Unavailable" style="max-width: 100%; height: auto;">
+        `;
+    }
+}
+
+/**
+ * Open PDF viewer for a report
+ */
+async function openReportViewer(reportId) {
+    const report = backendData.reports.find(r => r.id === reportId);
+    if (!report) {
+        console.error('Report not found:', reportId);
+        return;
+    }
+    
+    try {
+        // Use the filename (without .pdf) as the report_id for the backend
+        const reportIdForBackend = report.filename.replace('.pdf', '');
+        
+        // Open PDF viewer with report data
+        await openPdfViewer(reportIdForBackend, {
+            filename: report.filename,
+            fileSize: report.fileSize,
+            generationDate: report.generationDate,
+            reportId: reportIdForBackend
+        });
+        
+        // Store report ID in title element for download functionality
+        const titleEl = document.getElementById('pdfViewerTitle');
+        if (titleEl) {
+            titleEl.dataset.reportId = reportIdForBackend;
+        }
+    } catch (error) {
+        console.error('Failed to open PDF viewer:', error);
+        alert(`Failed to open PDF viewer: ${error.message}`);
+    }
+}
+
+/**
+ * Download report from dashboard
+ */
+async function downloadReportFromDashboard(reportId) {
+    const report = backendData.reports.find(r => r.id === reportId);
+    if (!report) {
+        console.error('Report not found:', reportId);
+        return;
+    }
+    
+    try {
+        // Use the filename (without .pdf) as the report_id for the backend
+        const reportIdForBackend = report.filename.replace('.pdf', '');
+        
+        // Download using API
+        await api.downloadReport(reportIdForBackend);
+        
+        console.log(`Downloaded report: ${report.filename}`);
+    } catch (error) {
+        console.error('Failed to download report:', error);
+        alert(`Failed to download report: ${error.message}`);
     }
 }
 

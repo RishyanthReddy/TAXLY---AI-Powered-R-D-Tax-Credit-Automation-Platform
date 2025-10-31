@@ -974,7 +974,10 @@ Test coverage includes:
 **Integration Tests:**
 
 ```bash
-# Test complete pipeline with PDF generation
+# Test enhanced pipeline with PDF generation (includes You.com News/Search + GLM)
+python -m pytest tests/test_complete_pipeline.py::TestCompletePipeline::test_complete_pipeline_with_5_projects -v -s 2>&1 | Select-String -Pattern "(PASSED|FAILED|Enhancement|News|Search|GLM|PDF generated)" -Context 0,0
+
+# Test complete pipeline (all tests)
 pytest tests/test_complete_pipeline.py -v
 
 # Test PDF completeness

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dashboard-enhanced.css">
     <link rel="stylesheet" href="css/reports.css">
+    <link rel="stylesheet" href="css/pdf-viewer.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/icons/favicon.png">
@@ -26,6 +27,7 @@
                 <span class="brand-name">R&D Tax Credit Automation</span>
             </div>
             <ul class="navbar-menu">
+                <li><a href="home.html">Home</a></li>
                 <li><a href="index.html">Dashboard</a></li>
                 <li><a href="workflow.html">Workflow</a></li>
                 <li><a href="reports.html" class="active">Reports</a></li>
@@ -266,9 +268,12 @@
                     <!-- PDF Thumbnail -->
                     <div class="preview-section">
                         <h3>Document Preview</h3>
-                        <div class="pdf-thumbnail">
+                        <div class="pdf-thumbnail-preview" id="pdfThumbnailContainer">
                             <img src="assets/images/pdf-placeholder.png" alt="PDF Preview" id="pdfThumbnail">
                         </div>
+                        <button class="btn btn-primary btn-block" id="openPdfViewerBtn">
+                            <span class="icon">👁️</span> Open Full PDF Viewer
+                        </button>
                     </div>
                 </div>
             </div>
@@ -278,6 +283,76 @@
                     <span class="icon">⬇️</span> Download Report
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div class="pdf-viewer-modal" id="pdfViewerModal">
+        <!-- Header -->
+        <div class="pdf-viewer-header">
+            <div class="pdf-viewer-title-section">
+                <h2 class="pdf-viewer-title" id="pdfViewerTitle" data-report-id="">PDF Report</h2>
+                <div class="pdf-metadata" id="pdfMetadata">
+                    <!-- Metadata will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="pdf-viewer-actions">
+                <button class="pdf-toolbar-btn primary" id="pdfDownloadBtn" title="Download PDF">
+                    ⬇️
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfViewerCloseBtn" title="Close Viewer (Esc)">
+                    ✕
+                </button>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="pdf-viewer-toolbar">
+            <!-- Navigation Controls -->
+            <div class="pdf-toolbar-group">
+                <button class="pdf-toolbar-btn" id="pdfPrevBtn" title="Previous Page (←)">
+                    ◀
+                </button>
+                <span class="pdf-page-info" id="pdfPageInfo">Page 1 of 1</span>
+                <button class="pdf-toolbar-btn" id="pdfNextBtn" title="Next Page (→)">
+                    ▶
+                </button>
+            </div>
+
+            <div class="pdf-toolbar-separator"></div>
+
+            <!-- Zoom Controls -->
+            <div class="pdf-toolbar-group">
+                <button class="pdf-toolbar-btn" id="pdfZoomOutBtn" title="Zoom Out (-)">
+                    −
+                </button>
+                <span class="pdf-zoom-info" id="pdfZoomInfo">100%</span>
+                <button class="pdf-toolbar-btn" id="pdfZoomInBtn" title="Zoom In (+)">
+                    +
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfResetZoomBtn" title="Reset Zoom (0)">
+                    ⟲
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfFitWidthBtn" title="Fit to Width">
+                    ⇔
+                </button>
+            </div>
+        </div>
+
+        <!-- PDF Canvas Container -->
+        <div class="pdf-viewer-content">
+            <div class="pdf-canvas-container" id="pdfCanvasContainer">
+                <canvas id="pdfCanvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Keyboard Shortcuts Hint -->
+        <div class="pdf-shortcuts-hint">
+            <ul>
+                <li><span>Navigate:</span> <kbd>←</kbd> <kbd>→</kbd></li>
+                <li><span>Zoom:</span> <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd></li>
+                <li><span>Close:</span> <kbd>Esc</kbd></li>
+            </ul>
         </div>
     </div>
 
@@ -291,6 +366,7 @@
     <!-- JavaScript -->
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/pdf-viewer.js"></script>
     <script src="js/reports.js"></script>
 </body>
 </html>

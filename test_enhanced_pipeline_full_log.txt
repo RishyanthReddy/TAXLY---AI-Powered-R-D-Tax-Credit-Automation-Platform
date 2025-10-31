@@ -1,0 +1,1548 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.1, pytest-8.3.5, pluggy-1.5.0 -- C:\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent
+configfile: pytest.ini
+plugins: anyio-4.8.0, dash-3.1.1, Faker-37.4.0, hydra-core-1.3.2, jaxtyping-0.3.2, langsmith-0.3.45, asyncio-0.26.0, cov-7.0.0, httpx-0.35.0, typeguard-4.4.4
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+python : 2025-10-31 10:03:18 - root - INFO - Logging infrastructure initialized
+At line:1 char:1
++ python -m pytest tests/test_complete_pipeline.py::TestCompletePipelin ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2025-10-31 10:0...ure initialized:Str 
+   ing) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2025-10-31 10:03:18 - root - INFO - Log level: INFO
+2025-10-31 10:03:18 - root - INFO - Log directory: 
+C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\logs
+2025-10-31 10:03:18 - root - INFO - Log file: C:\Users\rishi\Downloads\You.com 
+hackathon\rd_tax_agent\logs\agent_20251031.log
+collecting ... collected 1 item
+
+2025-10-31 10:03:22 - tools.api_connectors - INFO - Initialized You.com connector 
+(rate_limit=None req/s, timeout=60.0s, max_retries=3, backoff_threshold=N/A)
+tests/test_complete_pipeline.py::TestCompletePipeline::test_complete_pipeline_with_5_projects 
+------------------------------- live log setup --------------------------------
+2025-10-31 10:03:22 [    INFO] tools.api_connectors - Initialized You.com connector (rate_limit=None req/s, timeout=60.0s, max_retries=3, backoff_threshold=N/A)
+2025-10-31 10:03:22 - tools.youcom_rate_limiter - INFO - Initialized YouCom-search 
+token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 [    INFO] tools.youcom_rate_limiter - Initialized YouCom-search token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 - tools.youcom_rate_limiter - INFO - Initialized YouCom-news 
+token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 [    INFO] tools.youcom_rate_limiter - Initialized YouCom-news token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 - tools.youcom_rate_limiter - INFO - Initialized YouCom-agent 
+token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 [    INFO] tools.youcom_rate_limiter - Initialized YouCom-agent token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 - tools.youcom_rate_limiter - INFO - Initialized 
+YouCom-contents token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 [    INFO] tools.youcom_rate_limiter - Initialized YouCom-contents token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 - tools.youcom_rate_limiter - INFO - Initialized 
+YouCom-express_agent token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 [    INFO] tools.youcom_rate_limiter - Initialized YouCom-express_agent token bucket (rate=10/min, burst=10)
+2025-10-31 10:03:22 - tools.youcom_rate_limiter - INFO - Initialized You.com rate 
+limiter with 5 endpoint(s)
+2025-10-31 10:03:22 [    INFO] tools.youcom_rate_limiter - Initialized You.com rate limiter with 5 endpoint(s)
+2025-10-31 10:03:22 - tools.you_com_client - INFO - Initialized You.com API client 
+(timeout=60s, max_retries=3, per-endpoint rate limiting enabled, 
+cache_enabled=True, search_ttl=3600s, content_ttl=86400s)
+2025-10-31 10:03:22 [    INFO] tools.you_com_client - Initialized You.com API client (timeout=60s, max_retries=3, per-endpoint rate limiting enabled, cache_enabled=True, search_ttl=3600s, content_ttl=86400s)
+2025-10-31 10:03:22 - tools.glm_reasoner - INFO - Initialized GLMReasoner with 
+model: z-ai/glm-4.5-air:free
+2025-10-31 10:03:22 [    INFO] tools.glm_reasoner - Initialized GLMReasoner with model: z-ai/glm-4.5-air:free
+2025-10-31 10:03:22 - utils.pdf_generator - INFO - PDFGenerator initialized with 
+custom styling
+2025-10-31 10:03:22 [    INFO] utils.pdf_generator - PDFGenerator initialized with custom styling
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Initialized Audit Trail Agent 
+with YouComClient and GLMReasoner (GLM 4.5 Air via OpenRouter)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Initialized Audit Trail Agent with YouComClient and GLMReasoner (GLM 4.5 Air via OpenRouter)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - PDF generator provided and ready
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - PDF generator provided and ready
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - Initialized 
+AuditTrailAgent with real API clients
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - Initialized AuditTrailAgent with real API clients
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - Loaded 5 sample 
+projects
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - Loaded 5 sample projects
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Alpha Development: 
+14.5h, $1045.74, confidence=0.92
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Alpha Development: 14.5h, $1045.74, confidence=0.92
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Beta 
+Infrastructure: 15.5h, $1229.62, confidence=0.88
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Beta Infrastructure: 15.5h, $1229.62, confidence=0.88
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Gamma Analytics: 
+9.0h, $757.17, confidence=0.85
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Gamma Analytics: 9.0h, $757.17, confidence=0.85
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Delta Security: 
+15.0h, $1370.25, confidence=0.94
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Delta Security: 15.0h, $1370.25, confidence=0.94
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Epsilon AI: 16.5h, 
+$1586.48, confidence=0.91
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Epsilon AI: 16.5h, $1586.48, confidence=0.91
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - 
+================================================================================
+-------------------------------- live log call --------------------------------
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - ================================================================================
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - COMPREHENSIVE 
+END-TO-END PIPELINE TEST
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - COMPREHENSIVE END-TO-END PIPELINE TEST
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - 
+================================================================================
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - ================================================================================
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - Testing with 5 
+projects:
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - Testing with 5 projects:
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Alpha Development: 
+14.5h, $1,045.74, 92% confidence
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Alpha Development: 14.5h, $1,045.74, 92% confidence
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Beta 
+Infrastructure: 15.5h, $1,229.62, 88% confidence
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Beta Infrastructure: 15.5h, $1,229.62, 88% confidence
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Gamma Analytics: 
+9.0h, $757.17, 85% confidence
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Gamma Analytics: 9.0h, $757.17, 85% confidence
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Delta Security: 
+15.0h, $1,370.25, 94% confidence
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Delta Security: 15.0h, $1,370.25, 94% confidence
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO -   - Epsilon AI: 16.5h, 
+$1,586.48, 91% confidence
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline -   - Epsilon AI: 16.5h, $1,586.48, 91% confidence
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - Total: 70.5h, $5,989.26
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - Total: 70.5h, $5,989.26
+2025-10-31 10:03:22 - tests.test_complete_pipeline - INFO - 
+Running audit trail agent...
+2025-10-31 10:03:22 [    INFO] tests.test_complete_pipeline - 
+Running audit trail agent...
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Starting audit trail generation 
+for 5 projects (tax year: 2024)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Starting audit trail generation for 5 projects (tax year: 2024)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Starting batch narrative 
+generation for 5 projects
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Starting batch narrative generation for 5 projects
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Starting batch narrative 
+generation for 5 projects (max_concurrent=5)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Starting batch narrative generation for 5 projects (max_concurrent=5)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Alpha Development
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Alpha Development
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Starting narrative 
+generation for project: Alpha Development (qualification=95.0%, confidence=0.92)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Starting narrative generation for project: Alpha Development (qualification=95.0%, confidence=0.92)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Beta Infrastructure
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Starting narrative 
+generation for project: Beta Infrastructure (qualification=90.0%, confidence=0.88)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Gamma Analytics
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Starting narrative 
+generation for project: Gamma Analytics (qualification=85.0%, confidence=0.85)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Beta Infrastructure
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Starting narrative generation for project: Beta Infrastructure (qualification=90.0%, confidence=0.88)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Gamma Analytics
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Starting narrative generation for project: Gamma Analytics (qualification=85.0%, confidence=0.85)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Delta Security
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Delta Security
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Calling You.com Agent 
+API for narrative generation (project: Alpha Development)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Calling You.com Agent 
+API for narrative generation (project: Gamma Analytics)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Calling You.com Agent API for narrative generation (project: Gamma Analytics)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Calling You.com Agent 
+API for narrative generation (project: Beta Infrastructure)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Calling You.com Agent API for narrative generation (project: Alpha Development)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Calling You.com Agent API for narrative generation (project: Beta Infrastructure)
+2025-10-31 10:03:22 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=3871)
+2025-10-31 10:03:22 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=3871)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Starting narrative 
+generation for project: Delta Security (qualification=98.0%, confidence=0.94)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Starting narrative generation for project: Delta Security (qualification=98.0%, confidence=0.94)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Epsilon AI
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Epsilon AI
+2025-10-31 10:03:22 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=4207)
+2025-10-31 10:03:22 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=4207)
+2025-10-31 10:03:22 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=3982)
+2025-10-31 10:03:22 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=3982)
+2025-10-31 10:03:22 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #1)
+2025-10-31 10:03:22 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #1)
+2025-10-31 10:03:22 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #2)
+2025-10-31 10:03:22 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #2)
+2025-10-31 10:03:22 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #3)
+2025-10-31 10:03:22 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #3)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Calling You.com Agent 
+API for narrative generation (project: Delta Security)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Calling You.com Agent API for narrative generation (project: Delta Security)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Starting narrative 
+generation for project: Epsilon AI (qualification=93.0%, confidence=0.91)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Starting narrative generation for project: Epsilon AI (qualification=93.0%, confidence=0.91)
+2025-10-31 10:03:22 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=3938)
+2025-10-31 10:03:22 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=3938)
+2025-10-31 10:03:22 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #4)
+2025-10-31 10:03:22 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #4)
+2025-10-31 10:03:22 - agents.audit_trail - INFO - [TASK 6] Calling You.com Agent 
+API for narrative generation (project: Epsilon AI)
+2025-10-31 10:03:22 [    INFO] agents.audit_trail - [TASK 6] Calling You.com Agent API for narrative generation (project: Epsilon AI)
+2025-10-31 10:03:22 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=3914)
+2025-10-31 10:03:22 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=3914)
+2025-10-31 10:03:22 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #5)
+2025-10-31 10:03:22 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #5)
+2025-10-31 10:03:53 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:53 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:53 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:03:53 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:03:53 - agents.audit_trail - INFO - [TASK 6] Successfully received 
+narrative from You.com API for Gamma Analytics (length=4623 chars)
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - [TASK 6] Successfully received narrative from You.com API for Gamma Analytics (length=4623 chars)
+2025-10-31 10:03:53 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:53 - agents.audit_trail - INFO - [TASK 6] NARRATIVE GENERATION 
+RESULT: Gamma Analytics
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - [TASK 6] NARRATIVE GENERATION RESULT: Gamma Analytics
+2025-10-31 10:03:53 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Status: SUCCESS
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Status: SUCCESS
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Source: You.com Agent API
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Source: You.com Agent API
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Length: 4623 characters
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Length: 4623 characters
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Meets minimum (>500 chars): 
+Γ£ô YES
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Meets minimum (>500 chars): Γ£ô YES
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Project: Gamma Analytics
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Project: Gamma Analytics
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Qualification: 85.0%
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Qualification: 85.0%
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Confidence: 0.85
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Confidence: 0.85
+2025-10-31 10:03:53 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:53 - agents.audit_trail - INFO - Generated narrative 1/5 for 
+project: Gamma Analytics
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - Generated narrative 1/5 for project: Gamma Analytics
+2025-10-31 10:03:53 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Gamma Analytics
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Gamma Analytics
+2025-10-31 10:03:53 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:53 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:53 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:03:53 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:03:53 - agents.audit_trail - INFO - [TASK 6] Successfully received 
+narrative from You.com API for Epsilon AI (length=4779 chars)
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - [TASK 6] Successfully received narrative from You.com API for Epsilon AI (length=4779 chars)
+2025-10-31 10:03:53 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:53 - agents.audit_trail - INFO - [TASK 6] NARRATIVE GENERATION 
+RESULT: Epsilon AI
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - [TASK 6] NARRATIVE GENERATION RESULT: Epsilon AI
+2025-10-31 10:03:53 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Status: SUCCESS
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Status: SUCCESS
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Source: You.com Agent API
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Source: You.com Agent API
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Length: 4779 characters
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Length: 4779 characters
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Meets minimum (>500 chars): 
+Γ£ô YES
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Meets minimum (>500 chars): Γ£ô YES
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Project: Epsilon AI
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Project: Epsilon AI
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Qualification: 93.0%
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Qualification: 93.0%
+2025-10-31 10:03:53 - agents.audit_trail - INFO -   Confidence: 0.91
+2025-10-31 10:03:53 [    INFO] agents.audit_trail -   Confidence: 0.91
+2025-10-31 10:03:53 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:53 - agents.audit_trail - INFO - Generated narrative 2/5 for 
+project: Epsilon AI
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - Generated narrative 2/5 for project: Epsilon AI
+2025-10-31 10:03:53 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Epsilon AI
+2025-10-31 10:03:53 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Epsilon AI
+2025-10-31 10:03:54 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:54 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:54 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:03:54 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:03:54 - agents.audit_trail - INFO - [TASK 6] Successfully received 
+narrative from You.com API for Beta Infrastructure (length=5036 chars)
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - [TASK 6] Successfully received narrative from You.com API for Beta Infrastructure (length=5036 chars)
+2025-10-31 10:03:54 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:54 - agents.audit_trail - INFO - [TASK 6] NARRATIVE GENERATION 
+RESULT: Beta Infrastructure
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - [TASK 6] NARRATIVE GENERATION RESULT: Beta Infrastructure
+2025-10-31 10:03:54 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Status: SUCCESS
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Status: SUCCESS
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Source: You.com Agent API
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Source: You.com Agent API
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Length: 5036 characters
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Length: 5036 characters
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Meets minimum (>500 chars): 
+Γ£ô YES
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Meets minimum (>500 chars): Γ£ô YES
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Project: Beta Infrastructure
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Project: Beta Infrastructure
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Qualification: 90.0%
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Qualification: 90.0%
+2025-10-31 10:03:54 - agents.audit_trail - INFO -   Confidence: 0.88
+2025-10-31 10:03:54 [    INFO] agents.audit_trail -   Confidence: 0.88
+2025-10-31 10:03:54 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:54 - agents.audit_trail - INFO - Generated narrative 3/5 for 
+project: Beta Infrastructure
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - Generated narrative 3/5 for project: Beta Infrastructure
+2025-10-31 10:03:54 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Beta Infrastructure
+2025-10-31 10:03:54 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Beta Infrastructure
+2025-10-31 10:03:56 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:56 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:56 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:03:56 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:03:56 - agents.audit_trail - INFO - [TASK 6] Successfully received 
+narrative from You.com API for Alpha Development (length=6033 chars)
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - [TASK 6] Successfully received narrative from You.com API for Alpha Development (length=6033 chars)
+2025-10-31 10:03:56 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:56 - agents.audit_trail - INFO - [TASK 6] NARRATIVE GENERATION 
+RESULT: Alpha Development
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - [TASK 6] NARRATIVE GENERATION RESULT: Alpha Development
+2025-10-31 10:03:56 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Status: SUCCESS
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Status: SUCCESS
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Source: You.com Agent API
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Source: You.com Agent API
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Length: 6033 characters
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Length: 6033 characters
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Meets minimum (>500 chars): 
+Γ£ô YES
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Meets minimum (>500 chars): Γ£ô YES
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Project: Alpha Development
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Project: Alpha Development
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Qualification: 95.0%
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Qualification: 95.0%
+2025-10-31 10:03:56 - agents.audit_trail - INFO -   Confidence: 0.92
+2025-10-31 10:03:56 [    INFO] agents.audit_trail -   Confidence: 0.92
+2025-10-31 10:03:56 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:56 - agents.audit_trail - INFO - Generated narrative 4/5 for 
+project: Alpha Development
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - Generated narrative 4/5 for project: Alpha Development
+2025-10-31 10:03:56 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Alpha Development
+2025-10-31 10:03:56 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Alpha Development
+2025-10-31 10:03:57 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:57 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:03:57 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:03:57 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:03:57 - agents.audit_trail - INFO - [TASK 6] Successfully received 
+narrative from You.com API for Delta Security (length=5365 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - [TASK 6] Successfully received narrative from You.com API for Delta Security (length=5365 chars)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:57 - agents.audit_trail - INFO - [TASK 6] NARRATIVE GENERATION 
+RESULT: Delta Security
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - [TASK 6] NARRATIVE GENERATION RESULT: Delta Security
+2025-10-31 10:03:57 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Status: SUCCESS
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Status: SUCCESS
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Source: You.com Agent API
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Source: You.com Agent API
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Length: 5365 characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Length: 5365 characters
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Meets minimum (>500 chars): 
+Γ£ô YES
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Meets minimum (>500 chars): Γ£ô YES
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Project: Delta Security
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Project: Delta Security
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Qualification: 98.0%
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Qualification: 98.0%
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   Confidence: 0.94
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   Confidence: 0.94
+2025-10-31 10:03:57 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Generated narrative 5/5 for 
+project: Delta Security
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Generated narrative 5/5 for project: Delta Security
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Status update: 
+generating_narratives - in_progress - Delta Security
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Status update: generating_narratives - in_progress - Delta Security
+2025-10-31 10:03:57 - agents.audit_trail - INFO - You.com Agent API call completed 
+for project: Alpha Development (narrative_length=6033 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - You.com Agent API call completed for project: Alpha Development (narrative_length=6033 chars)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - You.com Agent API call completed 
+for project: Beta Infrastructure (narrative_length=5036 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - You.com Agent API call completed for project: Beta Infrastructure (narrative_length=5036 chars)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - You.com Agent API call completed 
+for project: Gamma Analytics (narrative_length=4623 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - You.com Agent API call completed for project: Gamma Analytics (narrative_length=4623 chars)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - You.com Agent API call completed 
+for project: Delta Security (narrative_length=5365 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - You.com Agent API call completed for project: Delta Security (narrative_length=5365 chars)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - You.com Agent API call completed 
+for project: Epsilon AI (narrative_length=4779 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - You.com Agent API call completed for project: Epsilon AI (narrative_length=4779 chars)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Batch narrative generation 
+complete: 5/5 narratives generated
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Batch narrative generation complete: 5/5 narratives generated
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Successfully generated 5 
+narratives (total API calls: 5)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Successfully generated 5 narratives (total API calls: 5)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:57 - agents.audit_trail - INFO - NARRATIVES DICTIONARY 
+VERIFICATION
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - NARRATIVES DICTIONARY VERIFICATION
+2025-10-31 10:03:57 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Total narratives generated: 5
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Total narratives generated: 5
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Narrative keys: ['Alpha 
+Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon 
+AI']
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Narrative keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   - Alpha Development: 6033 
+characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   - Alpha Development: 6033 characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   - Beta Infrastructure: 5036 characters
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   - Beta Infrastructure: 5036 
+characters
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   - Gamma Analytics: 4623 
+characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   - Gamma Analytics: 4623 characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   - Delta Security: 5365 characters
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   - Delta Security: 5365 
+characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail -   - Epsilon AI: 4779 characters
+2025-10-31 10:03:57 - agents.audit_trail - INFO -   - Epsilon AI: 4779 characters
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:03:57 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Status update: reviewing_narratives - in_progress
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Status update: 
+reviewing_narratives - in_progress
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Starting compliance review for 5 
+narratives using You.com Express Agent API
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Starting compliance review for 5 narratives using You.com Express Agent API
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Status update: reviewing_narratives - in_progress - Alpha Development
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Status update: 
+reviewing_narratives - in_progress - Alpha Development
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Reviewing narrative for 
+compliance: Alpha Development (narrative_length=6033 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Reviewing narrative for compliance: Alpha Development (narrative_length=6033 chars)
+2025-10-31 10:03:57 [    INFO] agents.audit_trail - Calling You.com Express Agent API for compliance review (project: Alpha Development)
+2025-10-31 10:03:57 - agents.audit_trail - INFO - Calling You.com Express Agent 
+API for compliance review (project: Alpha Development)
+2025-10-31 10:03:57 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=9702)
+2025-10-31 10:03:57 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=9702)
+2025-10-31 10:03:57 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #6)
+2025-10-31 10:03:57 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #6)
+2025-10-31 10:04:10 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:10 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:10 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:04:10 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:04:10 - agents.audit_trail - INFO - Successfully received compliance 
+review for Alpha Development (review_length=4895 chars)
+2025-10-31 10:04:10 [    INFO] agents.audit_trail - Successfully received compliance review for Alpha Development (review_length=4895 chars)
+2025-10-31 10:04:11 - agents.audit_trail - INFO - Compliance review for Alpha 
+Development: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:11 [    INFO] agents.audit_trail - Compliance review for Alpha Development: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:11 - agents.audit_trail - INFO - Reviewed narrative 1/5 for 
+project: Alpha Development (status: Compliant)
+2025-10-31 10:04:11 [    INFO] agents.audit_trail - Reviewed narrative 1/5 for project: Alpha Development (status: Compliant)
+2025-10-31 10:04:11 - agents.audit_trail - INFO - Status update: 
+reviewing_narratives - in_progress - Beta Infrastructure
+2025-10-31 10:04:11 [    INFO] agents.audit_trail - Status update: reviewing_narratives - in_progress - Beta Infrastructure
+2025-10-31 10:04:11 - agents.audit_trail - INFO - Reviewing narrative for 
+compliance: Beta Infrastructure (narrative_length=5036 chars)
+2025-10-31 10:04:11 [    INFO] agents.audit_trail - Reviewing narrative for compliance: Beta Infrastructure (narrative_length=5036 chars)
+2025-10-31 10:04:11 - agents.audit_trail - INFO - Calling You.com Express Agent 
+API for compliance review (project: Beta Infrastructure)
+2025-10-31 10:04:11 [    INFO] agents.audit_trail - Calling You.com Express Agent API for compliance review (project: Beta Infrastructure)
+2025-10-31 10:04:11 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=8662)
+2025-10-31 10:04:11 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=8662)
+2025-10-31 10:04:11 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #7)
+2025-10-31 10:04:11 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #7)
+2025-10-31 10:04:24 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:24 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:24 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:04:24 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:04:24 - agents.audit_trail - INFO - Successfully received compliance 
+review for Beta Infrastructure (review_length=4586 chars)
+2025-10-31 10:04:24 [    INFO] agents.audit_trail - Successfully received compliance review for Beta Infrastructure (review_length=4586 chars)
+2025-10-31 10:04:24 - agents.audit_trail - INFO - Compliance review for Beta 
+Infrastructure: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:24 [    INFO] agents.audit_trail - Compliance review for Beta Infrastructure: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:24 - agents.audit_trail - INFO - Reviewed narrative 2/5 for 
+project: Beta Infrastructure (status: Compliant)
+2025-10-31 10:04:24 [    INFO] agents.audit_trail - Reviewed narrative 2/5 for project: Beta Infrastructure (status: Compliant)
+2025-10-31 10:04:24 - agents.audit_trail - INFO - Status update: 
+reviewing_narratives - in_progress - Gamma Analytics
+2025-10-31 10:04:24 [    INFO] agents.audit_trail - Status update: reviewing_narratives - in_progress - Gamma Analytics
+2025-10-31 10:04:24 - agents.audit_trail - INFO - Reviewing narrative for 
+compliance: Gamma Analytics (narrative_length=4623 chars)
+2025-10-31 10:04:24 [    INFO] agents.audit_trail - Reviewing narrative for compliance: Gamma Analytics (narrative_length=4623 chars)
+2025-10-31 10:04:24 - agents.audit_trail - INFO - Calling You.com Express Agent 
+API for compliance review (project: Gamma Analytics)
+2025-10-31 10:04:24 [    INFO] agents.audit_trail - Calling You.com Express Agent API for compliance review (project: Gamma Analytics)
+2025-10-31 10:04:24 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=8229)
+2025-10-31 10:04:24 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=8229)
+2025-10-31 10:04:24 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #8)
+2025-10-31 10:04:24 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #8)
+2025-10-31 10:04:42 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:42 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:42 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:04:42 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:04:42 - agents.audit_trail - INFO - Successfully received compliance 
+review for Gamma Analytics (review_length=5103 chars)
+2025-10-31 10:04:42 [    INFO] agents.audit_trail - Successfully received compliance review for Gamma Analytics (review_length=5103 chars)
+2025-10-31 10:04:42 - agents.audit_trail - INFO - Compliance review for Gamma 
+Analytics: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:42 [    INFO] agents.audit_trail - Compliance review for Gamma Analytics: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:42 - agents.audit_trail - INFO - Reviewed narrative 3/5 for 
+project: Gamma Analytics (status: Compliant)
+2025-10-31 10:04:42 [    INFO] agents.audit_trail - Reviewed narrative 3/5 for project: Gamma Analytics (status: Compliant)
+2025-10-31 10:04:42 - agents.audit_trail - INFO - Status update: 
+reviewing_narratives - in_progress - Delta Security
+2025-10-31 10:04:42 [    INFO] agents.audit_trail - Status update: reviewing_narratives - in_progress - Delta Security
+2025-10-31 10:04:42 - agents.audit_trail - INFO - Reviewing narrative for 
+compliance: Delta Security (narrative_length=5365 chars)
+2025-10-31 10:04:42 [    INFO] agents.audit_trail - Reviewing narrative for compliance: Delta Security (narrative_length=5365 chars)
+2025-10-31 10:04:42 - agents.audit_trail - INFO - Calling You.com Express Agent 
+API for compliance review (project: Delta Security)
+2025-10-31 10:04:42 [    INFO] agents.audit_trail - Calling You.com Express Agent API for compliance review (project: Delta Security)
+2025-10-31 10:04:42 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=9001)
+2025-10-31 10:04:42 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=9001)
+2025-10-31 10:04:42 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #9)
+2025-10-31 10:04:42 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #9)
+2025-10-31 10:04:55 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:55 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:04:55 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:04:55 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:04:55 - agents.audit_trail - INFO - Successfully received compliance 
+review for Delta Security (review_length=5158 chars)
+2025-10-31 10:04:55 [    INFO] agents.audit_trail - Successfully received compliance review for Delta Security (review_length=5158 chars)
+2025-10-31 10:04:55 - agents.audit_trail - INFO - Compliance review for Delta 
+Security: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:55 - agents.audit_trail - INFO - Reviewed narrative 4/5 for 
+project: Delta Security (status: Compliant)
+2025-10-31 10:04:55 - agents.audit_trail - INFO - Status update: 
+reviewing_narratives - in_progress - Epsilon AI
+2025-10-31 10:04:55 - agents.audit_trail - INFO - Reviewing narrative for 
+compliance: Epsilon AI (narrative_length=4779 chars)
+2025-10-31 10:04:55 [    INFO] agents.audit_trail - Compliance review for Delta Security: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:04:55 [    INFO] agents.audit_trail - Reviewed narrative 4/5 for project: Delta Security (status: Compliant)
+2025-10-31 10:04:55 [    INFO] agents.audit_trail - Status update: reviewing_narratives - in_progress - Epsilon AI
+2025-10-31 10:04:55 [    INFO] agents.audit_trail - Reviewing narrative for compliance: Epsilon AI (narrative_length=4779 chars)
+2025-10-31 10:04:55 - agents.audit_trail - INFO - Calling You.com Express Agent 
+API for compliance review (project: Epsilon AI)
+2025-10-31 10:04:55 [    INFO] agents.audit_trail - Calling You.com Express Agent API for compliance review (project: Epsilon AI)
+2025-10-31 10:04:55 - tools.you_com_client - INFO - Running You.com Agent API 
+(mode=express, stream=False, prompt_length=8393)
+2025-10-31 10:04:55 [    INFO] tools.you_com_client - Running You.com Agent API (mode=express, stream=False, prompt_length=8393)
+2025-10-31 10:04:55 - tools.api_connectors - INFO - [You.com] POST /v1/agents/runs 
+(request #10)
+2025-10-31 10:04:55 [    INFO] tools.api_connectors - [You.com] POST /v1/agents/runs (request #10)
+2025-10-31 10:05:17 - httpx - INFO - HTTP Request: POST 
+https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:05:17 [    INFO] httpx - HTTP Request: POST https://api.you.com/v1/agents/runs "HTTP/1.1 200 OK"
+2025-10-31 10:05:17 - tools.you_com_client - INFO - Agent API call successful
+2025-10-31 10:05:17 [    INFO] tools.you_com_client - Agent API call successful
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Successfully received compliance 
+review for Epsilon AI (review_length=5733 chars)
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Successfully received compliance review for Epsilon AI (review_length=5733 chars)
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Compliance review for Epsilon 
+AI: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Compliance review for Epsilon AI: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Reviewed narrative 5/5 for 
+project: Epsilon AI (status: Compliant)
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Reviewed narrative 5/5 for project: Epsilon AI (status: Compliant)
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Compliance review complete: 5 
+narratives reviewed
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Compliance review complete: 5 narratives reviewed
+2025-10-31 10:05:17 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:17 - agents.audit_trail - INFO - COMPLIANCE REVIEWS DICTIONARY 
+VERIFICATION
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - COMPLIANCE REVIEWS DICTIONARY VERIFICATION
+2025-10-31 10:05:17 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Total compliance reviews: 5
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Total compliance reviews: 5
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Review keys: ['Alpha 
+Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon 
+AI']
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Review keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:05:17 - agents.audit_trail - INFO -   - Alpha Development: 
+Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 [    INFO] agents.audit_trail -   - Alpha Development: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 - agents.audit_trail - INFO -   - Beta Infrastructure: 
+Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 [    INFO] agents.audit_trail -   - Beta Infrastructure: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 - agents.audit_trail - INFO -   - Gamma Analytics: 
+Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 [    INFO] agents.audit_trail -   - Gamma Analytics: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 - agents.audit_trail - INFO -   - Delta Security: 
+Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 [    INFO] agents.audit_trail -   - Delta Security: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 - agents.audit_trail - INFO -   - Epsilon AI: 
+Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 [    INFO] agents.audit_trail -   - Epsilon AI: Status=Compliant, Completeness=0%, Flagged=True
+2025-10-31 10:05:17 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Status update: aggregating_data 
+- in_progress
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Status update: aggregating_data - in_progress
+2025-10-31 10:05:17 - agents.audit_trail - INFO - Starting final data aggregation 
+for report generation
+2025-10-31 10:05:17 [    INFO] agents.audit_trail - Starting final data aggregation for report generation
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Starting data aggregation for 5 qualified projects (tax year: 2024)
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Starting data aggregation for 5 
+qualified projects (tax year: 2024)
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Created projects DataFrame with 
+5 records and 9 columns
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Created projects DataFrame with 5 records and 9 columns
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Confidence distribution: High 
+(>=0.8): 5, Medium (0.7-0.8): 0, Low (<0.7): 0
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Confidence distribution: High (>=0.8): 5, Medium (0.7-0.8): 0, Low (<0.7): 0
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Top 3 projects account for 80% 
+of total qualified costs
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Top 3 projects account for 80% of total qualified costs
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Data aggregation complete:
+  Total Projects: 5
+  Total Qualified Hours: 70.50
+  Total Qualified Cost: $5,989.26
+  Estimated Credit (20%): $1,197.85
+  Average Confidence: 90.00%
+  Flagged for Review: 0
+  High Confidence (>=0.8): 5
+  Medium Confidence (0.7-0.8): 0
+  Low Confidence (<0.7): 0
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Data aggregation complete:
+  Total Projects: 5
+  Total Qualified Hours: 70.50
+  Total Qualified Cost: $5,989.26
+  Estimated Credit (20%): $1,197.85
+  Average Confidence: 90.00%
+  Flagged for Review: 0
+  High Confidence (>=0.8): 5
+  Medium Confidence (0.7-0.8): 0
+  Low Confidence (<0.7): 0
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Data aggregation complete: Total 
+hours: 70.50, Total cost: $5,989.26, Estimated credit: $1,197.85
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Data aggregation complete: Total hours: 70.50, Total cost: $5,989.26, Estimated credit: $1,197.85
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - AGGREGATED DATA DICTIONARY 
+VERIFICATION
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - AGGREGATED DATA DICTIONARY VERIFICATION
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Aggregated data keys: 
+['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 
+'average_confidence', 'high_confidence_count', 'medium_confidence_count', 
+'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 
+'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Aggregated data keys: ['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 'average_confidence', 'high_confidence_count', 'medium_confidence_count', 'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Core Metrics:
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Core Metrics:
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - total_qualified_hours: 70.50
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - total_qualified_hours: 70.50
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - total_qualified_cost: 
+$5,989.26
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - total_qualified_cost: $5,989.26
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - estimated_credit: $1,197.85
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - estimated_credit: $1,197.85
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - average_confidence: 90.00%
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - average_confidence: 90.00%
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - project_count: 5
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - project_count: 5
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - flagged_count: 0
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - flagged_count: 0
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - high_confidence_count: 5
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - high_confidence_count: 5
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - medium_confidence_count: 0
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - medium_confidence_count: 0
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - low_confidence_count: 0
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - low_confidence_count: 0
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - top_projects_80_count: 3
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - top_projects_80_count: 3
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - tax_year: 2024
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - tax_year: 2024
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - aggregation_timestamp: 
+2025-10-31T10:05:18.232892
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - aggregation_timestamp: 2025-10-31T10:05:18.232892
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Summary Statistics:
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Summary Statistics:
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - min_confidence: 0.8500
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - min_confidence: 0.8500
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - max_confidence: 0.9400
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - max_confidence: 0.9400
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - median_confidence: 0.9100
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - median_confidence: 0.9100
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - std_confidence: 0.0354
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - std_confidence: 0.0354
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - min_qualified_hours: 9.0000
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - min_qualified_hours: 9.0000
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - max_qualified_hours: 16.5000
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - max_qualified_hours: 16.5000
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - median_qualified_hours: 
+15.0000
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - median_qualified_hours: 15.0000
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - min_qualified_cost: 757.1700
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - min_qualified_cost: 757.1700
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - max_qualified_cost: 1586.4800
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - max_qualified_cost: 1586.4800
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - median_qualified_cost: 
+1229.6200
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - median_qualified_cost: 1229.6200
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - 
+avg_qualification_percentage: 92.2000
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - avg_qualification_percentage: 92.2000
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - 
+min_qualification_percentage: 85.0000
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - min_qualification_percentage: 85.0000
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - 
+max_qualification_percentage: 98.0000
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - max_qualification_percentage: 98.0000
+2025-10-31 10:05:18 - agents.audit_trail - INFO - DataFrame shape: (5, 11)
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - DataFrame shape: (5, 11)
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Status update: generating_pdf - 
+in_progress
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Status update: generating_pdf - in_progress
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Starting PDF report generation
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Starting PDF report generation
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - TASK 5: PRE-CREATION DATA 
+VERIFICATION
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - TASK 5: PRE-CREATION DATA VERIFICATION
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Γ£ô All assertion checks passed
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Γ£ô All assertion checks passed
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - narratives: 5 items
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - narratives: 5 items
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - compliance_reviews: 5 items
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - compliance_reviews: 5 items
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - aggregated_data: 14 keys
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - aggregated_data: 14 keys
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - TASK 5: POST-CREATION 
+CONFIRMATION
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - TASK 5: POST-CREATION CONFIRMATION
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Γ£ô Created AuditReport object 
+with COMPLETE DATA: RD_TAX_2024_20251031_100518
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Γ£ô Created AuditReport object with COMPLETE DATA: RD_TAX_2024_20251031_100518
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - projects: 5
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - narratives: 5 items
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - compliance_reviews: 5 items
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - projects: 5
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - narratives: 5 items
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - compliance_reviews: 5 items
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - aggregated_data: 14 keys
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - aggregated_data: 14 keys
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - estimated_credit: $1,197.85
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - estimated_credit: $1,197.85
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Γ£ô All three dictionaries 
+successfully passed to AuditReport
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Γ£ô All three dictionaries successfully passed to AuditReport
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - AUDITREPORT OBJECT VERIFICATION 
+(Before PDF Generation)
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - AUDITREPORT OBJECT VERIFICATION (Before PDF Generation)
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - AuditReport Fields:
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - AuditReport Fields:
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - report_id: 
+RD_TAX_2024_20251031_100518
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - report_id: RD_TAX_2024_20251031_100518
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - generation_date: 2025-10-31 
+10:05:18.250707
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - generation_date: 2025-10-31 10:05:18.250707
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - tax_year: 2024
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - tax_year: 2024
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - total_qualified_hours: 70.50
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - total_qualified_hours: 70.50
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - total_qualified_cost: 
+$5,989.26
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - total_qualified_cost: $5,989.26
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - estimated_credit: $1,197.85
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - estimated_credit: $1,197.85
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - projects count: 5
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - projects count: 5
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - pdf_path: 
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - pdf_path: 
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - company_name: Test Company 
+E2E
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - company_name: Test Company E2E
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - has narratives field: True
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - has narratives field: True
+2025-10-31 10:05:18 - agents.audit_trail - INFO -     - narratives count: 5
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -     - narratives count: 5
+2025-10-31 10:05:18 - agents.audit_trail - INFO -     - narratives keys: ['Alpha 
+Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon 
+AI']
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -     - narratives keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - has compliance_reviews 
+field: True
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - has compliance_reviews field: True
+2025-10-31 10:05:18 - agents.audit_trail - INFO -     - compliance_reviews count: 5
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -     - compliance_reviews count: 5
+2025-10-31 10:05:18 - agents.audit_trail - INFO -   - has aggregated_data field: 
+True
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -   - has aggregated_data field: True
+2025-10-31 10:05:18 - agents.audit_trail - INFO -     - aggregated_data keys: 
+['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 
+'average_confidence', 'high_confidence_count', 'medium_confidence_count', 
+'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 
+'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 [    INFO] agents.audit_trail -     - aggregated_data keys: ['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 'average_confidence', 'high_confidence_count', 'medium_confidence_count', 'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:18 - agents.audit_trail - INFO - Generating PDF report using 
+PDFGenerator
+2025-10-31 10:05:18 [    INFO] agents.audit_trail - Generating PDF report using PDFGenerator
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - PDF GENERATOR: Received 
+AuditReport object
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - PDF GENERATOR: Received AuditReport object
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Report ID: 
+RD_TAX_2024_20251031_100518
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Report ID: RD_TAX_2024_20251031_100518
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generation Date: 2025-10-31 
+10:05:18.250707
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generation Date: 2025-10-31 10:05:18.250707
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Tax Year: 2024
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Tax Year: 2024
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Company Name: Test Company E2E
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Company Name: Test Company E2E
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Total Qualified Hours: 70.5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Total Qualified Hours: 70.5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Total Qualified Cost: $5,989.26
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Total Qualified Cost: $5,989.26
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Estimated Credit: $1,197.85
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Estimated Credit: $1,197.85
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Average Confidence: 0.9
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Project Count: 5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Average Confidence: 0.9
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Project Count: 5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Flagged Project Count: 0
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Flagged Project Count: 0
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Projects List: 5 projects 
+received
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Projects List: 5 projects received
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Sample project data (first project):
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Sample project data (first 
+project):
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   - Project Name: Alpha 
+Development
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   - Project Name: Alpha Development
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   - Qualified Hours: 14.5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   - Qualified Hours: 14.5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   - Qualified Cost: $1,045.74
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   - Qualified Cost: $1,045.74
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   - Confidence Score: 0.92
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   - Confidence Score: 0.92
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   - Qualification %: 95.0%
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   - Qualification %: 95.0%
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   - Flagged: False
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   - Flagged: False
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+--------------------------------------------------------------------------------
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - --------------------------------------------------------------------------------
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Checking narratives field:
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Checking narratives field:
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô narratives field EXISTS
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô narratives field EXISTS
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô narratives is NOT None
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô narratives is NOT None
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô narratives count: 5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô narratives count: 5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô narratives keys: ['Alpha 
+Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon 
+AI']
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô narratives keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Sample narrative length 
+(Alpha Development): 6033 chars
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Sample narrative length (Alpha Development): 6033 chars
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+--------------------------------------------------------------------------------
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - --------------------------------------------------------------------------------
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Checking compliance_reviews 
+field:
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Checking compliance_reviews field:
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô compliance_reviews field 
+EXISTS
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô compliance_reviews field EXISTS
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô compliance_reviews is NOT None
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô compliance_reviews is NOT 
+None
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô compliance_reviews count: 
+5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô compliance_reviews count: 5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô compliance_reviews keys: 
+['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 
+'Epsilon AI']
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô compliance_reviews keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+--------------------------------------------------------------------------------
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - --------------------------------------------------------------------------------
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Checking aggregated_data field:
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Checking aggregated_data field:
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô aggregated_data field 
+EXISTS
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô aggregated_data field EXISTS
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô aggregated_data is NOT 
+None
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô aggregated_data is NOT None
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô aggregated_data keys: 
+['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 
+'average_confidence', 'high_confidence_count', 'medium_confidence_count', 
+'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 
+'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô aggregated_data keys: ['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 'average_confidence', 'high_confidence_count', 'medium_confidence_count', 'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô total_qualified_hours: 
+70.5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô total_qualified_hours: 70.5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô total_qualified_cost: 
+5989.26
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô total_qualified_cost: 5989.26
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô estimated_credit: 1197.852
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô estimated_credit: 1197.852
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - VALIDATION: Verifying 
+AuditReport has all required fields
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - VALIDATION: Verifying AuditReport has all required fields
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô narratives field is valid 
+(5 narratives)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô narratives field is valid (5 narratives)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô compliance_reviews field 
+is valid (5 reviews)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô compliance_reviews field is valid (5 reviews)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô aggregated_data field is 
+valid (14 keys)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô aggregated_data field is valid (14 keys)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Γ£ô VALIDATION PASSED: All 
+required fields are present and valid
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Γ£ô VALIDATION PASSED: All required fields are present and valid
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating PDF report: 
+outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating PDF report: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - SECTION GENERATION: Starting 
+PDF section generation
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - SECTION GENERATION: Starting PDF section generation
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Cover Page
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Cover Page
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Cover Page generated 
+successfully (11 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Cover Page generated successfully (11 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Table of 
+Contents
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Table of Contents
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Table of Contents 
+generated successfully (4 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Table of Contents generated successfully (4 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Executive 
+Summary
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Executive Summary
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Creating executive summary
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Creating executive summary
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Accessing 
+report.total_qualified_hours: 70.5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Accessing report.total_qualified_hours: 70.5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Accessing 
+report.total_qualified_cost: 5989.26
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Accessing report.total_qualified_cost: 5989.26
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Accessing 
+report.estimated_credit: 1197.852
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Accessing report.estimated_credit: 1197.852
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Accessing 
+report.average_confidence: 0.9
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Accessing report.average_confidence: 0.9
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Accessing 
+report.project_count: 5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Accessing report.project_count: 5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Accessing 
+report.flagged_project_count: 0
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Accessing report.flagged_project_count: 0
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Aggregated data available 
+with keys: ['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 
+'average_confidence', 'high_confidence_count', 'medium_confidence_count', 
+'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 
+'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Aggregated data available with keys: ['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 'average_confidence', 'high_confidence_count', 'medium_confidence_count', 'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     high_confidence_count: 5
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     high_confidence_count: 5
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     medium_confidence_count: 0
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     medium_confidence_count: 0
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     low_confidence_count: 0
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     low_confidence_count: 0
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Executive Summary generated successfully (8 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Executive Summary 
+generated successfully (8 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Project 
+Breakdown Summary
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Project Breakdown Summary
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Project Breakdown Summary generated successfully (7 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Project Breakdown Summary 
+generated successfully (7 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Qualified 
+Research Projects
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Qualified Research Projects
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Generating project 1/5: Alpha 
+Development
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Generating project 1/5: Alpha Development
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added technical narrative 
+for Alpha Development (6033 chars)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added technical narrative for Alpha Development (6033 chars)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added compliance review 
+for Alpha Development (status: Unknown)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added compliance review for Alpha Development (status: Unknown)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     Γ£ô Project section 
+generated (26 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     Γ£ô Project section generated (26 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Generating project 2/5: Beta 
+Infrastructure
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Generating project 2/5: Beta Infrastructure
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added technical narrative 
+for Beta Infrastructure (5036 chars)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added technical narrative for Beta Infrastructure (5036 chars)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added compliance review 
+for Beta Infrastructure (status: Unknown)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added compliance review for Beta Infrastructure (status: Unknown)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     Γ£ô Project section 
+generated (26 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     Γ£ô Project section generated (26 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Generating project 3/5: Gamma 
+Analytics
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Generating project 3/5: Gamma Analytics
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added technical narrative 
+for Gamma Analytics (4623 chars)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added technical narrative for Gamma Analytics (4623 chars)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added compliance review 
+for Gamma Analytics (status: Unknown)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added compliance review for Gamma Analytics (status: Unknown)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     Γ£ô Project section 
+generated (26 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     Γ£ô Project section generated (26 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Generating project 4/5: Delta 
+Security
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Generating project 4/5: Delta Security
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added technical narrative 
+for Delta Security (5365 chars)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added technical narrative for Delta Security (5365 chars)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added compliance review 
+for Delta Security (status: Unknown)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added compliance review for Delta Security (status: Unknown)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     Γ£ô Project section 
+generated (26 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     Γ£ô Project section generated (26 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Generating project 5/5: 
+Epsilon AI
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Generating project 5/5: Epsilon AI
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added technical narrative 
+for Epsilon AI (4779 chars)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added technical narrative for Epsilon AI (4779 chars)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added compliance review 
+for Epsilon AI (status: Unknown)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added compliance review for Epsilon AI (status: Unknown)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -     Γ£ô Project section 
+generated (26 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -     Γ£ô Project section generated (26 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô All 5 project sections 
+generated successfully
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô All 5 project sections generated successfully
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Technical 
+Narratives
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Technical Narratives
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Adding technical narratives for 
+5 projects
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Narrative for Alpha 
+Development: 6033 chars
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Adding technical narratives for 5 projects
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Narrative for Alpha Development: 6033 chars
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Narrative for Beta 
+Infrastructure: 5036 chars
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Narrative for Beta Infrastructure: 5036 chars
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Narrative for Gamma 
+Analytics: 4623 chars
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Narrative for Gamma Analytics: 4623 chars
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Narrative for Delta 
+Security: 5365 chars
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Narrative for Delta Security: 5365 chars
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Narrative for Epsilon AI: 
+4779 chars
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Narrative for Epsilon AI: 4779 chars
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Technical narratives section 
+created with 5 narratives
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Technical narratives section created with 5 narratives
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Technical Narratives 
+generated successfully (289 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Technical Narratives generated successfully (289 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: IRS 
+Citations
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: IRS Citations
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Adding IRS citations for 5 
+projects
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Adding IRS citations for 5 projects
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added IRS citation for 
+Alpha Development
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added IRS citation for Alpha Development
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added IRS citation for 
+Beta Infrastructure
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added IRS citation for Beta Infrastructure
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added IRS citation for 
+Gamma Analytics
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added IRS citation for Gamma Analytics
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added IRS citation for 
+Delta Security
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added IRS citation for Delta Security
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Added IRS citation for 
+Epsilon AI
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Added IRS citation for Epsilon AI
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - IRS citations section created 
+with 5 project citations
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - IRS citations section created with 5 project citations
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô IRS Citations generated 
+successfully (73 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô IRS Citations generated successfully (73 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Generating section: Appendices
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Generating section: Appendices
+2025-10-31 10:05:18 - utils.pdf_generator - INFO -   Γ£ô Appendices generated 
+successfully (29 elements)
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator -   Γ£ô Appendices generated successfully (29 elements)
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - SECTION GENERATION COMPLETE: 
+Total 557 elements generated
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - SECTION GENERATION COMPLETE: Total 557 elements generated
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:18 - utils.pdf_generator - INFO - Building PDF document...
+2025-10-31 10:05:18 [    INFO] utils.pdf_generator - Building PDF document...
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - PDF GENERATION COMPLETE
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - PDF GENERATION COMPLETE
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - PDF Path: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - PDF Path: 
+outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - PDF File Size: 79,439 bytes 
+(77.58 KB)
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - PDF File Size: 79,439 bytes (77.58 KB)
+2025-10-31 10:05:19 - utils.pdf_generator - INFO -   Γ£ô PDF appears COMPLETE 
+(size >= 15KB)
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator -   Γ£ô PDF appears COMPLETE (size >= 15KB)
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - 
+================================================================================
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - ================================================================================
+2025-10-31 10:05:19 - utils.pdf_generator - INFO - PDF report generated 
+successfully: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] utils.pdf_generator - PDF report generated successfully: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - Successfully generated PDF report: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - agents.audit_trail - INFO - Successfully generated PDF 
+report: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:19 - agents.audit_trail - INFO - AUDITTRAILRESULT OBJECT 
+VERIFICATION
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - AUDITTRAILRESULT OBJECT VERIFICATION
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:19 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:19 - agents.audit_trail - INFO - Result object fields:
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - Result object fields:
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - report: True
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - report: True
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - pdf_path: 
+outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - pdf_path: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - narratives count: 5
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - narratives count: 5
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - narratives keys: ['Alpha 
+Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon 
+AI']
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - narratives keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - compliance_reviews count: 5
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - compliance_reviews count: 5
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - compliance_reviews keys: 
+['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 
+'Epsilon AI']
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - compliance_reviews keys: ['Alpha Development', 'Beta Infrastructure', 'Gamma Analytics', 'Delta Security', 'Epsilon AI']
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - aggregated_data: True
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - aggregated_data: True
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - aggregated_data keys: 
+['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 
+'average_confidence', 'high_confidence_count', 'medium_confidence_count', 
+'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 
+'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - aggregated_data keys: ['total_qualified_hours', 'total_qualified_cost', 'estimated_credit', 'average_confidence', 'high_confidence_count', 'medium_confidence_count', 'low_confidence_count', 'project_count', 'flagged_count', 'top_projects_80_count', 'projects_df', 'summary_stats', 'tax_year', 'aggregation_timestamp']
+2025-10-31 10:05:19 - agents.audit_trail - INFO -   - execution_time_seconds: 
+116.43
+2025-10-31 10:05:19 [    INFO] agents.audit_trail -   - execution_time_seconds: 116.43
+2025-10-31 10:05:19 - agents.audit_trail - INFO - 
+================================================================================
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - ================================================================================
+2025-10-31 10:05:19 - agents.audit_trail - INFO - Status update: completed - 
+completed
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - Status update: completed - completed
+2025-10-31 10:05:19 - agents.audit_trail - INFO - Audit trail generation workflow 
+complete: Generated 5 narratives for 5 projects in 116.43 seconds. Total qualified 
+cost: $5,989.26, Estimated credit: $1,197.85, Average confidence: 90.00%. PDF 
+report saved to: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] agents.audit_trail - Audit trail generation workflow complete: Generated 5 narratives for 5 projects in 116.43 seconds. Total qualified cost: $5,989.26, Estimated credit: $1,197.85, Average confidence: 90.00%. PDF report saved to: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - 
+Γ£ô Audit trail completed in 116.44 seconds
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - 
+Γ£ô Audit trail completed in 116.44 seconds
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - Summary: Generated 5 narratives for 5 projects in 116.43 seconds. Total qualified cost: $5,989.26, Estimated credit: $1,197.85, Average confidence: 90.00%. PDF report saved to: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - Summary: Generated 5 
+narratives for 5 projects in 116.43 seconds. Total qualified cost: $5,989.26, 
+Estimated credit: $1,197.85, Average confidence: 90.00%. PDF report saved to: 
+outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - 
+Γ£ô Result structure validated
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - 
+Γ£ô Result structure validated
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Report ID: RD_TAX_2024_20251031_100518
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Report ID: 
+RD_TAX_2024_20251031_100518
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - PDF Path: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - PDF Path: 
+outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Narratives: 5
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Narratives: 5
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Compliance Reviews: 5
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Compliance 
+Reviews: 5
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Alpha Development: 6033 chars
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Alpha Development: 
+6033 chars
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Beta 
+Infrastructure: 5036 chars
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Beta Infrastructure: 5036 chars
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Gamma Analytics: 
+4623 chars
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Gamma Analytics: 4623 chars
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Delta Security: 5365 chars
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Delta Security: 
+5365 chars
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Epsilon AI: 4779 chars
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Epsilon AI: 4779 
+chars
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - 
+Γ£ô All narratives generated
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - 
+Γ£ô All narratives generated
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - Γ£ô All compliance reviews completed
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - Γ£ô All compliance 
+reviews completed
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - 
+Γ£ô Aggregated data:
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - 
+Γ£ô Aggregated data:
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Total Hours: 70.5
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Total Hours: 70.5
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Total Cost: $5,989.26
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Total Cost: 
+$5,989.26
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Estimated Credit: 
+$1,197.85
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Estimated Credit: $1,197.85
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO -   - Average 
+Confidence: 90.0%
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline -   - Average Confidence: 90.0%
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - Γ£ô Calculations 
+verified
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - Γ£ô Calculations verified
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - 
+Γ£ô PDF file exists: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - 
+Γ£ô PDF file exists: outputs\reports\rd_tax_credit_report_2024_20251031_100518.pdf
+2025-10-31 10:05:19 [    INFO] tests.test_complete_pipeline - 
+Analyzing PDF...
+2025-10-31 10:05:19 - tests.test_complete_pipeline - INFO - 
+Analyzing PDF...
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -   - File Size: 77.58 KB
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -   - File Size: 77.58 KB
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô File size within 
+expected range (60-100 KB for complete PDF)
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô File size within expected range (60-100 KB for complete PDF)
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -   - Page Count: 33
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -   - Page Count: 33
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô Page count within 
+expected range (25-40 pages for complete PDF)
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô Page count within expected range (25-40 pages for complete PDF)
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -   - Sections Found: 7
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -   - Sections Found: 7
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -     Γ£ô R&D Tax Credit
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -     Γ£ô R&D Tax Credit
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -     Γ£ô Table of 
+Contents
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -     Γ£ô Table of Contents
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -     Γ£ô Executive 
+Summary
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -     Γ£ô Executive Summary
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -     Γ£ô Project 
+Breakdown
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -     Γ£ô Project Breakdown
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO -     Γ£ô Technical 
+Narrative
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline -     Γ£ô Technical Narrative
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - 
+Γ£ô All required sections present
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - 
+Γ£ô All required sections present
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô All project names 
+found in PDF
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô All project names found in PDF
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - 
+================================================================================
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - 
+================================================================================
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - END-TO-END PIPELINE 
+TEST: PASSED
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - END-TO-END PIPELINE TEST: PASSED
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - 
+================================================================================
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - ================================================================================
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô Pipeline executed 
+successfully in 116.44s
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô Pipeline executed successfully in 116.44s
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô PDF generated: 
+77.58 KB, 33 pages
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô PDF generated: 77.58 KB, 33 pages
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô All 5 projects 
+processed
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô All 5 projects processed
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô All narratives and 
+reviews completed
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô All narratives and reviews completed
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - Γ£ô All sections 
+present and validated
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - Γ£ô All sections present and validated
+2025-10-31 10:05:20 - tests.test_complete_pipeline - INFO - 
+================================================================================
+2025-10-31 10:05:20 [    INFO] tests.test_complete_pipeline - ================================================================================
+PASSED
+ERROR: Coverage failure: total of 29 is less than fail-under=80
+
+
+============================== warnings summary ===============================
+..\..\..\AppData\Roaming\Python\Python313\site-packages\PyPDF2\__init__.py:21
+  C:\Users\rishi\AppData\Roaming\Python\Python313\site-packages\PyPDF2\__init__.py:21: DeprecationWarning: PyPDF2 is deprecated. Please move to the pypdf library instead.
+    warnings.warn(
+
+models\api_responses.py:37
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\api_responses.py:37: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('timeInterval')
+
+models\api_responses.py:112
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\api_responses.py:112: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('email')
+
+models\api_responses.py:181
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\api_responses.py:181: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('net_pay')
+
+models\api_responses.py:248
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\api_responses.py:248: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('choices')
+
+models\database_models.py:22
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\database_models.py:22: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+..\..\..\AppData\Roaming\Python\Python313\site-packages\pydantic\_internal\_config.py:295
+  C:\Users\rishi\AppData\Roaming\Python\Python313\site-packages\pydantic\_internal\_config.py:295: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+models\websocket_models.py:73
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\websocket_models.py:73: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('details')
+
+..\..\..\AppData\Roaming\Python\Python313\site-packages\pydantic\_internal\_generate_schema.py:297
+  C:\Users\rishi\AppData\Roaming\Python\Python313\site-packages\pydantic\_internal\_generate_schema.py:297: PydanticDeprecatedSince20: `json_encoders` is deprecated. See https://docs.pydantic.dev/2.10/concepts/serialization/#custom-serializers for alternatives. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    warnings.warn(
+
+models\websocket_models.py:108
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\websocket_models.py:108: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('message')
+
+models\websocket_models.py:145
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\websocket_models.py:145: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('current_step')
+
+models\websocket_models.py:152
+  C:\Users\rishi\Downloads\You.com hackathon\rd_tax_agent\models\websocket_models.py:152: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    @validator('percentage')
+
+tests/test_complete_pipeline.py::TestCompletePipeline::test_complete_pipeline_with_5_projects
+  C:\Users\rishi\AppData\Roaming\Python\Python313\site-packages\_pytest\runner.py:142: ResourceWarning: unclosed <ssl.SSLSocket fd=900, family=2, type=1, proto=0, laddr=('192.168.1.3', 50812), raddr=('104.18.41.176', 443)>
+    item.funcargs = None  # type: ignore[attr-defined]
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.13.1-final-0 _______________
+
+Name                              Stmts   Miss  Cover   Missing
+---------------------------------------------------------------
+agents\__init__.py                    4      0   100%
+agents\audit_trail_agent.py         558    166    70%   108-124, 248, 250, 268, 296, 309-313, 366-376, 439-440, 458-463, 504, 507, 609-620, 694, 795-796, 802-803, 809-810, 839-850, 894, 897, 913-937, 1001-1019, 1041, 1085-1086, 1093, 1104-1113, 1124-1135, 1142, 1186-1270, 1334, 1337, 1391-1392, 1399, 1422-1427, 1431-1444, 1500-1505, 1518-1522, 1531-1536, 1545-1549, 1558-1562, 1571, 1580-1584, 1606, 1609, 1688, 1691, 1833-1840, 1847
+agents\data_ingestion_agent.py      276    235    15%   102-113, 218-230, 248-268, 307-435, 462-563, 592-670, 688-754, 787-815, 842-949, 958, 966-967
+agents\qualification_agent.py       438    389    11%   105-122, 257-279, 301-325, 368-629, 662-716, 766-976, 1008-1022, 1047-1116, 1145-1172, 1205-1361, 1400-1567, 1576, 1584-1585
+models\__init__.py                    4      0   100%
+models\api_responses.py             154     83    46%   40-42, 51-74, 83-84, 115-117, 126-142, 154-157, 184-186, 190, 194, 203-211, 220-228, 251-253, 265-277, 289-292, 301-304, 313-316, 325-328
+models\database_models.py           135     47    65%   111, 126, 152-154, 163-170, 179-181, 190, 268, 283, 326, 377-380, 388, 396, 414-422, 433, 452-454, 479-489, 529-541
+models\financial_models.py           74     28    62%   108-112, 129-131, 140-141, 253-258, 275-277, 305-317, 326-328
+models\tax_models.py                181     62    66%   138, 157, 174, 216-217, 401, 407, 436, 442, 468, 475-482, 486, 498, 525, 548, 663-688, 699, 710-714, 752-777, 819-828, 837
+models\websocket_models.py           64     14    78%   76-78, 111-113, 148-150, 155-163
+tools\__init__.py                     3      0   100%
+tools\api_connectors.py             535    443    17%   74-86, 108-165, 186, 209-214, 275, 306, 316, 354, 357-362, 366, 368-369, 407, 412-423, 434, 463-468, 481-542, 566-578, 582-583, 587, 591, 615-631, 640, 651, 679-708, 752-828, 866-944, 965-1009, 1034-1055, 1064, 1080-1097, 1109-1116, 1130-1340, 1372-1451, 1476-1579, 1599-1644, 1676-1708, 1754-1940, 1995-2043, 2093-2187
+tools\api_monitor.py                257    257     0%   15-865
+tools\cache.py                      120    120     0%   16-405
+tools\embedder.py                    80     80     0%   22-265
+tools\glm_reasoner.py               197    170    14%   68, 97-105, 158-285, 306-318, 330-361, 373-395, 429-471, 495-506, 523-559
+tools\health_check.py               282    282     0%   27-851
+tools\indexing_pipeline.py          144    144     0%   16-413
+tools\pdf_extractor.py              117    105    10%   64-166, 184-215, 228-263, 293-320
+tools\prompt_templates.py            63     33    48%   727, 766, 801-803, 841, 886, 958, 990-1005, 1023-1036, 1078-1081, 1106, 1156, 1189-1190, 1216-1232
+tools\qualification_enhancer.py     127    102    20%   48, 106-112, 153-197, 219-240, 257-284, 301-328, 351-391, 412-455
+tools\rd_knowledge_tool.py          358    328     8%   125-163, 196-210, 222-241, 251-259, 268-271, 280-292, 316-332, 349-358, 386-433, 496-740, 810-911, 935-945, 961-988, 1060-1189
+tools\text_chunker.py               132    120     9%   70-188, 204-238, 265-282, 317-365, 400-430
+tools\vector_db.py                  103     86    17%   80-125, 161-188, 234-260, 285-297, 317-328, 346-352, 366-387, 404-414
+tools\you_com_client.py             554    488    12%   108, 111, 167-174, 191-211, 229-238, 253-256, 271-274, 292-302, 327-338, 350-378, 435-534, 558-596, 612, 626, 652-663, 729-830, 891-987, 1004-1026, 1047-1098, 1189, 1192, 1204, 1216, 1238-1260, 1301-1424, 1495-1587, 1613-1662, 1749-1823, 1856-2009, 2037-2083, 2105-2149, 2168-2246
+tools\youcom_api_monitor.py         203    203     0%   15-678
+tools\youcom_rate_limiter.py        148     73    51%   43, 137, 140, 157-199, 223-233, 267-274, 288-291, 316-325, 394, 436, 446, 485-491, 513-519, 539-545, 563-574, 601-609, 626-641
+utils\__init__.py                     3      0   100%
+utils\config.py                     112     24    79%   90, 92, 95, 101, 116, 122, 132, 134, 136, 141, 144, 147, 150, 153, 158, 163, 194, 206, 251-252, 287-289, 294
+utils\constants.py                   69      0   100%
+utils\exceptions.py                  50     37    26%   26-28, 32-34, 65-72, 111-122, 156-165, 200-209, 247-258
+utils\file_ops.py                   160    160     0%   13-486
+utils\logger.py                      81     15    81%   105, 151-167
+utils\metrics.py                    195    195     0%   11-586
+utils\pandas_processor.py           147    147     0%   9-552
+utils\pdf_generator.py              762    218    71%   104, 336-344, 512, 601-609, 750, 761-768, 797-801, 807-814, 880-885, 951-957, 983-1109, 1130-1239, 1288-1295, 1489-1496, 1515-1520, 1525, 1544-1546, 1612-1617, 1692, 1814, 1831-1835, 1848-1852, 1870-1872, 1886-1888, 1890-1892, 1898-1900, 1902-1904, 1910-1912, 1914-1916, 1922-1926, 1943-1944, 1975-1977, 1985-1987, 1995-1997, 2005-2007, 2034-2038, 2046-2048, 2056-2058, 2066-2068, 2099-2102, 2108-2110, 2114, 2119-2152
+utils\retry.py                       45     22    51%   98, 104-147, 178, 217, 257
+utils\status_broadcaster.py          55     55     0%   18-332
+utils\validators.py                  75     75     0%   12-265
+utils\websocket_manager.py           85     85     0%   18-314
+---------------------------------------------------------------
+TOTAL                              7150   5091    29%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+FAIL Required test coverage of 80% not reached. Total coverage: 28.80%
+================= 1 passed, 13 warnings in 128.30s (0:02:08) ==================

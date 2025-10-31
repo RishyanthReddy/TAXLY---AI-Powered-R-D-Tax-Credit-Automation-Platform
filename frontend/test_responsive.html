@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design Test - R&D Tax Credit Automation</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard-enhanced.css">
+    <style>
+        .viewport-tester {
+            padding: 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .viewport-controls {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .viewport-button {
+            padding: 12px 24px;
+            margin: 8px;
+            border: 2px solid #2563eb;
+            background: white;
+            color: #2563eb;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .viewport-button:hover {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .viewport-button.active {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .test-frame {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .frame-label {
+            text-align: center;
+            margin-top: 16px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+        
+        .checklist {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        
+        .checklist-item {
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 4px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        
+        .checklist-item.checked {
+            border-left-color: #10b981;
+            background: #d1fae5;
+        }
+    </style>
+</head>
+<body>
+    <div class="viewport-tester">
+        <h1 style="margin-bottom: 24px;">Responsive Design Testing</h1>
+        
+        <div class="viewport-controls">
+            <h3 style="margin-bottom: 16px;">Select Viewport Size</h3>
+            <button class="viewport-button active" onclick="setViewport('desktop')">
+                🖥️ Desktop (1400px)
+            </button>
+            <button class="viewport-button" onclick="setViewport('laptop')">
+                💻 Laptop (1024px)
+            </button>
+            <button class="viewport-button" onclick="setViewport('tablet')">
+                📱 Tablet (768px)
+            </button>
+            <button class="viewport-button" onclick="setViewport('mobile')">
+                📱 Mobile (375px)
+            </button>
+        </div>
+
+        <div id="test-frame-container">
+            <iframe id="test-frame" class="test-frame" src="index.html" style="width: 1400px; height: 800px;"></iframe>
+            <div class="frame-label" id="frame-label">Desktop View (1400px × 800px)</div>
+        </div>
+
+        <div class="checklist">
+            <h3 style="margin-bottom: 16px;">Responsive Design Checklist</h3>
+            
+            <div class="checklist-item" id="check-1">
+                <input type="checkbox" id="cb-1" onchange="updateChecklist(1)">
+                <label for="cb-1">Navigation bar adapts to screen size</label>
+            </div>
+            
+            <div class="checklist-item" id="check-2">
+                <input type="checkbox" id="cb-2" onchange="updateChecklist(2)">
+                <label for="cb-2">Dashboard cards stack properly on mobile</label>
+            </div>
+            
+            <div class="checklist-item" id="check-3">
+                <input type="checkbox" id="cb-3" onchange="updateChecklist(3)">
+                <label for="cb-3">Charts resize and remain readable</label>
+            </div>
+            
+            <div class="checklist-item" id="check-4">
+                <input type="checkbox" id="cb-4" onchange="updateChecklist(4)">
+                <label for="cb-4">Tables scroll horizontally on small screens</label>
+            </div>
+            
+            <div class="checklist-item" id="check-5">
+                <input type="checkbox" id="cb-5" onchange="updateChecklist(5)">
+                <label for="cb-5">Buttons and touch targets are large enough (44px min)</label>
+            </div>
+            
+            <div class="checklist-item" id="check-6">
+                <input type="checkbox" id="cb-6" onchange="updateChecklist(6)">
+                <label for="cb-6">Text remains readable (min 14px on mobile)</label>
+            </div>
+            
+            <div class="checklist-item" id="check-7">
+                <input type="checkbox" id="cb-7" onchange="updateChecklist(7)">
+                <label for="cb-7">Workflow visualization adapts to screen width</label>
+            </div>
+            
+            <div class="checklist-item" id="check-8">
+                <input type="checkbox" id="cb-8" onchange="updateChecklist(8)">
+                <label for="cb-8">PDF viewer works on tablet/mobile</label>
+            </div>
+            
+            <div class="checklist-item" id="check-9">
+                <input type="checkbox" id="cb-9" onchange="updateChecklist(9)">
+                <label for="cb-9">Forms and inputs are easy to use on touch devices</label>
+            </div>
+            
+            <div class="checklist-item" id="check-10">
+                <input type="checkbox" id="cb-10" onchange="updateChecklist(10)">
+                <label for="cb-10">No horizontal scrolling on any page</label>
+            </div>
+        </div>
+
+        <div style="margin-top: 24px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
+            <h4>Testing Instructions:</h4>
+            <ol style="margin-left: 24px; margin-top: 12px; line-height: 1.8;">
+                <li>Click each viewport button to test different screen sizes</li>
+                <li>Navigate through all pages (Home, Dashboard, Workflow, Reports)</li>
+                <li>Check that all elements are visible and usable</li>
+                <li>Verify touch targets are large enough on mobile</li>
+                <li>Test all interactive elements (buttons, links, forms)</li>
+                <li>Check the checklist items as you verify each aspect</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const viewports = {
+            desktop: { width: 1400, height: 800, label: 'Desktop View (1400px × 800px)' },
+            laptop: { width: 1024, height: 768, label: 'Laptop View (1024px × 768px)' },
+            tablet: { width: 768, height: 1024, label: 'Tablet View (768px × 1024px)' },
+            mobile: { width: 375, height: 667, label: 'Mobile View (375px × 667px)' }
+        };
+
+        function setViewport(size) {
+            const frame = document.getElementById('test-frame');
+            const label = document.getElementById('frame-label');
+            const viewport = viewports[size];
+
+            frame.style.width = viewport.width + 'px';
+            frame.style.height = viewport.height + 'px';
+            label.textContent = viewport.label;
+
+            // Update active button
+            document.querySelectorAll('.viewport-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function updateChecklist(itemId) {
+            const checkbox = document.getElementById(`cb-${itemId}`);
+            const item = document.getElementById(`check-${itemId}`);
+            
+            if (checkbox.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+
+            // Check if all items are checked
+            const allChecked = Array.from(document.querySelectorAll('.checklist-item input')).every(cb => cb.checked);
+            if (allChecked) {
+                alert('🎉 All responsive design checks completed! The application is responsive.');
+            }
+        }
+
+        // Load checklist state from localStorage
+        window.addEventListener('load', () => {
+            for (let i = 1; i <= 10; i++) {
+                const saved = localStorage.getItem(`responsive-check-${i}`);
+                if (saved === 'true') {
+                    document.getElementById(`cb-${i}`).checked = true;
+                    updateChecklist(i);
+                }
+            }
+        });
+
+        // Save checklist state
+        window.addEventListener('beforeunload', () => {
+            for (let i = 1; i <= 10; i++) {
+                const checked = document.getElementById(`cb-${i}`).checked;
+                localStorage.setItem(`responsive-check-${i}`, checked);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -464,6 +464,10 @@ pytest tests/test_pdf_generator.py -v
 
 #### End-to-End Tests (Complete Pipeline)
 ```bash
+# Enhanced pipeline with You.com News/Search APIs and GLM reasoner
+python -m pytest tests/test_complete_pipeline.py::TestCompletePipeline::test_complete_pipeline_with_5_projects -v -s 2>&1 | Select-String -Pattern "(PASSED|FAILED|Enhancement|News|Search|GLM|PDF generated)" -Context 0,0
+
+# Full test suite
 pytest tests/test_complete_pipeline.py -v
 pytest tests/test_pdf_completeness.py -v
 pytest tests/test_calculations.py -v
@@ -472,8 +476,8 @@ pytest tests/test_calculations.py -v
 ### Quick Verification
 
 ```bash
-# Run quick smoke test (< 2 minutes)
-pytest tests/test_complete_pipeline.py::test_pipeline_with_5_projects -v
+# Run enhanced pipeline test with filtered output (< 2 minutes)
+python -m pytest tests/test_complete_pipeline.py::TestCompletePipeline::test_complete_pipeline_with_5_projects -v -s 2>&1 | Select-String -Pattern "(PASSED|FAILED|Enhancement|News|Search|GLM|PDF generated)" -Context 0,0
 
 # Run PDF verification script
 python verify_pdf_reports.py

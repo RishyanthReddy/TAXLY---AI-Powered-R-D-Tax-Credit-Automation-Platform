@@ -208,7 +208,7 @@ function loadReports() {
     if (emptyState) emptyState.style.display = 'none';
     
     tableBody.innerHTML = currentReports.map(report => `
-        <tr data-report-id="${report.id}" onclick="viewReport('${report.id}')">
+        <tr data-report-id="${report.id}">
             <td>
                 <div class="report-name">${report.companyName} Tax Credit ${report.taxYear}</div>
                 <div class="report-id">${report.id}</div>
@@ -222,8 +222,11 @@ function loadReports() {
             <td>${formatFileSize(report.fileSize)}</td>
             <td>
                 <div class="table-actions" onclick="event.stopPropagation()">
+                    <button class="action-icon-btn" onclick="previewPdfInViewer('${report.id}')" title="Preview PDF">
+                        📄
+                    </button>
                     <button class="action-icon-btn" onclick="viewReport('${report.id}')" title="View Details">
-                        👁️
+                        ℹ️
                     </button>
                     <button class="action-icon-btn" onclick="downloadReport('${report.id}')" title="Download PDF">
                         ⬇️
@@ -386,12 +389,97 @@ function viewReport(reportId) {
     document.getElementById('previewPageCount').textContent = selectedReport.pageCount;
     document.getElementById('previewFilename').textContent = selectedReport.filename;
     
+    // Generate PDF thumbnail
+    generatePdfThumbnail(selectedReport);
+    
     // Setup download button
     const downloadBtn = document.getElementById('downloadReportBtn');
     downloadBtn.onclick = () => downloadReport(selectedReport.id);
     
+    // Setup PDF viewer button
+    const openPdfBtn = document.getElementById('openPdfViewerBtn');
+    if (openPdfBtn) {
+        openPdfBtn.onclick = () => openFullPdfViewer(selectedReport);
+    }
+    
     // Show modal
     openModal();
+}
+
+// Generate PDF thumbnail for preview
+async function generatePdfThumbnail(report) {
+    const thumbnailContainer = document.getElementById('pdfThumbnailContainer');
+    const thumbnailImg = document.getElementById('pdfThumbnail');
+    
+    if (!thumbnailContainer || !thumbnailImg) return;
+    
+    // Show loading state
+    thumbnailContainer.innerHTML = `
+        <div class="pdf-thumbnail-loading">
+            <div class="spinner"></div>
+            <p>Generating preview...</p>
+        </div>
+    `;
+    
+    try {
+        // Use the filename (without .pdf) as the report_id for the backend
+        const reportIdForBackend = report.filename.replace('.pdf', '');
+        
+        // Generate thumbnail using PDF.js
+        const img = document.createElement('img');
+        await generateThumbnail(reportIdForBackend, img, 300);
+        
+        // Replace loading state with thumbnail
+        thumbnailContainer.innerHTML = '';
+        thumbnailContainer.appendChild(img);
+        
+        // Make thumbnail clickable to open full viewer
+        thumbnailContainer.style.cursor = 'pointer';
+        thumbnailContainer.onclick = () => openFullPdfViewer(report);
+    } catch (error) {
+        console.error('Failed to generate thumbnail:', error);
+        
+        // Show placeholder on error
+        thumbnailContainer.innerHTML = `
+            <img src="assets/images/pdf-placeholder.png" alt="PDF Preview Unavailable">
+        `;
+    }
+}
+
+// Open full PDF viewer
+async function openFullPdfViewer(report) {
+    try {
+        // Close the preview modal first
+        closeModal();
+        
+        // Use the filename (without .pdf) as the report_id for the backend
+        const reportIdForBackend = report.filename.replace('.pdf', '');
+        
+        // Open PDF viewer with report data
+        await openPdfViewer(reportIdForBackend, {
+            filename: report.filename,
+            fileSize: report.fileSize,
+            generationDate: report.generationDate,
+            reportId: reportIdForBackend
+        });
+        
+        // Store report ID in title element for download functionality
+        const titleEl = document.getElementById('pdfViewerTitle');
+        if (titleEl) {
+            titleEl.dataset.reportId = reportIdForBackend;
+        }
+    } catch (error) {
+        console.error('Failed to open PDF viewer:', error);
+        showNotification('error', `Failed to open PDF viewer: ${error.message}`);
+    }
+}
+
+// Preview PDF directly in viewer (from table action button)
+async function previewPdfInViewer(reportId) {
+    const report = currentReports.find(r => r.id === reportId);
+    if (!report) return;
+    
+    await openFullPdfViewer(report);
 }
 
 // Download report

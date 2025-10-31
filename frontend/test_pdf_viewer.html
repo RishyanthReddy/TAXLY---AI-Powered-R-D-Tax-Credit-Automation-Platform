@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer Test</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pdf-viewer.css">
+    
+    <style>
+        body {
+            padding: 2rem;
+            background: var(--bg-primary);
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-section h2 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .test-section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .test-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .test-btn:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .thumbnail-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .thumbnail-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .thumbnail-item p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-section">
+            <h2>PDF Viewer Test Page</h2>
+            <p>This page tests the PDF viewer functionality with sample reports from the backend.</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 1: Open PDF Viewer</h2>
+            <p>Click the button below to open a sample PDF in the full-screen viewer.</p>
+            <div class="test-buttons">
+                <button class="test-btn" onclick="testOpenViewer('rd_tax_credit_report_2024_20251030_135256')">
+                    Open Sample Report 1
+                </button>
+                <button class="test-btn" onclick="testOpenViewer('rd_tax_credit_report_2024_20251030_133741')">
+                    Open Sample Report 2
+                </button>
+                <button class="test-btn" onclick="testOpenViewer('professional_audit_report')">
+                    Open Professional Report
+                </button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 2: Generate Thumbnails</h2>
+            <p>Click the button below to generate thumbnails for multiple PDFs.</p>
+            <button class="test-btn" onclick="testGenerateThumbnails()">
+                Generate Thumbnails
+            </button>
+            <div class="thumbnail-grid" id="thumbnailGrid"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 3: Navigation & Zoom</h2>
+            <p>Open a PDF and test the following features:</p>
+            <ul>
+                <li>Navigate pages using arrow buttons or keyboard (← →)</li>
+                <li>Zoom in/out using buttons or keyboard (+ -)</li>
+                <li>Reset zoom (0 key)</li>
+                <li>Fit to width</li>
+                <li>Download PDF</li>
+                <li>Close viewer (Esc key)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div class="pdf-viewer-modal" id="pdfViewerModal">
+        <!-- Header -->
+        <div class="pdf-viewer-header">
+            <div class="pdf-viewer-title-section">
+                <h2 class="pdf-viewer-title" id="pdfViewerTitle" data-report-id="">PDF Report</h2>
+                <div class="pdf-metadata" id="pdfMetadata"></div>
+            </div>
+            <div class="pdf-viewer-actions">
+                <button class="pdf-toolbar-btn primary" id="pdfDownloadBtn" title="Download PDF">
+                    ⬇️
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfViewerCloseBtn" title="Close Viewer (Esc)">
+                    ✕
+                </button>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="pdf-viewer-toolbar">
+            <div class="pdf-toolbar-group">
+                <button class="pdf-toolbar-btn" id="pdfPrevBtn" title="Previous Page (←)">
+                    ◀
+                </button>
+                <span class="pdf-page-info" id="pdfPageInfo">Page 1 of 1</span>
+                <button class="pdf-toolbar-btn" id="pdfNextBtn" title="Next Page (→)">
+                    ▶
+                </button>
+            </div>
+
+            <div class="pdf-toolbar-separator"></div>
+
+            <div class="pdf-toolbar-group">
+                <button class="pdf-toolbar-btn" id="pdfZoomOutBtn" title="Zoom Out (-)">
+                    −
+                </button>
+                <span class="pdf-zoom-info" id="pdfZoomInfo">100%</span>
+                <button class="pdf-toolbar-btn" id="pdfZoomInBtn" title="Zoom In (+)">
+                    +
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfResetZoomBtn" title="Reset Zoom (0)">
+                    ⟲
+                </button>
+                <button class="pdf-toolbar-btn" id="pdfFitWidthBtn" title="Fit to Width">
+                    ⇔
+                </button>
+            </div>
+        </div>
+
+        <!-- PDF Canvas Container -->
+        <div class="pdf-viewer-content">
+            <div class="pdf-canvas-container" id="pdfCanvasContainer">
+                <canvas id="pdfCanvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Keyboard Shortcuts Hint -->
+        <div class="pdf-shortcuts-hint">
+            <ul>
+                <li><span>Navigate:</span> <kbd>←</kbd> <kbd>→</kbd></li>
+                <li><span>Zoom:</span> <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd></li>
+                <li><span>Close:</span> <kbd>Esc</kbd></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/pdf-viewer.js"></script>
+    
+    <script>
+        // Test function to open PDF viewer
+        async function testOpenViewer(reportId) {
+            try {
+                console.log(`Opening PDF viewer for: ${reportId}`);
+                
+                await openPdfViewer(reportId, {
+                    filename: `${reportId}.pdf`,
+                    fileSize: 85000,
+                    generationDate: new Date().toISOString(),
+                    reportId: reportId
+                });
+                
+                // Store report ID for download
+                const titleEl = document.getElementById('pdfViewerTitle');
+                if (titleEl) {
+                    titleEl.dataset.reportId = reportId;
+                }
+            } catch (error) {
+                console.error('Failed to open PDF viewer:', error);
+                alert(`Failed to open PDF viewer: ${error.message}`);
+            }
+        }
+        
+        // Test function to generate thumbnails
+        async function testGenerateThumbnails() {
+            const grid = document.getElementById('thumbnailGrid');
+            grid.innerHTML = '<p>Generating thumbnails...</p>';
+            
+            const reports = [
+                'rd_tax_credit_report_2024_20251030_135256',
+                'rd_tax_credit_report_2024_20251030_133741',
+                'professional_audit_report',
+                'custom_styled_report'
+            ];
+            
+            grid.innerHTML = '';
+            
+            for (const reportId of reports) {
+                const item = document.createElement('div');
+                item.className = 'thumbnail-item';
+                
+                const img = document.createElement('img');
+                img.alt = 'Loading...';
+                
+                const label = document.createElement('p');
+                label.textContent = reportId.substring(0, 20) + '...';
+                
+                item.appendChild(img);
+                item.appendChild(label);
+                grid.appendChild(item);
+                
+                try {
+                    await generateThumbnail(reportId, img, 200);
+                    console.log(`Generated thumbnail for ${reportId}`);
+                } catch (error) {
+                    console.error(`Failed to generate thumbnail for ${reportId}:`, error);
+                    img.src = 'assets/images/pdf-placeholder.png';
+                }
+            }
+        }
+        
+        console.log('PDF Viewer Test Page Loaded');
+        console.log('Available test functions:');
+        console.log('- testOpenViewer(reportId)');
+        console.log('- testGenerateThumbnails()');
+    </script>
+</body>
+</html>
