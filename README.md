@@ -2135,23 +2135,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-### Roadmap
-
-See our [public roadmap](https://github.com/yourusername/taxly-rd-tax-automation/projects/1) for upcoming features and improvements.
-
----
-
-## 🌟 Star History
-
-If you find TAXLY useful, please consider giving it a star on GitHub! ⭐
-
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/taxly-rd-tax-automation&type=Date)](https://star-history.com/#yourusername/taxly-rd-tax-automation&Date)
-
----
-
-
-**TAXLY - Revolutionizing R&D Tax Credit Compliance with AI**
-
-[🚀 Get Started](#-quick-start) • [📖 Documentation](#-project-structure) • [🎯 Features](#-key-features) • [🏆 Hackathon](#-hackathon-submission-details)
-
 </div>
