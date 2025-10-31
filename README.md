@@ -148,31 +148,31 @@ R&D tax credits are government incentives designed to encourage innovation by of
 ```mermaid
 graph TB
     subgraph "Frontend Layer - TAXLY Dashboard"
-        A1[Client Onboarding UI]
-        A2[People Management]
-        A3[Questionnaire System]
-        A4[PBC Document Portal]
-        A5[Interactive Dashboard]
-        A6[Report Builder]
+        A1["<b>Client Onboarding UI</b>"]
+        A2["<b>People Management</b>"]
+        A3["<b>Questionnaire System</b>"]
+        A4["<b>PBC Document Portal</b>"]
+        A5["<b>Interactive Dashboard</b>"]
+        A6["<b>Report Builder</b>"]
     end
     
     subgraph "Backend API Layer - FastAPI"
-        B1[REST Endpoints]
-        B2[WebSocket Server]
-        B3[Authentication]
+        B1["<b>REST Endpoints</b>"]
+        B2["<b>WebSocket Server</b>"]
+        B3["<b>Authentication</b>"]
     end
     
     subgraph "Agent Orchestration - PydanticAI"
-        C1[Data Ingestion Agent]
-        C2[Qualification Agent]
-        C3[Audit Trail Agent]
+        C1["<b>Data Ingestion Agent</b>"]
+        C2["<b>Qualification Agent</b>"]
+        C3["<b>Audit Trail Agent</b>"]
     end
     
     subgraph "External Integrations"
-        D1[You.com APIs]
-        D2[HR Platforms]
-        D3[OpenRouter GLM]
-        D4[ChromaDB RAG]
+        D1["<b>You.com APIs</b>"]
+        D2["<b>HR Platforms</b>"]
+        D3["<b>OpenRouter GLM</b>"]
+        D4["<b>ChromaDB RAG</b>"]
     end
     
     A1 --> B1
@@ -196,22 +196,22 @@ graph TB
     C3 --> D1
     C3 --> D3
     
-    style A1 fill:#e3f2fd
-    style A2 fill:#e3f2fd
-    style A3 fill:#e3f2fd
-    style A4 fill:#e3f2fd
-    style A5 fill:#e3f2fd
-    style A6 fill:#e3f2fd
-    style B1 fill:#fff3e0
-    style B2 fill:#fff3e0
-    style B3 fill:#fff3e0
-    style C1 fill:#f3e5f5
-    style C2 fill:#f3e5f5
-    style C3 fill:#f3e5f5
-    style D1 fill:#e8f5e9
-    style D2 fill:#e8f5e9
-    style D3 fill:#e8f5e9
-    style D4 fill:#e8f5e9
+    style A1 fill:#e3f2fd,stroke:#000,stroke-width:2px,color:#000
+    style A2 fill:#e3f2fd,stroke:#000,stroke-width:2px,color:#000
+    style A3 fill:#e3f2fd,stroke:#000,stroke-width:2px,color:#000
+    style A4 fill:#e3f2fd,stroke:#000,stroke-width:2px,color:#000
+    style A5 fill:#e3f2fd,stroke:#000,stroke-width:2px,color:#000
+    style A6 fill:#e3f2fd,stroke:#000,stroke-width:2px,color:#000
+    style B1 fill:#fff3e0,stroke:#000,stroke-width:2px,color:#000
+    style B2 fill:#fff3e0,stroke:#000,stroke-width:2px,color:#000
+    style B3 fill:#fff3e0,stroke:#000,stroke-width:2px,color:#000
+    style C1 fill:#f3e5f5,stroke:#000,stroke-width:2px,color:#000
+    style C2 fill:#f3e5f5,stroke:#000,stroke-width:2px,color:#000
+    style C3 fill:#f3e5f5,stroke:#000,stroke-width:2px,color:#000
+    style D1 fill:#e8f5e9,stroke:#000,stroke-width:2px,color:#000
+    style D2 fill:#e8f5e9,stroke:#000,stroke-width:2px,color:#000
+    style D3 fill:#e8f5e9,stroke:#000,stroke-width:2px,color:#000
+    style D4 fill:#e8f5e9,stroke:#000,stroke-width:2px,color:#000
 ```
 
 
