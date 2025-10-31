@@ -1822,7 +1822,6 @@ A: TAXLY is production-ready with 90%+ test coverage. For production deployment:
 - **Hackathon**: You.com Hackathon 2025
 - **Submission Date**: October 30, 2025
 - **Category**: AI-Powered Business Automation / FinTech
-- **Team**: Solo Developer
 - **Contact**: rishyanthreddy101@gmail.com
 
 ### Market Opportunity
@@ -2136,34 +2135,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-
-## 📞 Contact & Support
-
-### Developer Contact
-
-- **Email**: rishyanthreddy101@gmail.com
-- **GitHub**: [Your GitHub Profile](https://github.com/yourusername)
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- **Project Repository**: [TAXLY on GitHub](https://github.com/yourusername/taxly-rd-tax-automation)
-
-### Getting Help
-
-- **Documentation**: See this README and inline code documentation
-- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/yourusername/taxly-rd-tax-automation/issues)
-- **Discussions**: Join the conversation on [GitHub Discussions](https://github.com/yourusername/taxly-rd-tax-automation/discussions)
-- **Email Support**: rishyanthreddy101@gmail.com
-
-### Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-**Ways to Contribute:**
-- 🐛 Report bugs
-- 💡 Suggest new features
-- 📝 Improve documentation
-- 🧪 Add test cases
-- 🔧 Submit pull requests
-
 ### Roadmap
 
 See our [public roadmap](https://github.com/yourusername/taxly-rd-tax-automation/projects/1) for upcoming features and improvements.
@@ -2178,21 +2149,6 @@ If you find TAXLY useful, please consider giving it a star on GitHub! ⭐
 
 ---
 
-## 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/yourusername/taxly-rd-tax-automation?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/taxly-rd-tax-automation?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/taxly-rd-tax-automation?style=social)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/taxly-rd-tax-automation)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/yourusername/taxly-rd-tax-automation)
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/taxly-rd-tax-automation)
-![GitHub code size](https://img.shields.io/github/languages/code-size/yourusername/taxly-rd-tax-automation)
-
----
-
-<div align="center">
-
-**Built with ❤️ for the You.com Hackathon 2025**
 
 **TAXLY - Revolutionizing R&D Tax Credit Compliance with AI**
 
