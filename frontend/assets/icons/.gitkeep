@@ -1,0 +1,11 @@
+# Icons Directory
+
+Place icon files here:
+- favicon.png
+- logo.svg
+- Platform logos (clockify.svg, bamboohr.svg, etc.)
+- UI icons
+
+Recommended formats:
+- SVG for scalable icons
+- PNG for raster images

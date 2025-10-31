@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&D Tax Credit Automation Agent - Reports">
+    <title>Reports - R&D Tax Credit Automation</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/reports.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="assets/icons/logo.svg" alt="R&D Tax Credit Automation" class="logo">
+                <span class="brand-name">R&D Tax Credit Automation</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="workflow.html">Workflow</a></li>
+                <li><a href="reports.html" class="active">Reports</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <button class="btn btn-secondary" id="filterBtn">
+                    <span class="icon">🔍</span> Filter
+                </button>
+                <button class="btn btn-secondary" id="viewSampleReportBtn">
+                    <span class="icon">👁️</span> View Sample Report
+                </button>
+                <button class="btn btn-primary" id="generateNewReportBtn">
+                    <span class="icon">📄</span> Generate New Report
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1>Audit-Ready Reports</h1>
+                <p class="subtitle">View, download, and manage your R&D tax credit documentation</p>
+            </header>
+
+            <!-- Report Statistics -->
+            <section class="section">
+                <div class="stats-grid">
+                    <!-- Report Status Donut -->
+                    <div class="card status-card">
+                        <h3 class="card-title">Report Status</h3>
+                        <div class="donut-chart-container">
+                            <div class="donut-chart">
+                                <svg viewBox="0 0 100 100" class="donut-svg">
+                                    <circle cx="50" cy="50" r="40" class="donut-ring"></circle>
+                                    <circle cx="50" cy="50" r="40" class="donut-segment" id="donutSegment"></circle>
+                                </svg>
+                                <div class="donut-center">
+                                    <div class="donut-value" id="totalReports">0</div>
+                                    <div class="donut-label">Reports</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: var(--status-healthy);"></span>
+                                <span class="legend-label">Complete</span>
+                                <span class="legend-value" id="completeReports">0</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: var(--color-primary);"></span>
+                                <span class="legend-label">In Progress</span>
+                                <span class="legend-value" id="inProgressReports">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Storage Info -->
+                    <div class="card info-card">
+                        <h3 class="card-title">Storage</h3>
+                        <div class="info-metric">
+                            <div class="metric-icon">💾</div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="totalSize">0 KB</div>
+                                <div class="metric-label">Total Size</div>
+                            </div>
+                        </div>
+                        <div class="info-metric">
+                            <div class="metric-icon">📄</div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="avgSize">0 KB</div>
+                                <div class="metric-label">Average Size</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Activity -->
+                    <div class="card info-card">
+                        <h3 class="card-title">Latest Activity</h3>
+                        <div class="info-metric">
+                            <div class="metric-icon">📅</div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="latestDate">-</div>
+                                <div class="metric-label">Last Generated</div>
+                            </div>
+                        </div>
+                        <div class="info-metric">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-content">
+                                <div class="metric-value" id="thisMonthCount">0</div>
+                                <div class="metric-label">This Month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Panel -->
+            <section class="filter-panel" id="filterPanel" style="display: none;">
+                <div class="card">
+                    <h3 class="card-title">Filter Reports</h3>
+                    <div class="filter-form">
+                        <div class="form-group">
+                            <label for="filterTaxYear">Tax Year</label>
+                            <select id="filterTaxYear" class="form-control">
+                                <option value="">All Years</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterStatus">Status</label>
+                            <select id="filterStatus" class="form-control">
+                                <option value="">All Statuses</option>
+                                <option value="complete">Complete</option>
+                                <option value="partial">Partial</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterCompany">Company</label>
+                            <input type="text" id="filterCompany" class="form-control" placeholder="Search by company name">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" id="clearFiltersBtn">Clear</button>
+                            <button class="btn btn-primary" id="applyFiltersBtn">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Table -->
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Generated Reports</h2>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="reports-table" id="reportsTable">
+                            <thead>
+                                <tr>
+                                    <th>Report</th>
+                                    <th>Client</th>
+                                    <th>Tax Year</th>
+                                    <th>Status</th>
+                                    <th>Generated</th>
+                                    <th>Size</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportsTableBody">
+                                <!-- Report rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <div class="empty-icon">📄</div>
+                            <h3>No Reports Found</h3>
+                            <p>Generate your first R&D tax credit report to get started</p>
+                            <button class="btn btn-primary" onclick="window.location.href='workflow.html'">
+                                Start Workflow
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Report Preview Modal -->
+    <div class="modal" id="reportPreviewModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h2 id="modalTitle">Report Preview</h2>
+                <button class="btn-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-preview-container">
+                    <!-- Report Metadata -->
+                    <div class="preview-section">
+                        <h3>Report Information</h3>
+                        <dl class="preview-list">
+                            <dt>Report ID:</dt>
+                            <dd id="previewReportId">-</dd>
+                            <dt>Company:</dt>
+                            <dd id="previewCompany">-</dd>
+                            <dt>Tax Year:</dt>
+                            <dd id="previewTaxYear">-</dd>
+                            <dt>Generation Date:</dt>
+                            <dd id="previewDate">-</dd>
+                            <dt>Status:</dt>
+                            <dd id="previewStatus">-</dd>
+                        </dl>
+                    </div>
+
+                    <!-- Report Metrics -->
+                    <div class="preview-section">
+                        <h3>Report Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <div class="metric-label">Projects</div>
+                                <div class="metric-value" id="previewProjects">-</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Qualified Hours</div>
+                                <div class="metric-value" id="previewHours">-</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Qualified Cost</div>
+                                <div class="metric-value" id="previewCost">-</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Estimated Credit</div>
+                                <div class="metric-value" id="previewCredit">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Details -->
+                    <div class="preview-section">
+                        <h3>Report Details</h3>
+                        <dl class="preview-list">
+                            <dt>File Size:</dt>
+                            <dd id="previewFileSize">-</dd>
+                            <dt>Page Count:</dt>
+                            <dd id="previewPageCount">-</dd>
+                            <dt>Filename:</dt>
+                            <dd id="previewFilename">-</dd>
+                        </dl>
+                    </div>
+
+                    <!-- PDF Thumbnail -->
+                    <div class="preview-section">
+                        <h3>Document Preview</h3>
+                        <div class="pdf-thumbnail">
+                            <img src="assets/images/pdf-placeholder.png" alt="PDF Preview" id="pdfThumbnail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                <button class="btn btn-primary" id="downloadReportBtn">
+                    <span class="icon">⬇️</span> Download Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 R&D Tax Credit Automation Agent. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+{
+  "integrations": {
+    "clockify": {
+      "status": "healthy",
+      "lastSync": "2024-10-30T12:00:00Z",
+      "timeEntries": 1234,
+      "projects": 10,
+      "connected": true
+    },
+    "bamboohr": {
+      "status": "healthy",
+      "lastSync": "2024-10-30T13:00:00Z",
+      "employees": 45,
+      "payrollRecords": 540,
+      "connected": true
+    },
+    "unifiedTo": {
+      "status": "healthy",
+      "dataSources": 2,
+      "coverage": 100,
+      "connected": true
+    }
+  },
+  "engagementSummary": {
+    "totalProjects": 10,
+    "qualificationRate": 85,
+    "estimatedCredits": 4608,
+    "qualifiedHours": 320,
+    "totalCost": 23040
+  },
+  "complianceHealth": {
+    "pbcRequests": {
+      "completed": 12,
+      "total": 16,
+      "percentage": 75
+    },
+    "questionnaires": {
+      "completed": 5,
+      "total": 5,
+      "percentage": 100
+    },
+    "auditReadiness": {
+      "score": 92,
+      "status": "excellent"
+    },
+    "deadlines": [
+      {
+        "date": "2024-11-15",
+        "task": "Final PBC submission",
+        "daysRemaining": 7,
+        "status": "warning"
+      },
+      {
+        "date": "2024-12-01",
+        "task": "Tax credit filing deadline",
+        "daysRemaining": 23,
+        "status": "info"
+      }
+    ]
+  },
+  "teamMembers": [
+    {
+      "id": "EMP001",
+      "name": "John Smith",
+      "role": "Senior Developer",
+      "projects": 3,
+      "hoursTracked": 120,
+      "hourlyRate": 75
+    },
+    {
+      "id": "EMP002",
+      "name": "Sarah Johnson",
+      "role": "Software Engineer",
+      "projects": 2,
+      "hoursTracked": 95,
+      "hourlyRate": 65
+    },
+    {
+      "id": "EMP003",
+      "name": "Michael Chen",
+      "role": "Tech Lead",
+      "projects": 4,
+      "hoursTracked": 140,
+      "hourlyRate": 85
+    },
+    {
+      "id": "EMP004",
+      "name": "Emily Davis",
+      "role": "Developer",
+      "projects": 2,
+      "hoursTracked": 88,
+      "hourlyRate": 60
+    },
+    {
+      "id": "EMP005",
+      "name": "David Wilson",
+      "role": "Senior Engineer",
+      "projects": 3,
+      "hoursTracked": 110,
+      "hourlyRate": 70
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project Alpha",
+      "qualifiedHours": 45,
+      "qualifiedCost": 3200,
+      "estimatedCredit": 640,
+      "confidenceScore": 0.92
+    },
+    {
+      "name": "Project Beta",
+      "qualifiedHours": 38,
+      "qualifiedCost": 2850,
+      "estimatedCredit": 570,
+      "confidenceScore": 0.88
+    },
+    {
+      "name": "Project Gamma",
+      "qualifiedHours": 32,
+      "qualifiedCost": 2400,
+      "estimatedCredit": 480,
+      "confidenceScore": 0.85
+    }
+  ]
+}

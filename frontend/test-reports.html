@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Reports Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .report-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reports Integration Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Backend Health Check</h2>
+        <button onclick="testBackendHealth()">Test Backend Health</button>
+        <div id="healthResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Load Reports from Backend</h2>
+        <button onclick="testLoadReports()">Load Reports</button>
+        <div id="reportsResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Parse Report Filename</h2>
+        <button onclick="testParseFilename()">Test Filename Parsing</button>
+        <div id="parseResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Download Report</h2>
+        <input type="text" id="reportIdInput" placeholder="Enter report ID" style="padding: 8px; width: 300px;">
+        <button onclick="testDownloadReport()">Test Download</button>
+        <div id="downloadResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. Display Reports</h2>
+        <div id="reportsDisplay"></div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        async function testBackendHealth() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.innerHTML = '<div class="status info">Testing...</div>';
+            
+            try {
+                const health = await api.getHealth();
+                resultDiv.innerHTML = `
+                    <div class="status success">✓ Backend is healthy</div>
+                    <pre>${JSON.stringify(health, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">✗ Backend unavailable: ${error.message}</div>
+                    <p>Make sure the backend is running: <code>python main.py</code></p>
+                `;
+            }
+        }
+        
+        async function testLoadReports() {
+            const resultDiv = document.getElementById('reportsResult');
+            resultDiv.innerHTML = '<div class="status info">Loading reports...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/reports/list');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="status success">✓ Loaded ${data.total} reports</div>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                // Display reports
+                displayReports(data.reports);
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">✗ Failed to load reports: ${error.message}</div>
+                    <p>Backend may not be running or endpoint not available</p>
+                `;
+            }
+        }
+        
+        function testParseFilename() {
+            const resultDiv = document.getElementById('parseResult');
+            
+            const testFilenames = [
+                'rd_tax_credit_report_2024_20251030_143000.pdf',
+                'rd_tax_credit_report_RPT-2024-001_20251030_000706.pdf',
+                'professional_audit_report.pdf'
+            ];
+            
+            let html = '<div class="status success">✓ Parsing test filenames</div>';
+            
+            testFilenames.forEach(filename => {
+                const metadata = parseReportFilename(filename);
+                html += `
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px;">
+                        <strong>${filename}</strong>
+                        <pre>${JSON.stringify(metadata, null, 2)}</pre>
+                    </div>
+                `;
+            });
+            
+            resultDiv.innerHTML = html;
+        }
+        
+        async function testDownloadReport() {
+            const reportId = document.getElementById('reportIdInput').value;
+            const resultDiv = document.getElementById('downloadResult');
+            
+            if (!reportId) {
+                resultDiv.innerHTML = '<div class="status error">Please enter a report ID</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="status info">Downloading...</div>';
+            
+            try {
+                const result = await api.downloadReport(reportId);
+                resultDiv.innerHTML = `
+                    <div class="status success">✓ Downloaded: ${result.filename}</div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">✗ Download failed: ${error.message}</div>
+                `;
+            }
+        }
+        
+        function displayReports(reports) {
+            const displayDiv = document.getElementById('reportsDisplay');
+            
+            if (!reports || reports.length === 0) {
+                displayDiv.innerHTML = '<p>No reports to display</p>';
+                return;
+            }
+            
+            let html = `<h3>Found ${reports.length} reports:</h3>`;
+            
+            reports.forEach(report => {
+                html += `
+                    <div class="report-card">
+                        <h4>${report.filename}</h4>
+                        <p><strong>ID:</strong> ${report.id}</p>
+                        <p><strong>Tax Year:</strong> ${report.taxYear}</p>
+                        <p><strong>Generated:</strong> ${formatDate(report.generationDate)}</p>
+                        <p><strong>Size:</strong> ${formatFileSize(report.fileSize)}</p>
+                        <p><strong>Status:</strong> <span class="status success">${report.status}</span></p>
+                        <button onclick="api.downloadReport('${report.id}').catch(e => alert('Download failed: ' + e.message))">
+                            Download
+                        </button>
+                    </div>
+                `;
+            });
+            
+            displayDiv.innerHTML = html;
+        }
+        
+        // Auto-run health check on load
+        window.addEventListener('load', () => {
+            testBackendHealth();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&D Tax Credit Automation Agent - Dashboard">
+    <title>R&D Tax Credit Automation - Dashboard</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="assets/icons/logo.svg" alt="R&D Tax Credit Automation" class="logo">
+                <span class="brand-name">R&D Tax Credit Automation</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="index.html" class="active">Dashboard</a></li>
+                <li><a href="workflow.html">Workflow</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <button class="btn btn-secondary" id="syncBtn">
+                    <span class="icon">🔄</span> Sync Data
+                </button>
+                <button class="btn btn-primary" id="generateReportBtn">
+                    <span class="icon">📄</span> Generate Report
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1>Dashboard Control Center</h1>
+                <p class="subtitle">Monitor integrations, compliance health, and engagement metrics</p>
+            </header>
+
+            <!-- Integration Status Section -->
+            <section class="section">
+                <h2 class="section-title">Integration Status</h2>
+                <div class="grid grid-3">
+                    <div class="card integration-card" data-status="healthy">
+                        <div class="card-header">
+                            <img src="assets/icons/clockify.svg" alt="Clockify" class="integration-icon">
+                            <h3>Clockify</h3>
+                            <span class="status-badge status-healthy">Connected</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="metric"><strong>Last Sync:</strong> 2 hours ago</p>
+                            <p class="metric"><strong>Time Entries:</strong> 1,234</p>
+                            <p class="metric"><strong>Projects:</strong> 10</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-outline">Sync Now</button>
+                        </div>
+                    </div>
+
+                    <div class="card integration-card" data-status="healthy">
+                        <div class="card-header">
+                            <img src="assets/icons/bamboohr.svg" alt="BambooHR" class="integration-icon">
+                            <h3>BambooHR</h3>
+                            <span class="status-badge status-healthy">Connected</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="metric"><strong>Last Sync:</strong> 1 hour ago</p>
+                            <p class="metric"><strong>Employees:</strong> 45</p>
+                            <p class="metric"><strong>Payroll Records:</strong> 540</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-outline">Sync Now</button>
+                        </div>
+                    </div>
+
+                    <div class="card integration-card" data-status="healthy">
+                        <div class="card-header">
+                            <img src="assets/icons/unified.svg" alt="Unified.to" class="integration-icon">
+                            <h3>Unified.to</h3>
+                            <span class="status-badge status-healthy">Aggregating</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="metric"><strong>Data Sources:</strong> 2 connected</p>
+                            <p class="metric"><strong>Status:</strong> Active</p>
+                            <p class="metric"><strong>Coverage:</strong> 100%</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-outline">Configure</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Engagement Summary Section -->
+            <section class="section">
+                <h2 class="section-title">Engagement Summary</h2>
+                <div class="grid grid-4">
+                    <div class="card stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">Total Projects</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Qualification Rate</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value">$4,608</div>
+                        <div class="stat-label">Estimated Credits</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-value">320</div>
+                        <div class="stat-label">Qualified Hours</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2 mt-4">
+                    <div class="card">
+                        <h3 class="card-title">Credits by Project</h3>
+                        <div id="creditsChart" class="chart-container">
+                            <!-- Chart will be rendered by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Qualification Distribution</h3>
+                        <div id="qualificationChart" class="chart-container">
+                            <!-- Chart will be rendered by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compliance Health Section -->
+            <section class="section">
+                <h2 class="section-title">Compliance Health</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3 class="card-title">PBC Requests</h3>
+                        <div class="compliance-metric">
+                            <div class="progress-circle" data-progress="75">
+                                <span class="progress-value">75%</span>
+                            </div>
+                            <p class="mt-2">12 of 16 completed</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Questionnaires</h3>
+                        <div class="compliance-metric">
+                            <div class="progress-circle" data-progress="100">
+                                <span class="progress-value">100%</span>
+                            </div>
+                            <p class="mt-2">All questionnaires complete</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Audit Readiness</h3>
+                        <div class="compliance-metric">
+                            <div class="progress-circle" data-progress="92">
+                                <span class="progress-value">92%</span>
+                            </div>
+                            <p class="mt-2">Excellent readiness score</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <h3 class="card-title">Upcoming Deadlines</h3>
+                    <ul class="deadline-list">
+                        <li class="deadline-item">
+                            <span class="deadline-date">Nov 15, 2024</span>
+                            <span class="deadline-task">Final PBC submission</span>
+                            <span class="deadline-status status-warning">7 days remaining</span>
+                        </li>
+                        <li class="deadline-item">
+                            <span class="deadline-date">Dec 1, 2024</span>
+                            <span class="deadline-task">Tax credit filing deadline</span>
+                            <span class="deadline-status status-info">23 days remaining</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Team Information Section -->
+            <section class="section">
+                <h2 class="section-title">Team Information</h2>
+                <div class="card">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Role</th>
+                                    <th>Projects</th>
+                                    <th>Hours Tracked</th>
+                                    <th>Hourly Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teamTableBody">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 R&D Tax Credit Automation Agent. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

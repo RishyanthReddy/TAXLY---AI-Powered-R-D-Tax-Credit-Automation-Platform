@@ -1,0 +1,9 @@
+# Fonts Directory
+
+Place custom font files here if needed:
+- .woff2 (recommended)
+- .woff
+- .ttf
+
+Note: The application currently uses system fonts.
+Add custom fonts only if required by design specifications.

@@ -1,0 +1,457 @@
+/**
+ * Workflow Page Styles
+ */
+
+/* Page Header */
+.page-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.backend-status-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.backend-status-container label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+/* Workflow Controls */
+.workflow-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.control-group label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+/* Workflow Canvas */
+.workflow-canvas {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    margin-bottom: var(--spacing-6);
+    overflow-x: auto;
+}
+
+.pipeline-container {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: max-content;
+}
+
+/* Pipeline Stage */
+.pipeline-stage {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.stage-node {
+    width: 200px;
+    padding: var(--spacing-4);
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.pipeline-stage[data-status="pending"] .stage-node {
+    border-color: var(--border-color);
+    opacity: 0.6;
+}
+
+.pipeline-stage[data-status="in_progress"] .stage-node {
+    border-color: var(--color-primary);
+    background-color: rgba(37, 99, 235, 0.05);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.pipeline-stage[data-status="completed"] .stage-node {
+    border-color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.pipeline-stage[data-status="error"] .stage-node {
+    border-color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.2);
+    }
+}
+
+.stage-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: var(--spacing-2);
+}
+
+.stage-content {
+    text-align: center;
+}
+
+.stage-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-1);
+}
+
+.stage-subtitle {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-2);
+}
+
+.stage-status {
+    margin: var(--spacing-2) 0;
+}
+
+.stage-timing {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+.stage-progress {
+    margin-top: var(--spacing-3);
+    height: 4px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.stage-progress .progress-bar-inner {
+    height: 100%;
+    background-color: var(--color-primary);
+    transition: width var(--transition-base);
+}
+
+/* Stage Connector */
+.stage-connector {
+    width: 40px;
+    height: 2px;
+    background-color: var(--border-color);
+    position: relative;
+}
+
+.stage-connector::after {
+    content: '→';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: var(--font-size-lg);
+}
+
+.pipeline-stage[data-status="completed"] + .pipeline-stage .stage-connector {
+    background-color: var(--color-success);
+}
+
+/* Stage Details Panel */
+.stage-details-panel {
+    position: fixed;
+    right: 0;
+    top: var(--navbar-height);
+    width: 400px;
+    height: calc(100vh - var(--navbar-height));
+    background-color: var(--bg-primary);
+    border-left: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    z-index: var(--z-fixed);
+    overflow-y: auto;
+}
+
+.stage-details-panel.active {
+    transform: translateX(0);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-6);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-primary);
+    z-index: 1;
+}
+
+.panel-header h2 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.panel-body {
+    padding: var(--spacing-6);
+}
+
+/* Workflow Log */
+.workflow-log {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+    overflow: hidden;
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4);
+    background-color: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.log-header h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.log-body {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: var(--spacing-4);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-100);
+}
+
+.log-entry {
+    padding: var(--spacing-1) 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.log-timestamp {
+    color: var(--color-gray-400);
+    margin-right: var(--spacing-2);
+}
+
+.log-info .log-message {
+    color: var(--color-info-light);
+}
+
+.log-success .log-message {
+    color: var(--color-success-light);
+}
+
+.log-warning .log-message {
+    color: var(--color-warning-light);
+}
+
+.log-error .log-message {
+    color: var(--color-error-light);
+}
+
+/* Overall Progress */
+.overall-progress {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-6);
+}
+
+.progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-4);
+}
+
+.progress-header h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.progress-header span {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.progress-stats strong {
+    color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .pipeline-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .stage-node {
+        width: 100%;
+    }
+    
+    .stage-connector {
+        width: 2px;
+        height: 40px;
+        margin: 0 auto;
+    }
+    
+    .stage-connector::after {
+        content: '↓';
+        right: 50%;
+        top: auto;
+        bottom: -8px;
+        transform: translateX(50%);
+    }
+    
+    .stage-details-panel {
+        width: 100%;
+        height: 50vh;
+        top: auto;
+        bottom: 0;
+        transform: translateY(100%);
+    }
+    
+    .stage-details-panel.active {
+        transform: translateY(0);
+    }
+}
+
+/* Download Section */
+.download-section {
+    display: none;
+    background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-6);
+    margin-top: var(--spacing-6);
+    margin-bottom: var(--spacing-6);
+    color: white;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-base);
+}
+
+.download-section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.download-header {
+    margin-bottom: var(--spacing-4);
+}
+
+.download-header h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: white;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.download-header h3::before {
+    content: '✓';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-size: var(--font-size-xl);
+}
+
+.download-body {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4);
+}
+
+.download-info {
+    margin-bottom: var(--spacing-3);
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.download-info strong {
+    font-weight: var(--font-weight-semibold);
+    color: white;
+}
+
+.download-info:last-of-type {
+    margin-bottom: var(--spacing-4);
+}
+
+.download-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-4);
+}
+
+.download-actions .btn {
+    flex: 1;
+    background-color: white;
+    color: var(--color-success);
+    border: none;
+    font-weight: var(--font-weight-semibold);
+}
+
+.download-actions .btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.download-actions .btn-secondary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.download-actions .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Pipeline Button</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .status.info {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status.success {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .status.error {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        button:hover:not(:disabled) {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .log {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 4px 0;
+        }
+        
+        .log-entry.info { color: #1976d2; }
+        .log-entry.success { color: #388e3c; }
+        .log-entry.error { color: #d32f2f; }
+        .log-entry.warning { color: #f57c00; }
+        
+        .result {
+            background-color: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .result h3 {
+            color: #166534;
+            margin-top: 0;
+        }
+        
+        .result-item {
+            margin: 8px 0;
+        }
+        
+        .result-item strong {
+            color: #166534;
+        }
+        
+        .download-btn {
+            background-color: #16a34a;
+            margin-top: 15px;
+        }
+        
+        .download-btn:hover {
+            background-color: #15803d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Pipeline Button</h1>
+        
+        <div id="statusMessage" class="status info">
+            Ready to test the pipeline endpoint
+        </div>
+        
+        <button id="runPipelineBtn" onclick="runPipeline()">
+            ▶️ Run Complete Pipeline
+        </button>
+        
+        <div id="result" style="display: none;"></div>
+        
+        <div class="log" id="log">
+            <div class="log-entry info">[Ready] Click "Run Complete Pipeline" to start</div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+        let ws = null;
+        
+        // Initialize WebSocket connection
+        function initWebSocket() {
+            addLog('info', 'Connecting to WebSocket...');
+            
+            ws = new WebSocket('ws://localhost:8000/ws');
+            
+            ws.onopen = () => {
+                addLog('success', 'WebSocket connected');
+                updateStatus('Connected to backend', 'success');
+            };
+            
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    handleWebSocketMessage(data);
+                } catch (error) {
+                    console.error('Error parsing WebSocket message:', error);
+                }
+            };
+            
+            ws.onerror = (error) => {
+                addLog('error', 'WebSocket error');
+                console.error('WebSocket error:', error);
+            };
+            
+            ws.onclose = () => {
+                addLog('warning', 'WebSocket disconnected');
+                updateStatus('Disconnected from backend', 'error');
+            };
+        }
+        
+        // Handle WebSocket messages
+        function handleWebSocketMessage(data) {
+            console.log('WebSocket message:', data);
+            
+            if (data.type === 'status_update') {
+                const { stage, status, details } = data;
+                addLog('info', `[${stage}] ${status}: ${details}`);
+            } else if (data.type === 'error') {
+                addLog('error', `Error: ${data.message}`);
+            } else if (data.type === 'progress') {
+                addLog('info', `Progress: ${data.percentage}% - ${data.description}`);
+            }
+        }
+        
+        // Run pipeline
+        async function runPipeline() {
+            const btn = document.getElementById('runPipelineBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Running Pipeline...';
+            
+            updateStatus('Running complete pipeline...', 'info');
+            addLog('info', 'Starting pipeline execution...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/run-pipeline`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        use_sample_data: true,
+                        tax_year: 2024,
+                        company_name: 'Test Company'
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.detail || errorData.message || `HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                addLog('success', 'Pipeline completed successfully!');
+                updateStatus('Pipeline completed successfully!', 'success');
+                
+                // Display results
+                displayResult(result);
+                
+            } catch (error) {
+                addLog('error', `Pipeline failed: ${error.message}`);
+                updateStatus(`Pipeline failed: ${error.message}`, 'error');
+                console.error('Pipeline error:', error);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '▶️ Run Complete Pipeline';
+            }
+        }
+        
+        // Display result
+        function displayResult(result) {
+            const resultDiv = document.getElementById('result');
+            
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <h3>✓ Report Generated Successfully!</h3>
+                    <div class="result-item"><strong>Report ID:</strong> ${result.report_id}</div>
+                    <div class="result-item"><strong>PDF Path:</strong> ${result.pdf_path}</div>
+                    <div class="result-item"><strong>Projects:</strong> ${result.project_count}</div>
+                    <div class="result-item"><strong>Total Hours:</strong> ${result.total_qualified_hours.toFixed(1)}h</div>
+                    <div class="result-item"><strong>Total Cost:</strong> $${result.total_qualified_cost.toLocaleString()}</div>
+                    <div class="result-item"><strong>Estimated Credit:</strong> $${result.estimated_credit.toLocaleString()}</div>
+                    <div class="result-item"><strong>Execution Time:</strong> ${result.execution_time_seconds.toFixed(1)}s</div>
+                    <button class="download-btn" onclick="downloadReport('${result.report_id}')">
+                        📥 Download Report
+                    </button>
+                </div>
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+        
+        // Download report
+        async function downloadReport(reportId) {
+            addLog('info', `Downloading report: ${reportId}`);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/download/report/${reportId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${reportId}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+                
+                addLog('success', 'Report downloaded successfully');
+                
+            } catch (error) {
+                addLog('error', `Download failed: ${error.message}`);
+            }
+        }
+        
+        // Update status message
+        function updateStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+        
+        // Add log entry
+        function addLog(type, message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            initWebSocket();
+        });
+    </script>
+</body>
+</html>

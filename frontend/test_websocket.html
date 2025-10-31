@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test - R&D Tax Credit Automation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .status.connected {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.connecting {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .log {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-left: 3px solid #007bff;
+            padding-left: 10px;
+        }
+        .log-entry.error {
+            border-left-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .log-entry.success {
+            border-left-color: #28a745;
+            background-color: #d4edda;
+        }
+        .log-entry.info {
+            border-left-color: #17a2b8;
+            background-color: #d1ecf1;
+        }
+        .timestamp {
+            color: #6c757d;
+            font-size: 11px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .info-item label {
+            display: block;
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        .info-item value {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔌 WebSocket Connection Test</h1>
+        <p>Test the real-time WebSocket connection to the backend server.</p>
+        
+        <div id="connectionStatus" class="status connecting">
+            Status: Connecting...
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Connection ID</label>
+                <value id="connectionId">-</value>
+            </div>
+            <div class="info-item">
+                <label>Reconnect Attempts</label>
+                <value id="reconnectAttempts">0</value>
+            </div>
+            <div class="info-item">
+                <label>Ready State</label>
+                <value id="readyState">-</value>
+            </div>
+            <div class="info-item">
+                <label>Messages Received</label>
+                <value id="messageCount">0</value>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Controls</h2>
+        <div class="controls">
+            <button id="connectBtn">Connect</button>
+            <button id="disconnectBtn">Disconnect</button>
+            <button id="sendTestBtn">Send Test Message</button>
+            <button id="clearLogBtn">Clear Log</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Message Log</h2>
+        <div class="log" id="messageLog">
+            <div class="log-entry info">
+                <span class="timestamp">[00:00:00]</span>
+                <span>WebSocket test page loaded. Click "Connect" to start.</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/websocket.js"></script>
+    <script>
+        let wsManager = null;
+        let messageCount = 0;
+        let startTime = Date.now();
+        
+        // Initialize
+        function init() {
+            wsManager = new WebSocketManager('ws://localhost:8000/ws');
+            
+            // Set up event handlers
+            wsManager.onStatusUpdate = handleStatusUpdate;
+            wsManager.onError = handleError;
+            wsManager.onProgress = handleProgress;
+            wsManager.onConnectionChange = handleConnectionChange;
+            wsManager.onCustomMessage = handleCustomMessage;
+            
+            // Connect automatically
+            wsManager.connect();
+            
+            // Set up button handlers
+            document.getElementById('connectBtn').addEventListener('click', () => {
+                wsManager.connect();
+            });
+            
+            document.getElementById('disconnectBtn').addEventListener('click', () => {
+                wsManager.close();
+            });
+            
+            document.getElementById('sendTestBtn').addEventListener('click', () => {
+                const testMessage = {
+                    type: 'test',
+                    message: 'Hello from frontend!',
+                    timestamp: new Date().toISOString()
+                };
+                const sent = wsManager.send(testMessage);
+                if (sent) {
+                    addLogEntry('info', 'Sent test message to server');
+                } else {
+                    addLogEntry('error', 'Failed to send message - not connected');
+                }
+            });
+            
+            document.getElementById('clearLogBtn').addEventListener('click', () => {
+                document.getElementById('messageLog').innerHTML = '';
+            });
+            
+            // Update status periodically
+            setInterval(updateStatus, 1000);
+        }
+        
+        function handleConnectionChange(isConnected) {
+            const statusEl = document.getElementById('connectionStatus');
+            if (isConnected) {
+                statusEl.className = 'status connected';
+                statusEl.textContent = 'Status: Connected ✓';
+                addLogEntry('success', 'Connected to backend WebSocket server');
+            } else {
+                statusEl.className = 'status disconnected';
+                statusEl.textContent = 'Status: Disconnected ✗';
+                addLogEntry('error', 'Disconnected from backend WebSocket server');
+            }
+        }
+        
+        function handleStatusUpdate(update) {
+            messageCount++;
+            addLogEntry('info', `Status Update: ${update.stage} - ${update.status} - ${update.details}`);
+        }
+        
+        function handleError(error) {
+            messageCount++;
+            addLogEntry('error', `Error: ${error.error_type} - ${error.message}`);
+        }
+        
+        function handleProgress(progress) {
+            messageCount++;
+            addLogEntry('info', `Progress: ${progress.percentage.toFixed(1)}% - ${progress.description || 'Processing...'}`);
+        }
+        
+        function handleCustomMessage(data) {
+            messageCount++;
+            addLogEntry('info', `Custom Message: ${JSON.stringify(data)}`);
+        }
+        
+        function updateStatus() {
+            if (!wsManager) return;
+            
+            const status = wsManager.getStatus();
+            document.getElementById('connectionId').textContent = status.connectionId || '-';
+            document.getElementById('reconnectAttempts').textContent = status.reconnectAttempts;
+            document.getElementById('messageCount').textContent = messageCount;
+            
+            const readyStateMap = {
+                0: 'CONNECTING',
+                1: 'OPEN',
+                2: 'CLOSING',
+                3: 'CLOSED',
+                null: '-'
+            };
+            document.getElementById('readyState').textContent = readyStateMap[status.readyState];
+        }
+        
+        function addLogEntry(type, message) {
+            const logEl = document.getElementById('messageLog');
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+            const timestamp = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.innerHTML = `
+                <span class="timestamp">[${timestamp}]</span>
+                <span>${message}</span>
+            `;
+            
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (wsManager) {
+                wsManager.close();
+            }
+        });
+    </script>
+</body>
+</html>

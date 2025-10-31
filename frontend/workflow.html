@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&D Tax Credit Automation Agent - Workflow Visualization">
+    <title>Agent Workflow - R&D Tax Credit Automation</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/workflow.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="assets/icons/logo.svg" alt="R&D Tax Credit Automation" class="logo">
+                <span class="brand-name">R&D Tax Credit Automation</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="workflow.html" class="active">Workflow</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <button class="btn btn-secondary" id="pauseBtn" disabled>
+                    <span class="icon">⏸️</span> Pause
+                </button>
+                <button class="btn btn-primary" id="startWorkflowBtn">
+                    <span class="icon">▶️</span> Run Pipeline
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <header class="page-header">
+                <div class="header-content">
+                    <div>
+                        <h1>Agent Workflow Visualization</h1>
+                        <p class="subtitle">Real-time visualization of the six-stage R&D tax credit automation pipeline</p>
+                    </div>
+                    <div class="backend-status-container">
+                        <label>Backend Status:</label>
+                        <span class="status-badge status-pending" id="backendStatus">Connecting...</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Workflow Controls -->
+            <section class="workflow-controls">
+                <div class="control-group">
+                    <label>Playback Speed:</label>
+                    <div class="btn-group">
+                        <button class="btn btn-sm" data-speed="1">1x</button>
+                        <button class="btn btn-sm active" data-speed="2">2x</button>
+                        <button class="btn btn-sm" data-speed="5">5x</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>View Mode:</label>
+                    <div class="btn-group">
+                        <button class="btn btn-sm active" data-view="horizontal">Horizontal</button>
+                        <button class="btn btn-sm" data-view="vertical">Vertical</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <button class="btn btn-sm btn-outline" id="resetBtn">
+                        <span class="icon">🔄</span> Reset
+                    </button>
+                </div>
+            </section>
+
+            <!-- Workflow Canvas -->
+            <section class="workflow-canvas">
+                <div class="pipeline-container" id="pipelineContainer">
+                    <!-- Stage 1: Data Ingestion -->
+                    <div class="pipeline-stage" data-stage="1" data-status="pending">
+                        <div class="stage-node">
+                            <div class="stage-icon">📥</div>
+                            <div class="stage-content">
+                                <h3 class="stage-title">Data Ingestion</h3>
+                                <p class="stage-subtitle">Clockify + BambooHR</p>
+                                <div class="stage-status">
+                                    <span class="status-badge">Pending</span>
+                                </div>
+                                <div class="stage-timing">⏱️ 3-5 seconds</div>
+                            </div>
+                            <div class="stage-progress">
+                                <div class="progress-bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stage-connector"></div>
+                    </div>
+
+                    <!-- Stage 2: Data Validation -->
+                    <div class="pipeline-stage" data-stage="2" data-status="pending">
+                        <div class="stage-node">
+                            <div class="stage-icon">✓</div>
+                            <div class="stage-content">
+                                <h3 class="stage-title">Data Validation</h3>
+                                <p class="stage-subtitle">Pandas Processing</p>
+                                <div class="stage-status">
+                                    <span class="status-badge">Pending</span>
+                                </div>
+                                <div class="stage-timing">⏱️ &lt; 1 second</div>
+                            </div>
+                            <div class="stage-progress">
+                                <div class="progress-bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stage-connector"></div>
+                    </div>
+
+                    <!-- Stage 3: Project Qualification -->
+                    <div class="pipeline-stage" data-stage="3" data-status="pending">
+                        <div class="stage-node">
+                            <div class="stage-icon">🤖</div>
+                            <div class="stage-content">
+                                <h3 class="stage-title">Project Qualification</h3>
+                                <p class="stage-subtitle">GLM 4.5 + You.com</p>
+                                <div class="stage-status">
+                                    <span class="status-badge">Pending</span>
+                                </div>
+                                <div class="stage-timing">⏱️ 10-15 seconds</div>
+                            </div>
+                            <div class="stage-progress">
+                                <div class="progress-bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stage-connector"></div>
+                    </div>
+
+                    <!-- Stage 4: Narrative Generation -->
+                    <div class="pipeline-stage" data-stage="4" data-status="pending">
+                        <div class="stage-node">
+                            <div class="stage-icon">📝</div>
+                            <div class="stage-content">
+                                <h3 class="stage-title">Narrative Generation</h3>
+                                <p class="stage-subtitle">You.com Agent API</p>
+                                <div class="stage-status">
+                                    <span class="status-badge">Pending</span>
+                                </div>
+                                <div class="stage-timing">⏱️ 30 seconds</div>
+                            </div>
+                            <div class="stage-progress">
+                                <div class="progress-bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stage-connector"></div>
+                    </div>
+
+                    <!-- Stage 5: Compliance Review -->
+                    <div class="pipeline-stage" data-stage="5" data-status="pending">
+                        <div class="stage-node">
+                            <div class="stage-icon">🔍</div>
+                            <div class="stage-content">
+                                <h3 class="stage-title">Compliance Review</h3>
+                                <p class="stage-subtitle">You.com Express Agent</p>
+                                <div class="stage-status">
+                                    <span class="status-badge">Pending</span>
+                                </div>
+                                <div class="stage-timing">⏱️ 20 seconds</div>
+                            </div>
+                            <div class="stage-progress">
+                                <div class="progress-bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stage-connector"></div>
+                    </div>
+
+                    <!-- Stage 6: PDF Generation -->
+                    <div class="pipeline-stage" data-stage="6" data-status="pending">
+                        <div class="stage-node">
+                            <div class="stage-icon">📄</div>
+                            <div class="stage-content">
+                                <h3 class="stage-title">PDF Generation</h3>
+                                <p class="stage-subtitle">ReportLab</p>
+                                <div class="stage-status">
+                                    <span class="status-badge">Pending</span>
+                                </div>
+                                <div class="stage-timing">⏱️ 8-10 seconds</div>
+                            </div>
+                            <div class="stage-progress">
+                                <div class="progress-bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stage Details Panel -->
+            <section class="stage-details-panel" id="stageDetailsPanel">
+                <div class="panel-header">
+                    <h2 id="detailsTitle">Stage Details</h2>
+                    <button class="btn-close" id="closePanelBtn">&times;</button>
+                </div>
+                <div class="panel-body" id="detailsBody">
+                    <p class="text-muted">Click on a stage to view details</p>
+                </div>
+            </section>
+
+            <!-- Workflow Log -->
+            <section class="workflow-log">
+                <div class="log-header">
+                    <h3>Workflow Log</h3>
+                    <button class="btn btn-sm btn-outline" id="clearLogBtn">Clear</button>
+                </div>
+                <div class="log-body" id="logBody">
+                    <div class="log-entry log-info">
+                        <span class="log-timestamp">[00:00:00]</span>
+                        <span class="log-message">Workflow ready to start</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Overall Progress -->
+            <section class="overall-progress">
+                <div class="progress-header">
+                    <h3>Overall Progress</h3>
+                    <span id="progressPercentage">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="overallProgressBar" style="width: 0%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span>Completed: <strong id="completedStages">0</strong> / 6</span>
+                    <span>Elapsed Time: <strong id="elapsedTime">00:00</strong></span>
+                    <span>Estimated Remaining: <strong id="remainingTime">--:--</strong></span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 R&D Tax Credit Automation Agent. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/websocket.js"></script>
+    <script src="js/workflow.js"></script>
+</body>
+</html>

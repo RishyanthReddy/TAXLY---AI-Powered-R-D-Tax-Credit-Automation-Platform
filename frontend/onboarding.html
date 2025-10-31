@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&D Tax Credit Automation Agent - Onboarding">
+    <title>Onboarding - R&D Tax Credit Automation</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/onboarding.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+</head>
+<body class="onboarding-body">
+    <!-- Onboarding Container -->
+    <div class="onboarding-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Welcome</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Company Info</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">HR Platform</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Time Tracking</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="5">
+                <div class="step-circle">5</div>
+                <div class="step-label">Authentication</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="6">
+                <div class="step-circle">6</div>
+                <div class="step-label">Review</div>
+            </div>
+        </div>
+
+        <!-- Step Content -->
+        <div class="step-content">
+            <!-- Step 1: Welcome -->
+            <div class="step-panel active" id="step1">
+                <div class="step-header">
+                    <h1>Welcome to R&D Tax Credit Automation</h1>
+                    <p class="subtitle">Automate your R&D tax credit documentation with AI-powered agents</p>
+                </div>
+                <div class="step-body">
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📥</div>
+                            <h3>Automated Data Ingestion</h3>
+                            <p>Connect your time tracking and HR systems for seamless data collection</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🤖</div>
+                            <h3>AI-Powered Qualification</h3>
+                            <p>Leverage IRS guidance and LLM reasoning to determine R&D eligibility</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📄</div>
+                            <h3>Audit-Ready Reports</h3>
+                            <p>Generate comprehensive PDF documentation with citations and narratives</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💰</div>
+                            <h3>4x ROI</h3>
+                            <p>Reduce consultant fees and internal compliance time by 75%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" id="skipDemoBtn">Skip for Demo</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Get Started</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Company Information -->
+            <div class="step-panel" id="step2">
+                <div class="step-header">
+                    <h1>Company Information</h1>
+                    <p class="subtitle">Tell us about your organization</p>
+                </div>
+                <div class="step-body">
+                    <form class="onboarding-form">
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <input type="text" id="companyName" class="form-control" placeholder="Acme Corporation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taxYear">Tax Year *</label>
+                            <select id="taxYear" class="form-control" required>
+                                <option value="">Select tax year</option>
+                                <option value="2024" selected>2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="industry">Industry *</label>
+                            <select id="industry" class="form-control" required>
+                                <option value="">Select industry</option>
+                                <option value="software">Software Development</option>
+                                <option value="biotech">Biotechnology</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeCount">Number of Employees</label>
+                            <input type="number" id="employeeCount" class="form-control" placeholder="50" min="1">
+                        </div>
+                    </form>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 3: HR/Payroll Platform Selection -->
+            <div class="step-panel" id="step3">
+                <div class="step-header">
+                    <h1>Select Your HR/Payroll Platform</h1>
+                    <p class="subtitle">Choose the system you use for employee and payroll management</p>
+                </div>
+                <div class="step-body">
+                    <div class="platform-grid">
+                        <div class="platform-card" data-platform="bamboohr">
+                            <img src="assets/icons/bamboohr.svg" alt="BambooHR" class="platform-logo">
+                            <h3>BambooHR</h3>
+                            <p>All-in-one HR software for growing businesses</p>
+                        </div>
+                        <div class="platform-card" data-platform="gusto">
+                            <img src="assets/icons/gusto.svg" alt="Gusto" class="platform-logo">
+                            <h3>Gusto</h3>
+                            <p>Payroll, benefits, and HR management</p>
+                        </div>
+                        <div class="platform-card" data-platform="adp">
+                            <img src="assets/icons/adp.svg" alt="ADP" class="platform-logo">
+                            <h3>ADP</h3>
+                            <p>Enterprise payroll and HR solutions</p>
+                        </div>
+                        <div class="platform-card" data-platform="rippling">
+                            <img src="assets/icons/rippling.svg" alt="Rippling" class="platform-logo">
+                            <h3>Rippling</h3>
+                            <p>Modern HR, IT, and finance platform</p>
+                        </div>
+                        <div class="platform-card" data-platform="workday">
+                            <img src="assets/icons/workday.svg" alt="Workday" class="platform-logo">
+                            <h3>Workday</h3>
+                            <p>Enterprise cloud applications for finance and HR</p>
+                        </div>
+                        <div class="platform-card" data-platform="other">
+                            <div class="platform-logo-placeholder">?</div>
+                            <h3>Other</h3>
+                            <p>Connect via Unified.to integration</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="hrContinueBtn" disabled>Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Time Tracking Platform Selection -->
+            <div class="step-panel" id="step4">
+                <div class="step-header">
+                    <h1>Select Your Time Tracking Platform</h1>
+                    <p class="subtitle">Choose the system you use for tracking employee time and projects</p>
+                </div>
+                <div class="step-body">
+                    <div class="platform-grid">
+                        <div class="platform-card" data-platform="clockify">
+                            <img src="assets/icons/clockify.svg" alt="Clockify" class="platform-logo">
+                            <h3>Clockify</h3>
+                            <p>Free time tracking software for teams</p>
+                        </div>
+                        <div class="platform-card" data-platform="toggl">
+                            <img src="assets/icons/toggl.svg" alt="Toggl" class="platform-logo">
+                            <h3>Toggl Track</h3>
+                            <p>Simple time tracking for any workflow</p>
+                        </div>
+                        <div class="platform-card" data-platform="harvest">
+                            <img src="assets/icons/harvest.svg" alt="Harvest" class="platform-logo">
+                            <h3>Harvest</h3>
+                            <p>Time tracking and invoicing software</p>
+                        </div>
+                        <div class="platform-card" data-platform="jira">
+                            <img src="assets/icons/jira.svg" alt="Jira" class="platform-logo">
+                            <h3>Jira</h3>
+                            <p>Project management with time tracking</p>
+                        </div>
+                        <div class="platform-card" data-platform="asana">
+                            <img src="assets/icons/asana.svg" alt="Asana" class="platform-logo">
+                            <h3>Asana</h3>
+                            <p>Work management platform with time tracking</p>
+                        </div>
+                        <div class="platform-card" data-platform="other-time">
+                            <div class="platform-logo-placeholder">?</div>
+                            <h3>Other</h3>
+                            <p>Manual CSV upload or API integration</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="timeContinueBtn" disabled>Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Authentication -->
+            <div class="step-panel" id="step5">
+                <div class="step-header">
+                    <h1>Connect Your Platforms</h1>
+                    <p class="subtitle">Authenticate with your selected platforms to enable data access</p>
+                </div>
+                <div class="step-body">
+                    <div class="auth-container">
+                        <div class="auth-card">
+                            <div class="auth-header">
+                                <img src="assets/icons/bamboohr.svg" alt="BambooHR" class="auth-icon">
+                                <h3 id="hrPlatformName">BambooHR</h3>
+                            </div>
+                            <div class="auth-body">
+                                <p>Click below to authorize access to your HR and payroll data</p>
+                                <button class="btn btn-primary btn-block" id="authHRBtn">
+                                    <span class="icon">🔐</span> Authorize BambooHR
+                                </button>
+                                <div class="auth-status" id="hrAuthStatus">
+                                    <span class="status-icon">⏳</span> Waiting for authorization
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="auth-card">
+                            <div class="auth-header">
+                                <img src="assets/icons/clockify.svg" alt="Clockify" class="auth-icon">
+                                <h3 id="timePlatformName">Clockify</h3>
+                            </div>
+                            <div class="auth-body">
+                                <p>Click below to authorize access to your time tracking data</p>
+                                <button class="btn btn-primary btn-block" id="authTimeBtn">
+                                    <span class="icon">🔐</span> Authorize Clockify
+                                </button>
+                                <div class="auth-status" id="timeAuthStatus">
+                                    <span class="status-icon">⏳</span> Waiting for authorization
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="authContinueBtn" disabled>Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 6: Review -->
+            <div class="step-panel" id="step6">
+                <div class="step-header">
+                    <h1>Review Your Configuration</h1>
+                    <p class="subtitle">Confirm your settings before proceeding to the dashboard</p>
+                </div>
+                <div class="step-body">
+                    <div class="review-container">
+                        <div class="review-section">
+                            <h3>Company Information</h3>
+                            <dl class="review-list">
+                                <dt>Company Name:</dt>
+                                <dd id="reviewCompanyName">-</dd>
+                                <dt>Tax Year:</dt>
+                                <dd id="reviewTaxYear">-</dd>
+                                <dt>Industry:</dt>
+                                <dd id="reviewIndustry">-</dd>
+                            </dl>
+                        </div>
+
+                        <div class="review-section">
+                            <h3>Platform Integrations</h3>
+                            <dl class="review-list">
+                                <dt>HR/Payroll Platform:</dt>
+                                <dd id="reviewHRPlatform">-</dd>
+                                <dt>Time Tracking Platform:</dt>
+                                <dd id="reviewTimePlatform">-</dd>
+                                <dt>Authentication Status:</dt>
+                                <dd><span class="status-badge status-healthy">Connected</span></dd>
+                            </dl>
+                        </div>
+
+                        <div class="review-section">
+                            <h3>Next Steps</h3>
+                            <ul class="next-steps-list">
+                                <li>✅ Your platforms are connected and ready</li>
+                                <li>✅ Data will be synced automatically</li>
+                                <li>✅ You can start classifying R&D projects</li>
+                                <li>✅ Generate audit-ready reports anytime</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary btn-lg" onclick="completeOnboarding()">
+                        Go to Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/onboarding.js"></script>
+</body>
+</html>

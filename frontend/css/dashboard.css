@@ -1,0 +1,150 @@
+/**
+ * Dashboard Page Styles
+ */
+
+/* Integration Cards */
+.integration-card {
+    position: relative;
+}
+
+.integration-card[data-status="healthy"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--status-healthy);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.integration-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.integration-card h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.integration-card .metric {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-2);
+}
+
+.integration-card .metric strong {
+    color: var(--text-primary);
+}
+
+/* Stat Cards */
+.stat-card {
+    text-align: center;
+    padding: var(--spacing-6);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-3);
+}
+
+.stat-value {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Chart Container */
+.chart-container {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-base);
+    padding: var(--spacing-4);
+}
+
+/* Compliance Metrics */
+.compliance-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-4);
+}
+
+.progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--color-primary) 0deg,
+        var(--color-primary) calc(var(--progress, 0) * 3.6deg),
+        var(--bg-tertiary) calc(var(--progress, 0) * 3.6deg),
+        var(--bg-tertiary) 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-circle::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+}
+
+.progress-value {
+    position: relative;
+    z-index: 1;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+/* Deadline List */
+.deadline-list {
+    list-style: none;
+}
+
+.deadline-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-3);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.deadline-item:last-child {
+    border-bottom: none;
+}
+
+.deadline-date {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    min-width: 100px;
+}
+
+.deadline-task {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0 var(--spacing-4);
+}
+
+.deadline-status {
+    font-size: var(--font-size-xs);
+}
