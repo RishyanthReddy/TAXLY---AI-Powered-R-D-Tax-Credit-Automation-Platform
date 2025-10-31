@@ -120,4 +120,4 @@ tmp/
 *.sqlite3
 
 # ChromaDB
-knowledge_base/indexed/
+# knowledge_base/indexed/  # COMMENTED OUT FOR HACKATHON SUBMISSION - Include indexed database
