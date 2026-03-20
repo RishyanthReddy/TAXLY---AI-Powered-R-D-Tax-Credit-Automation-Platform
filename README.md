@@ -7,11 +7,11 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > 🏆 **Honorable Mention — You.com Agentic Hackathon 2025**  
-> Official announcement: [Announcing the Winners of the You.com Agentic Hackathon 2025](https://you.com/resources/the-winners-of-the-you-com-agentic-hackathon-2025) :contentReference[oaicite:2]{index=2}
-
+> Official announcement: [Announcing the Winners of the You.com Agentic Hackathon 2025](https://you.com/resources/the-winners-of-the-you-com-agentic-hackathon-2025)
+>
 > **Revolutionizing R&D Tax Credit Compliance with Multi-Agent AI Orchestration**
 
-**TAXLY** is the first comprehensive AI-powered platform that automates the entire R&D tax credit documentation workflow—from data ingestion to audit-ready report generation. Built for the **You.com Agentic Hackathon 2025**, where it received an **Honorable Mention**, TAXLY showcases cutting-edge AI agent orchestration, RAG-based compliance reasoning, and real-time workflow visualization. :contentReference[oaicite:1]{index=1}
+**TAXLY** is the first comprehensive AI-powered platform that automates the entire R&D tax credit documentation workflow—from data ingestion to audit-ready report generation. Built for the **You.com Agentic Hackathon 2025**, where it received an **Honorable Mention**, TAXLY showcases cutting-edge AI agent orchestration, RAG-based compliance reasoning, and real-time workflow visualization.{index=1}
 
 ---
 
